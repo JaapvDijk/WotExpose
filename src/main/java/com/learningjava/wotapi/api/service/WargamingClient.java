@@ -1,10 +1,8 @@
-package com.learningjava.wotapi.service;
+package com.learningjava.wotapi.api.service;
 
-import com.learningjava.wotapi.api.model.wargaming.Players;
+import com.learningjava.wotapi.api.model.worldoftanks.entity.Players;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 

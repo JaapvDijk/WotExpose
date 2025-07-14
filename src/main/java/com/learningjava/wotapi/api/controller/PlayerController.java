@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.api.controller;
 
-import com.learningjava.wotapi.api.model.wargaming.Players;
-import com.learningjava.wotapi.service.PlayerService;
+import com.learningjava.wotapi.api.model.worldoftanks.entity.Players;
+import com.learningjava.wotapi.api.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

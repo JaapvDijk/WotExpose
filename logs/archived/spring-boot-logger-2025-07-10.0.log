@@ -831,8 +831,8 @@
 2025-07-10 17:59:49,248 TRACE o.s.b.f.s.AbstractBeanFactory [main] Returning cached instance of singleton bean 'autoConfigurationReport'
 2025-07-10 17:59:49,248 TRACE o.s.b.f.s.AbstractBeanFactory [main] Returning cached instance of singleton bean 'autoConfigurationReport'
 2025-07-10 17:59:49,248 TRACE o.s.b.f.s.AbstractBeanFactory [main] Returning cached instance of singleton bean 'autoConfigurationReport'
-2025-07-10 17:59:49,251 TRACE o.s.c.a.ConfigurationClassBeanDefinitionReader [main] Registering bean definition for @Bean method com.learningjava.wotapi.config.RestClientConfig.tomatoRestClient()
-2025-07-10 17:59:49,251 TRACE o.s.c.a.ConfigurationClassBeanDefinitionReader [main] Registering bean definition for @Bean method com.learningjava.wotapi.config.RestClientConfig.wargamingClient()
+2025-07-10 17:59:49,251 TRACE o.s.c.a.ConfigurationClassBeanDefinitionReader [main] Registering bean definition for @Bean method com.learningjava.wotapi.api.config.RestClientConfig.tomatoRestClient()
+2025-07-10 17:59:49,251 TRACE o.s.c.a.ConfigurationClassBeanDefinitionReader [main] Registering bean definition for @Bean method com.learningjava.wotapi.api.config.RestClientConfig.wargamingClient()
 2025-07-10 17:59:49,252 TRACE o.s.c.a.ConfigurationClassBeanDefinitionReader [main] Registered bean definition for imported class 'org.springframework.scheduling.annotation.SchedulingConfiguration'
 2025-07-10 17:59:49,252 TRACE o.s.c.a.ConfigurationClassBeanDefinitionReader [main] Registering bean definition for @Bean method org.springframework.scheduling.annotation.SchedulingConfiguration.org.springframework.context.annotation.internalScheduledAnnotationProcessor()
 2025-07-10 17:59:49,253 TRACE o.s.c.a.ConfigurationClassBeanDefinitionReader [main] Registered bean definition for imported class 'org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration'
@@ -1402,8 +1402,8 @@ javax.management.InstanceNotFoundException: org.springframework.boot:type=Admin,
 2025-07-10 17:59:49,411 TRACE o.s.b.a.c.SpringBootCondition [main] Condition OnBeanCondition on org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration#multipartResolver matched due to @ConditionalOnMissingBean (types: org.springframework.web.multipart.MultipartResolver; SearchStrategy: all) did not find any beans
 2025-07-10 17:59:49,411 TRACE o.s.b.f.s.AbstractBeanFactory [main] Returning cached instance of singleton bean 'autoConfigurationReport'
 2025-07-10 17:59:49,411 TRACE o.s.c.a.ConfigurationClassBeanDefinitionReader [main] Registering bean definition for @Bean method org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration.multipartResolver()
-2025-07-10 17:59:49,463 TRACE o.s.c.a.ConfigurationClassEnhancer [main] Successfully enhanced com.learningjava.wotapi.config.RestClientConfig; enhanced class name is: com.learningjava.wotapi.config.RestClientConfig$$SpringCGLIB$$0
-2025-07-10 17:59:49,464 TRACE o.s.c.a.ConfigurationClassPostProcessor [main] Replacing bean definition 'restClientConfig' existing class 'com.learningjava.wotapi.config.RestClientConfig' with enhanced class 'com.learningjava.wotapi.config.RestClientConfig$$SpringCGLIB$$0'
+2025-07-10 17:59:49,463 TRACE o.s.c.a.ConfigurationClassEnhancer [main] Successfully enhanced com.learningjava.wotapi.api.config.RestClientConfig; enhanced class name is: com.learningjava.wotapi.api.config.RestClientConfig$$SpringCGLIB$$0
+2025-07-10 17:59:49,464 TRACE o.s.c.a.ConfigurationClassPostProcessor [main] Replacing bean definition 'restClientConfig' existing class 'com.learningjava.wotapi.api.config.RestClientConfig' with enhanced class 'com.learningjava.wotapi.api.config.RestClientConfig$$SpringCGLIB$$0'
 2025-07-10 17:59:49,464 DEBUG o.s.b.f.s.DefaultSingletonBeanRegistry [main] Creating shared instance of singleton bean 'propertySourcesPlaceholderConfigurer'
 2025-07-10 17:59:49,464 TRACE o.s.b.f.s.AbstractAutowireCapableBeanFactory [main] Creating instance of bean 'propertySourcesPlaceholderConfigurer'
 2025-07-10 17:59:49,467 TRACE o.s.b.f.s.AbstractAutowireCapableBeanFactory [main] Finished creating instance of bean 'propertySourcesPlaceholderConfigurer'
@@ -1854,7 +1854,7 @@ javax.management.InstanceNotFoundException: org.springframework.boot:type=Admin,
 2025-07-10 17:59:49,790 TRACE o.s.b.f.s.AbstractAutowireCapableBeanFactory [main] Creating instance of bean 'playerController'
 2025-07-10 17:59:49,793 DEBUG o.s.b.f.s.DefaultSingletonBeanRegistry [main] Creating shared instance of singleton bean 'playerService'
 2025-07-10 17:59:49,793 TRACE o.s.b.f.s.AbstractAutowireCapableBeanFactory [main] Creating instance of bean 'playerService'
-2025-07-10 17:59:49,794 TRACE o.s.s.a.ScheduledAnnotationBeanPostProcessor [main] No @Scheduled annotations found on bean class: class com.learningjava.wotapi.service.PlayerService
+2025-07-10 17:59:49,794 TRACE o.s.s.a.ScheduledAnnotationBeanPostProcessor [main] No @Scheduled annotations found on bean class: class com.learningjava.wotapi.api.service.PlayerService
 2025-07-10 17:59:49,794 TRACE o.s.b.f.s.AbstractAutowireCapableBeanFactory [main] Finished creating instance of bean 'playerService'
 2025-07-10 17:59:49,794 DEBUG o.s.b.f.s.ConstructorResolver [main] Autowiring by type from bean name 'playerController' via constructor to bean named 'playerService'
 2025-07-10 17:59:49,794 TRACE o.s.s.a.ScheduledAnnotationBeanPostProcessor [main] No @Scheduled annotations found on bean class: class com.learningjava.wotapi.api.controller.PlayerController
@@ -1867,7 +1867,7 @@ javax.management.InstanceNotFoundException: org.springframework.boot:type=Admin,
 2025-07-10 17:59:49,798 TRACE o.s.c.e.PropertySourcesPropertyResolver [main] Searching for key 'api.wargaming.base-url' in PropertySource 'environmentProperties'
 2025-07-10 17:59:49,798 DEBUG o.s.c.e.PropertySourcesPropertyResolver [main] Found key 'api.wargaming.base-url' in PropertySource 'environmentProperties' with value of type String
 2025-07-10 17:59:49,798 TRACE o.s.u.PlaceholderParser$PartResolutionContext [main] Resolved placeholder 'api.wargaming.base-url'
-2025-07-10 17:59:49,799 TRACE o.s.s.a.ScheduledAnnotationBeanPostProcessor [main] No @Scheduled annotations found on bean class: class com.learningjava.wotapi.config.RestClientConfig$$SpringCGLIB$$0
+2025-07-10 17:59:49,799 TRACE o.s.s.a.ScheduledAnnotationBeanPostProcessor [main] No @Scheduled annotations found on bean class: class com.learningjava.wotapi.api.config.RestClientConfig$$SpringCGLIB$$0
 2025-07-10 17:59:49,799 TRACE o.s.b.f.s.AbstractAutowireCapableBeanFactory [main] Finished creating instance of bean 'restClientConfig'
 2025-07-10 17:59:49,799 DEBUG o.s.b.f.s.DefaultSingletonBeanRegistry [main] Creating shared instance of singleton bean 'tomatoImport'
 2025-07-10 17:59:49,799 TRACE o.s.b.f.s.AbstractAutowireCapableBeanFactory [main] Creating instance of bean 'tomatoImport'
@@ -2905,9 +2905,9 @@ javax.management.InstanceNotFoundException: org.springframework.boot:type=Admin,
 2025-07-10 17:59:50,260 TRACE o.s.b.f.s.AbstractBeanFactory [main] Returning cached instance of singleton bean 'org.springframework.aop.config.internalAutoProxyCreator'
 2025-07-10 17:59:50,261 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: com.learningjava.wotapi.App
 2025-07-10 17:59:50,261 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: com.learningjava.wotapi.api.controller.PlayerController
-2025-07-10 17:59:50,261 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: com.learningjava.wotapi.config.RestClientConfig$$SpringCGLIB$$0
+2025-07-10 17:59:50,261 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: com.learningjava.wotapi.api.config.RestClientConfig$$SpringCGLIB$$0
 2025-07-10 17:59:50,263 DEBUG o.s.c.e.EventListenerMethodProcessor [main] 1 @EventListener methods processed on bean 'tomatoImport': {public void com.learningjava.wotapi.imports.TomatoImport.startupImport()=@org.springframework.context.event.EventListener(classes={org.springframework.boot.context.event.ApplicationReadyEvent.class}, condition="", defaultExecution=true, id="", value={org.springframework.boot.context.event.ApplicationReadyEvent.class})}
-2025-07-10 17:59:50,263 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: com.learningjava.wotapi.service.PlayerService
+2025-07-10 17:59:50,263 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: com.learningjava.wotapi.api.service.PlayerService
 2025-07-10 17:59:50,263 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: org.springframework.scheduling.annotation.SchedulingConfiguration
 2025-07-10 17:59:50,263 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration
 2025-07-10 17:59:50,263 TRACE o.s.c.e.EventListenerMethodProcessor [main] No @EventListener annotations found on bean class: org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
@@ -4518,7 +4518,7 @@ Unconditional classes:
 2025-07-10 17:59:50,593 DEBUG s.u.l.i.LoggingProviderImpl$JULWrapper [HttpClient-1-Worker-0] X509Certificate: Alg:SHA256withRSA, Serial:40:1a:c4:64:21:b3:13:21:03:0e:bb:e4:12:1a:c5:1d, Subject:CN=VeriSign Universal Root Certification Authority, OU="(c) 2008 VeriSign, Inc. - For authorized use only", OU=VeriSign Trust Network, O="VeriSign, Inc.", C=US, Issuer:CN=VeriSign Universal Root Certification Authority, OU="(c) 2008 VeriSign, Inc. - For authorized use only", OU=VeriSign Trust Network, O="VeriSign, Inc.", C=US, Key type:RSA, Length:2048, Cert Id:2318285810, Valid from:02/04/2008, 02:00, Valid until:02/12/2037, 00:59
 2025-07-10 17:59:50,594 DEBUG s.u.l.i.LoggingProviderImpl$JULWrapper [HttpClient-1-Worker-0] X509Certificate: Alg:SHA1withRSA, Serial:50:94:6c:ec:18:ea:d5:9c:4d:d5:97:ef:75:8f:a0:ad, Subject:CN=XRamp Global Certification Authority, O=XRamp Security Services Inc, OU=www.xrampsecurity.com, C=US, Issuer:CN=XRamp Global Certification Authority, O=XRamp Security Services Inc, OU=www.xrampsecurity.com, C=US, Key type:RSA, Length:2048, Cert Id:3342493210, Valid from:01/11/2004, 18:14, Valid until:01/01/2035, 06:37
 2025-07-10 17:59:50,604 DEBUG s.u.l.i.LoggingProviderImpl$JULWrapper [HttpClient-1-Worker-0]  TLSHandshake: tomato.gg:443, TLSv1.3, TLS_AES_256_GCM_SHA384, 3318003009
-2025-07-10 17:59:50,712 DEBUG o.s.w.c.DefaultRestClient [main] Reading to [com.learningjava.wotapi.api.model.Tomato.TomatoTankPerformance]
+2025-07-10 17:59:50,712 DEBUG o.s.w.c.DefaultRestClient [main] Reading to [Tomato.com.learningjava.wotapi.model.TomatoTankPerformance]
 2025-07-10 17:59:50,760 TRACE i.m.o.SimpleObservation$SimpleScope [main] NoOp observation used with SimpleScope
 2025-07-10 17:59:50,760 INFO c.l.w.i.TomatoImport [main] [Tomato Import] Finished successfully
 2025-07-10 17:59:50,760 TRACE o.s.c.e.ApplicationListenerMethodAdapter [main] No result object given - no result to handle
@@ -6472,7 +6472,7 @@ Unconditional classes:
 2025-07-10 18:00:06,354 DEBUG s.u.l.i.LoggingProviderImpl$JULWrapper [HttpClient-1-Worker-0] X509Certificate: Alg:SHA256withRSA, Serial:40:1a:c4:64:21:b3:13:21:03:0e:bb:e4:12:1a:c5:1d, Subject:CN=VeriSign Universal Root Certification Authority, OU="(c) 2008 VeriSign, Inc. - For authorized use only", OU=VeriSign Trust Network, O="VeriSign, Inc.", C=US, Issuer:CN=VeriSign Universal Root Certification Authority, OU="(c) 2008 VeriSign, Inc. - For authorized use only", OU=VeriSign Trust Network, O="VeriSign, Inc.", C=US, Key type:RSA, Length:2048, Cert Id:2318285810, Valid from:02/04/2008, 02:00, Valid until:02/12/2037, 00:59
 2025-07-10 18:00:06,355 DEBUG s.u.l.i.LoggingProviderImpl$JULWrapper [HttpClient-1-Worker-0] X509Certificate: Alg:SHA1withRSA, Serial:50:94:6c:ec:18:ea:d5:9c:4d:d5:97:ef:75:8f:a0:ad, Subject:CN=XRamp Global Certification Authority, O=XRamp Security Services Inc, OU=www.xrampsecurity.com, C=US, Issuer:CN=XRamp Global Certification Authority, O=XRamp Security Services Inc, OU=www.xrampsecurity.com, C=US, Key type:RSA, Length:2048, Cert Id:3342493210, Valid from:01/11/2004, 18:14, Valid until:01/01/2035, 06:37
 2025-07-10 18:00:06,364 DEBUG s.u.l.i.LoggingProviderImpl$JULWrapper [HttpClient-1-Worker-0]  TLSHandshake: tomato.gg:443, TLSv1.3, TLS_AES_256_GCM_SHA384, 3318003009
-2025-07-10 18:00:06,460 DEBUG o.s.w.c.DefaultRestClient [main] Reading to [com.learningjava.wotapi.api.model.Tomato.TomatoTankPerformance]
+2025-07-10 18:00:06,460 DEBUG o.s.w.c.DefaultRestClient [main] Reading to [Tomato.com.learningjava.wotapi.model.TomatoTankPerformance]
 2025-07-10 18:00:06,507 INFO c.l.w.i.TomatoImport [main] [Tomato Import] Finished successfully
 2025-07-10 18:00:06,508 DEBUG o.s.b.a.ApplicationAvailabilityBean [main] Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
 2025-07-10 18:00:13,239 DEBUG s.r.r.Log$LoggerLog [RMI TCP Connection(2)-192.168.1.70] RMI TCP Connection(2)-192.168.1.70: (port 60363) connection closed

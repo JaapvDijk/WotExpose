@@ -1,11 +1,11 @@
-package com.learningjava.wotapi.api.model.wargaming;
+package com.learningjava.wotapi.api.model.worldoftanks.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Players {
+public final class Players {
     public String status;
     public Meta meta;
     public ArrayList<Player> data;

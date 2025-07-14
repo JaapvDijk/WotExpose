@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.model.Tomato;
+package com.learningjava.wotapi.api.model.tomato.dto;
 
 // import com.fasterxml.jackson.databind.ObjectMapper; // version 2.11.1
 // import com.fasterxml.jackson.annotation.JsonProperty; // version 2.11.1
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TomatoTankPerformance {
+public class TomatoTankPerformanceResponse {
     public PageProps pageProps;
     public boolean __N_SSG;
 

@@ -1,7 +1,7 @@
-package com.learningjava.wotapi.imports;
+package com.learningjava.wotapi.api.importer;
 
-import com.learningjava.wotapi.api.model.Tomato.TomatoTankPerformance;
-import com.learningjava.wotapi.service.TomatoClient;
+import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
+import com.learningjava.wotapi.api.service.TomatoClient;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,16 +10,16 @@ import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
+import java.util.Objects;
 
 @Component
-public class TomatoImport {
+public class TomatoImporter {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(TomatoImporter.class);
 
     private final TomatoClient tomatoApiClient;
 
-    public TomatoImport(TomatoClient tomatoApiClient) {
+    public TomatoImporter(TomatoClient tomatoApiClient) {
         this.tomatoApiClient = tomatoApiClient;
     }
 
@@ -28,9 +28,9 @@ public class TomatoImport {
     public void start() {
         logger.info("[Tomato Import] Started..");
 
-        Optional<TomatoTankPerformance> tankPerformanceEU = tomatoApiClient.getTankPerformance();
+        TomatoTankPerformanceResponse tankPerformanceEU = tomatoApiClient.getTankPerformance();
 
-        if (tankPerformanceEU.isEmpty()) { return; }
+        if (Objects.isNull(tankPerformanceEU)) { return; }
 
         //TODO: To database
 

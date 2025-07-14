@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.config;
+package com.learningjava.wotapi.api.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

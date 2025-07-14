@@ -1,6 +1,6 @@
-package com.learningjava.wotapi.service;
+package com.learningjava.wotapi.api.service;
 
-import com.learningjava.wotapi.api.model.wargaming.Players;
+import com.learningjava.wotapi.api.model.worldoftanks.entity.Players;
 import org.springframework.stereotype.Service;
 
 @Service
