@@ -11,11 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TomatoTankPerformanceResponse {
     public PageProps pageProps;
     public boolean __N_SSG;
+
+    public List<PageProps.Data.TankPerformance> getData() {
+        return this.pageProps.data.data;
+    }
 
     public static class PageProps{
         public Data data;
@@ -25,7 +30,7 @@ public class TomatoTankPerformanceResponse {
 
         public static class Data {
             public Meta meta;
-            public ArrayList<TankPerformance> data;
+            public List<TankPerformance> data;
 
             public static class Meta{
                 public String status;
@@ -38,7 +43,7 @@ public class TomatoTankPerformanceResponse {
                 public String nation;
                 public int tier;
                 @JsonProperty("class")
-                public String class_name;
+                public String tank_class;
                 public String image;
                 public String big_image;
                 public int battles;

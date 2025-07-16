@@ -1,6 +1,6 @@
 package com.learningjava.wotapi.api.service;
 
-import com.learningjava.wotapi.api.model.worldoftanks.entity.Players;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayersResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class WargamingClient {
     }
 
     //Accounts
-    public Players getPlayers(String name) {
+    public WoTPlayersResponse getPlayers(String name) {
         return restClient.get()
                 .uri(builder ->
                         builder.path("/account/list/")
@@ -27,7 +27,7 @@ public class WargamingClient {
                                 .queryParam("search", name)
                                 .build())
                 .retrieve()
-                .body(Players.class);
+                .body(WoTPlayersResponse.class);
     }
 
     public String getPlayerInfo(int accountId) {

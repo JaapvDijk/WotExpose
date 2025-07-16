@@ -1,7 +1,9 @@
 package com.learningjava.wotapi.api.service;
 
-import com.learningjava.wotapi.api.model.worldoftanks.entity.Players;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PlayerService {
@@ -12,11 +14,11 @@ public class PlayerService {
         this.wgClient = wargamingClient;
     }
 
-    public Players GetPlayers(String name) {
-        return wgClient.getPlayers(name);
+    public List<PlayerResponse> getPlayers(String name) {
+        return wgClient.getPlayers(name).toPlayersResponse();
     }
 
-    public String GetPlayerInfo(int id) {
+    public String getPlayerInfo(int id) {
         return wgClient.getPlayerInfo(id);
     }
 }

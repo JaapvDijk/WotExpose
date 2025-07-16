@@ -1,7 +1,9 @@
 package com.learningjava.wotapi.api.importer;
 
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
+import com.learningjava.wotapi.api.repo.TomatoTankPerformanceRepository;
 import com.learningjava.wotapi.api.service.TomatoClient;
+import com.learningjava.wotapi.api.service.TomatoService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,10 +19,10 @@ public class TomatoImporter {
 
     private static final Logger logger = LoggerFactory.getLogger(TomatoImporter.class);
 
-    private final TomatoClient tomatoApiClient;
+    private final TomatoService tomatoService;
 
-    public TomatoImporter(TomatoClient tomatoApiClient) {
-        this.tomatoApiClient = tomatoApiClient;
+    public TomatoImporter(TomatoService tomatoService) {
+        this.tomatoService = tomatoService;
     }
 
     //Every night at 3:00
@@ -28,11 +30,16 @@ public class TomatoImporter {
     public void start() {
         logger.info("[Tomato Import] Started..");
 
-        TomatoTankPerformanceResponse tankPerformanceEU = tomatoApiClient.getTankPerformance();
+        TomatoTankPerformanceResponse tankPerformanceEU = tomatoService.fetchTankPerformance();
 
-        if (Objects.isNull(tankPerformanceEU)) { return; }
+        if (Objects.isNull(tankPerformanceEU)) {
+            logger.info("[Tomato Import] aborted: Api call returned null..");
+            return;
+        }
 
-        //TODO: To database
+        tomatoService.saveTankPerformance(tankPerformanceEU);
+
+        //var tanks = tomatoService.getRecentTankPerformanceByName("Bourrasque");
 
         logger.info("[Tomato Import] Finished successfully");
     }
