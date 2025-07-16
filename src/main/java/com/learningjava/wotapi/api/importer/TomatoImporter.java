@@ -1,8 +1,6 @@
 package com.learningjava.wotapi.api.importer;
 
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
-import com.learningjava.wotapi.api.repo.TomatoTankPerformanceRepository;
-import com.learningjava.wotapi.api.service.TomatoClient;
 import com.learningjava.wotapi.api.service.TomatoService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -38,8 +36,6 @@ public class TomatoImporter {
         }
 
         tomatoService.saveTankPerformance(tankPerformanceEU);
-
-        //var tanks = tomatoService.getRecentTankPerformanceByName("Bourrasque");
 
         logger.info("[Tomato Import] Finished successfully");
     }

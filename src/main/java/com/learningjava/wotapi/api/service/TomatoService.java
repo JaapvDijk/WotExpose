@@ -4,20 +4,10 @@ import com.learningjava.wotapi.api.mapper.TankPerformanceMapper;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
 import com.learningjava.wotapi.api.model.tomato.entity.TankPerformance;
 import com.learningjava.wotapi.api.repo.TomatoTankPerformanceRepository;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-import org.springframework.cglib.core.Local;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 public class TomatoService {
