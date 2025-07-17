@@ -9,6 +9,11 @@ public class PlayerSearchRequest extends RequestBase {
     @Size(min = 3, message = "Name must be at least 3 characters long")
     private String name;
 
+    public PlayerSearchRequest(String name, String region) {
+        super(region);
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

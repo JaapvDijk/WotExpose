@@ -8,6 +8,10 @@ public class RequestBase {
     @Pattern(regexp = "EU|NA|ASIA", message = "Region must be either 'EU', 'NA' or 'ASIA'")
     private String region;
 
+    public RequestBase(String region) {
+        this.region = region;
+    }
+
     public String getRegion() {
         return region;
     }

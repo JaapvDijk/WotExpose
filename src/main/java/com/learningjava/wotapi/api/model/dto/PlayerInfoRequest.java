@@ -9,6 +9,11 @@ public class PlayerInfoRequest extends RequestBase {
     @Size(min = 9, max = 9, message = "Id must be 9 characters long")
     private int id;
 
+    public PlayerInfoRequest(int account_id, String region) {
+        super(region);
+        id = account_id;
+    }
+
     public int getId() {
         return id;
     }

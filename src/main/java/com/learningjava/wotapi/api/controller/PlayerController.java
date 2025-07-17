@@ -9,14 +9,12 @@ import com.learningjava.wotapi.api.service.PlayerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/player")
-@Validated
 public class PlayerController {
 
     private final PlayerService playerService;
@@ -29,7 +27,8 @@ public class PlayerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PlayerResponse>> search(@Valid @ModelAttribute PlayerSearchRequest request)  {
+    public ResponseEntity<List<PlayerResponse>> search(@Valid @ModelAttribute PlayerSearchRequest request)
+    {
         var result = playerService.getPlayers(request.getName());
 
         return ResponseEntity.ok(result);
