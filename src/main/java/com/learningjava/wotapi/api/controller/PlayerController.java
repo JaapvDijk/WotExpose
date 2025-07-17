@@ -1,19 +1,22 @@
 package com.learningjava.wotapi.api.controller;
 
 import com.learningjava.wotapi.api.importer.TomatoImporter;
+import com.learningjava.wotapi.api.model.dto.PlayerInfoRequest;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchRequest;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
 import com.learningjava.wotapi.api.service.PlayerService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/player")
+@Validated
 public class PlayerController {
 
     private final PlayerService playerService;
@@ -26,22 +29,23 @@ public class PlayerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PlayerResponse>> search(@Valid @ModelAttribute PlayerSearchRequest request)
-    {
+    public ResponseEntity<List<PlayerResponse>> search(@Valid @ModelAttribute PlayerSearchRequest request)  {
         var result = playerService.getPlayers(request.getName());
-
-        if (result == null)
-        {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
 
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/info/{id}")
-    public ResponseEntity<String> getPlayer(@PathVariable int id, @RequestParam String region)
+    public ResponseEntity<String> getPlayer(@Valid @ModelAttribute PlayerInfoRequest request)
     {
-        return new ResponseEntity<String>(playerService.getPlayerInfo(id), HttpStatus.OK);
+        var result = playerService.getPlayerInfo(request.getId());
+
+        if (result == null)
+        {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/tomatoImport")

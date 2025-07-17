@@ -1,5 +1,6 @@
 package com.learningjava.wotapi.api.service;
 
+import com.learningjava.wotapi.api.mapper.PlayerResponseMapper;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,10 @@ public class PlayerService {
     }
 
     public List<PlayerResponse> getPlayers(String name) {
-        return wgClient.getPlayers(name).toPlayersResponse();
+
+        var players = wgClient.getPlayers(name);
+
+        return PlayerResponseMapper.INSTANCE.toEntityList(players.data);
     }
 
     public String getPlayerInfo(int id) {

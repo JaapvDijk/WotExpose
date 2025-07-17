@@ -16,22 +16,10 @@ public final class WoTPlayersResponse {
     public static class Player{
         public String nickname;
         public int account_id;
-
-        public PlayerResponse toPlayerResponse() {
-            return new PlayerResponse(account_id ,nickname);
-        }
     }
 
     public static class Meta{
         public int count;
-    }
-
-    public List<PlayerResponse> toPlayersResponse() {
-        return Optional.ofNullable(data) //Check for null here, Jackson may overwrite the
-                .orElseGet(ArrayList::new) //prop with null in case of a {"data": null} response
-                .stream()
-                .map(Player::toPlayerResponse)
-                .collect(Collectors.toList());
     }
 }
 
