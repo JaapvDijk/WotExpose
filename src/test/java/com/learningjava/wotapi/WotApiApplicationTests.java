@@ -22,6 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.containsString;
 
+//TODO: Tests for endpoints:
+// - Player/Info/{Id}
 @WebMvcTest(PlayerController.class)
 public class WotApiApplicationTests {
     @Autowired
