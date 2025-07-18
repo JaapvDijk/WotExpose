@@ -9,15 +9,17 @@ import java.time.LocalDate;
         name = "tank_performance",
         indexes = {
                 @Index(name = "idx_name", columnList = "name"),
-                @Index(name = "idx_import_date", columnList = "import_date")
+                @Index(name = "idx_import_date", columnList = "import_date"),
+                @Index(name = "idx_region", columnList = "region")
         }
 )
 public class TankPerformance {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private LocalDate importDate;
+    private String region;
 
     public int tank_id;
     public String name;
@@ -60,6 +62,14 @@ public class TankPerformance {
 
     public void setImportDate(LocalDate importDate) {
         this.importDate = importDate;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public int getTank_id() {

@@ -1,6 +1,6 @@
 package com.learningjava.wotapi.api.controller;
 
-import com.learningjava.wotapi.api.importer.TomatoImporter;
+import com.learningjava.wotapi.api.model.HttpContext;
 import com.learningjava.wotapi.api.model.dto.PlayerInfoRequest;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchRequest;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
@@ -12,18 +12,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/player")
 public class PlayerController {
 
     private final PlayerService playerService;
-    private final TomatoImporter tomatoImporter;
 
     @Autowired
-    public PlayerController(PlayerService playerService, TomatoImporter tomatoImporter) {
+    public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
-        this.tomatoImporter = tomatoImporter;
     }
 
     @GetMapping("/search")
@@ -39,18 +38,11 @@ public class PlayerController {
     {
         var result = playerService.getPlayerInfo(request.getId());
 
-        if (result == null)
+        if (Objects.isNull(result))
         {
             return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/tomatoImport")
-    public ResponseEntity<String> doImport()
-    {
-        tomatoImporter.start();
-        return ResponseEntity.ok("Done");
     }
 }

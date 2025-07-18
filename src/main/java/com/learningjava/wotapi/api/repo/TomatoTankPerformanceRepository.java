@@ -11,4 +11,6 @@ public interface TomatoTankPerformanceRepository extends JpaRepository<TankPerfo
     boolean existsByImportDate(LocalDate importDate);
 
     TankPerformance findLatestByName(String name);
+
+    boolean existsByImportDateAndRegionEquals(LocalDate importDate, String region);
 }

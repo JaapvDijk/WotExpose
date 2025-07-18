@@ -4,26 +4,23 @@ import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayersResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClient;
+import com.learningjava.wotapi.api.config.RestClientConfig.RestClientProxy;
 
 @Component
 public class WargamingClient {
 
-    private final RestClient restClient;
-    private final String appId;
+    private final RestClientProxy restClient;
 
-    public WargamingClient(@Qualifier("wargamingRestClient") RestClient restClient,
-                           @Value("${api.wargaming.app-id}") String appId) {
+    public WargamingClient(@Qualifier("wargamingRestClient") RestClientProxy restClient) {
         this.restClient = restClient;
-        this.appId = appId;
     }
 
     //Accounts
     public WoTPlayersResponse getPlayers(String name) {
-        return restClient.get()
+        return restClient.getRequest()
                 .uri(builder ->
                         builder.path("/account/list/")
-                                .queryParam("application_id", appId)
+                                .queryParam("application_id", "{application_id}")
                                 .queryParam("search", name)
                                 .build())
                 .retrieve()
@@ -31,17 +28,15 @@ public class WargamingClient {
     }
 
     public String getPlayerInfo(int accountId) {
-        return restClient.get()
+        return restClient.getRequest()
                 .uri(builder ->
                         builder.path("/account/info/")
-                                .queryParam("application_id", appId)
+                                .queryParam("application_id", "{application_id}")
                                 .queryParam("account_id", accountId)
                                 .build())
                 .retrieve()
                 .body(String.class);
     }
-
-    //Authentication
 
     //Player ratings
 }

@@ -1,6 +1,7 @@
 package com.learningjava.wotapi.api.service;
 
 import com.learningjava.wotapi.api.mapper.TankPerformanceMapper;
+import com.learningjava.wotapi.api.model.HttpContext;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
 import com.learningjava.wotapi.api.model.tomato.entity.TankPerformance;
 import com.learningjava.wotapi.api.repo.TomatoTankPerformanceRepository;
@@ -20,21 +21,21 @@ public class TomatoService {
         this.repo = repo;
     }
 
-    public TomatoTankPerformanceResponse fetchTankPerformance()
+    public TomatoTankPerformanceResponse fetchTankPerformance(String region)
     {
-        return tomatoClient.getTankPerformance();
+        return tomatoClient.getTankPerformance(region);
     }
 
-    public void saveTankPerformance(TomatoTankPerformanceResponse tankPerformanceResponse)
+    public void saveTankPerformance(TomatoTankPerformanceResponse tankPerformanceResponse, String region)
     {
         var localDate = LocalDate.now();
-        var alreadyImportedToday = repo.existsByImportDate(localDate);
+        var alreadyImportedToday = repo.existsByImportDateAndRegionEquals(localDate, region);
         if (alreadyImportedToday) {
            return;
         }
 
         List<TankPerformance> result = TankPerformanceMapper.INSTANCE.toEntityList(tankPerformanceResponse.getData());
-        result = result.stream().peek(t -> t.setImportDate(localDate)).toList();
+        result = result.stream().peek(t -> { t.setImportDate(localDate); t.setRegion(region); }).toList();
 
         repo.saveAll(result);
     }

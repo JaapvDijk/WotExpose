@@ -24,20 +24,28 @@ public class TomatoImporter {
     }
 
     //Every night at 3:00
-    @Scheduled(cron = "0 0 3 * * *")
+    @Scheduled(cron = "0 0 3 * * *") //TODO: naar config
     public void start() {
-        logger.info("[Tomato Import] Started..");
+        start("EU");
+        start("NA");
+        start("ASIA");
+    }
 
-        TomatoTankPerformanceResponse tankPerformanceEU = tomatoService.fetchTankPerformance();
+    public boolean start(String region) {
+        logger.info("[Tomato Import] Started for {} ..", region);
 
-        if (Objects.isNull(tankPerformanceEU)) {
+        TomatoTankPerformanceResponse tankPerformance = tomatoService.fetchTankPerformance(region);
+
+        if (Objects.isNull(tankPerformance)) {
             logger.info("[Tomato Import] aborted: Api call returned null..");
-            return;
+            return false;
         }
 
-        tomatoService.saveTankPerformance(tankPerformanceEU);
+        tomatoService.saveTankPerformance(tankPerformance, region);
 
         logger.info("[Tomato Import] Finished successfully");
+
+        return true;
     }
 
     //On startup

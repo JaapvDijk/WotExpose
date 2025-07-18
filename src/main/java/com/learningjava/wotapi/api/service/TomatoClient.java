@@ -22,12 +22,12 @@ public class TomatoClient {
     }
 
     @Retryable(maxAttempts = 5, backoff = @Backoff(delay = 10000, multiplier = 5.0))
-    public TomatoTankPerformanceResponse getTankPerformance() {
+    public TomatoTankPerformanceResponse getTankPerformance(String region) {
         return restClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/tank-performance/recent/EU.json")
+                        .pathSegment("tank-performance", "recent", region + ".json")
                         .queryParam("mode", "recent")
-                        .queryParam("server", "EU")
+                        .queryParam("server", region)
                         .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, (request, response) -> {
