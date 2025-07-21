@@ -21,41 +21,48 @@ public class TankPerformance {
     private LocalDate importDate;
     private String region;
 
-    public int tank_id;
-    public String name;
-    public String nation;
-    public int tier;
-    public String tank_class;
-    public String image;
-    public String big_image;
-    public int battles;
-    public int player_wn8;
-    public double winrate;
-    public double player_winrate;
-    public double winrate_differential;
-    public int damage;
-    public int sniper_damage;
-    public double frags;
-    public double shots_fired;
-    public double direct_hits;
-    public double penetrations;
-    public double hit_rate;
-    public double pen_rate;
-    public int spotting_assist;
-    public int tracking_assist;
-    public double spots;
-    public int damage_blocked;
-    public int damage_received;
-    public int potential_damage_received;
-    public double base_capture_points;
-    public double base_defense_points;
-    public int life_time;
-    public double survival;
-    public int distance_traveled;
-    public int base_xp;
-    public int wn8;
-    public boolean isPrem;
+    private int tank_id;
+    private String name;
+    private String nation;
+    private int tier;
+    private String tank_class;
+    private String image;
+    private String big_image;
+    private int battles;
+    private int player_wn8;
+    private double winrate;
+    private double player_winrate;
+    private double winrate_differential;
+    private int damage;
+    private int sniper_damage;
+    private double frags;
+    private double shots_fired;
+    private double direct_hits;
+    private double penetrations;
+    private double hit_rate;
+    private double pen_rate;
+    private int spotting_assist;
+    private int tracking_assist;
+    private double spots;
+    private int damage_blocked;
+    private int damage_received;
+    private int potential_damage_received;
+    private double base_capture_points;
+    private double base_defense_points;
+    private int life_time;
+    private double survival;
+    private int distance_traveled;
+    private int base_xp;
+    private int wn8;
+    private boolean isPrem;
+    
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
     public LocalDate getImportDate() {
         return importDate;
     }

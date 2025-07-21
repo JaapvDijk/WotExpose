@@ -1,6 +1,5 @@
 package com.learningjava.wotapi.api.model.dto;
 
-import com.learningjava.wotapi.api.model.RequestBase;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

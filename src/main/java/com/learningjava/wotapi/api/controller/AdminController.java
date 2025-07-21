@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.api.controller;
 
 import com.learningjava.wotapi.api.importer.TomatoImporter;
-import com.learningjava.wotapi.api.model.RequestBase;
+import com.learningjava.wotapi.api.model.dto.RequestBase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
