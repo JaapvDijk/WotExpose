@@ -2,15 +2,13 @@ package com.learningjava.wotapi.api.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-public abstract class RequestBase {
+public abstract class PlayerRequestBase {
     @NotBlank(message = "Region is required")
     @Pattern(regexp = "EU|NA|ASIA", message = "Region must be either 'EU', 'NA' or 'ASIA'")
     private String region;
 
-    public RequestBase(String region) {
+    public PlayerRequestBase(String region) {
         this.region = region;
 
         //Set the region in the context here

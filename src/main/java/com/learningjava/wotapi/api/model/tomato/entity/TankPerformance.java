@@ -1,6 +1,7 @@
 package com.learningjava.wotapi.api.model.tomato.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -18,6 +19,8 @@ public class TankPerformance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @CreationTimestamp
+    @Column(name = "import_date")
     private LocalDate importDate;
     private String region;
 

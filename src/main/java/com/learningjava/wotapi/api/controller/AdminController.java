@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.api.controller;
 
 import com.learningjava.wotapi.api.importer.TomatoImporter;
-import com.learningjava.wotapi.api.model.dto.RequestBase;
+import com.learningjava.wotapi.api.model.dto.PlayerRequestBase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -17,11 +19,13 @@ public class AdminController {
     private final TomatoImporter tomatoImporter;
 
     @GetMapping("/import")
-    public ResponseEntity<String> doImport(@Valid @ModelAttribute RequestBase request)
+    public ResponseEntity<String> doImport(String region)
     {
-        var success = tomatoImporter.start(request.getRegion());
+        if (Objects.isNull(region)) { ResponseEntity.ok("Missing: 'region' query parameter"); }
 
-        if (!success) { ResponseEntity.ok("Import failed"); }
+        var success = tomatoImporter.start(region);
+
+        if (!success) { ResponseEntity.internalServerError().body("Import failed"); }
 
         return ResponseEntity.ok("Import successful");
     }

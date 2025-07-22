@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.controller;
+package com.learningjava.wotapi.api.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
