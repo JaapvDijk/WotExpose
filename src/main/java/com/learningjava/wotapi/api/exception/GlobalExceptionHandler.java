@@ -1,7 +1,10 @@
 package com.learningjava.wotapi.api.exception;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,46 +16,44 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    //500
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("error", "Internal server error");
-        body.put("message", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
+    public ResponseEntity<?> handleGeneric(Exception ex) {
+        return error(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", ex.getMessage());
     }
 
-    //400
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Map<String, Object>> handleBadRequest(IllegalArgumentException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("error", "Bad request");
-        body.put("message", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    public ResponseEntity<?> handleBadRequest(IllegalArgumentException ex) {
+        return error(HttpStatus.BAD_REQUEST, "Bad request", ex.getMessage());
     }
 
-    //@Valid (400)
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex) {
+        return error(HttpStatus.UNAUTHORIZED, "Invalid username or password", ex.getMessage());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<?> handleAccessDenied(AccessDeniedException ex) {
+        return error(HttpStatus.FORBIDDEN, "You are not authorized to access this resource", ex.getMessage());
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<?> handleJwtExpired(ExpiredJwtException ex) {
+        return error(HttpStatus.FORBIDDEN, "The JWT token has expired", ex.getMessage());
+    }
+
+    //From @Valid
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
-        return getMapResponseEntity(ex);
+    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
+        return error(HttpStatus.BAD_REQUEST, "Validation failed", ex.getMessage());
     }
 
-    //@Valid (400)
+    //From @Valid
     @ExceptionHandler(BindException.class)
-    public ResponseEntity<Map<String, Object>> handleBindErrors(BindException ex) {
-        return getMapResponseEntity(ex);
+    public ResponseEntity<?> handleBindErrors(BindException ex) {
+        return error(HttpStatus.BAD_REQUEST, "Validation failed", ex.getMessage());
     }
 
-    private ResponseEntity<Map<String, Object>> getMapResponseEntity(BindException ex) {
-        Map<String, String> fieldErrors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-                fieldErrors.put(error.getField(), error.getDefaultMessage())
-        );
-
-        Map<String, Object> body = new HashMap<>();
-        body.put("error", "Validation failed");
-        body.put("details", fieldErrors);
-
-        return ResponseEntity.badRequest().body(body);
+    private ResponseEntity<?> error(HttpStatus status, String error, String message) {
+        return ResponseEntity.status(status).body(Map.of("error", error, "message", message));
     }
 }
