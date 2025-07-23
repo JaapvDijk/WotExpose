@@ -1,7 +1,6 @@
 package com.learningjava.wotapi.api.config;
 
 import com.learningjava.wotapi.api.model.HttpContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

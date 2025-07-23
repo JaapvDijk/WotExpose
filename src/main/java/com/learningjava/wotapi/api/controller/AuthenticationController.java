@@ -1,10 +1,10 @@
-package com.learningjava.wotapi.api.config;
+package com.learningjava.wotapi.api.controller;
 
 import com.learningjava.wotapi.api.model.dto.LoginResponse;
 import com.learningjava.wotapi.api.model.dto.LoginUserDto;
 import com.learningjava.wotapi.api.model.dto.RegisterUserDto;
 import com.learningjava.wotapi.api.model.entities.User;
-import com.learningjava.wotapi.api.service.AuthenticationService;
+import com.learningjava.wotapi.api.auth.AuthenticationService;
 import com.learningjava.wotapi.api.service.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

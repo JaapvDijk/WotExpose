@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.config;
+package com.learningjava.wotapi.api.auth;
 
 import com.learningjava.wotapi.api.repo.UserRepository;
 import org.springframework.context.annotation.Bean;
@@ -37,7 +37,7 @@ public class ApplicationConfig {
 
     @Bean
     AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(); //TODO: deprecated
+        var authProvider = new DaoAuthenticationProvider(); //TODO: deprecated
 
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
