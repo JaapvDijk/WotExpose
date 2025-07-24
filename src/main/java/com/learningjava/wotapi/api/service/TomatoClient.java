@@ -1,5 +1,6 @@
 package com.learningjava.wotapi.api.service;
 
+import com.learningjava.wotapi.api.config.RetryConfig;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -16,14 +18,15 @@ public class TomatoClient {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final RestClient restClient;
+    private final RetryTemplate retryTemplate;
 
-    public TomatoClient(@Qualifier("tomatoRestClient") RestClient restClient) {
+    public TomatoClient(@Qualifier("tomatoRestClient") RestClient restClient, RetryTemplate retryTemplate) {
         this.restClient = restClient;
+        this.retryTemplate = retryTemplate;
     }
 
-    @Retryable(maxAttempts = 5, backoff = @Backoff(delay = 10000, multiplier = 5.0))
     public TomatoTankPerformanceResponse getTankPerformance(String region) {
-        return restClient.get()
+        return retryTemplate.execute(a -> restClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .pathSegment("tank-performance", "recent", region + ".json")
                         .queryParam("mode", "recent")
@@ -33,7 +36,7 @@ public class TomatoClient {
                 .onStatus(HttpStatusCode::isError, (request, response) -> {
                     logger.error("[Tomato Import] Error {} calling {}", response.getStatusCode(), request.getURI());
                 })
-                .body(TomatoTankPerformanceResponse.class);
+                .body(TomatoTankPerformanceResponse.class));
     }
 
     @Recover
