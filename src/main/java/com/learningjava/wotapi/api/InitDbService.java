@@ -1,8 +1,8 @@
 package com.learningjava.wotapi.api;
 
-import com.learningjava.wotapi.api.model.entities.Privilege;
-import com.learningjava.wotapi.api.model.entities.Role;
-import com.learningjava.wotapi.api.model.entities.User;
+import com.learningjava.wotapi.api.model.entity.Privilege;
+import com.learningjava.wotapi.api.model.entity.Role;
+import com.learningjava.wotapi.api.model.entity.User;
 import com.learningjava.wotapi.api.repo.PrivilegeRepository;
 import com.learningjava.wotapi.api.repo.RoleRepository;
 import com.learningjava.wotapi.api.repo.UserRepository;

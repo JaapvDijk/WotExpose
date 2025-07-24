@@ -2,7 +2,7 @@ package com.learningjava.wotapi.api.auth;
 
 import com.learningjava.wotapi.api.model.dto.LoginRequest;
 import com.learningjava.wotapi.api.model.dto.RegisterUserRequest;
-import com.learningjava.wotapi.api.model.entities.User;
+import com.learningjava.wotapi.api.model.entity.User;
 import com.learningjava.wotapi.api.repo.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

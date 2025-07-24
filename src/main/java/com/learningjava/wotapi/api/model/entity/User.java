@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.model.entities;
+package com.learningjava.wotapi.api.model.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
