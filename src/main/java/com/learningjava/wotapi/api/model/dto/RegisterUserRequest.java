@@ -3,7 +3,6 @@ package com.learningjava.wotapi.api.model.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
-//TODO: validation
 public class RegisterUserRequest {
     @Email
     private String email;
