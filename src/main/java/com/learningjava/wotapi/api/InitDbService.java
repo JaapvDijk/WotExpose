@@ -55,7 +55,7 @@ public class InitDbService {
 
         User user = new User();
         user.setFullName("user");
-        user.setEmail("user@something.nl");
+        user.setEmail("user@wotapi.nl");
         user.setPassword(passwordEncoder.encode("user123"));
         user.setRoles(List.of(userRole));
         userRepository.save(user);

@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -25,7 +26,7 @@ import static org.hamcrest.Matchers.containsString;
 //TODO: Tests for endpoints:
 // - Player/Info/{Id}
 @WebMvcTest(PlayerController.class)
-public class WotApiApplicationTests {
+public class PlayerControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
@@ -34,11 +35,6 @@ public class WotApiApplicationTests {
 
     @MockitoBean
     private TomatoImporter tomatoImporter;
-
-    @Test
-    void contextLoads() {
-
-    }
 
     @Test
     public void testSearch_withValidInput_returnsOk() throws Exception {

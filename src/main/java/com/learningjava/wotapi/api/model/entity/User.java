@@ -45,8 +45,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        System.out.println("called from own getAuthorities() implementation");
-
         var roleAuthorities = roles.stream()
                 .map(r -> new SimpleGrantedAuthority(r.getName()));
 
