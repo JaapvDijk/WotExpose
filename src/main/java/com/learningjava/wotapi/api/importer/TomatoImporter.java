@@ -1,7 +1,9 @@
 package com.learningjava.wotapi.api.importer;
 
+import com.learningjava.wotapi.api.config.ApiProperties;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
 import com.learningjava.wotapi.api.service.TomatoService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,8 +25,7 @@ public class TomatoImporter {
         this.tomatoService = tomatoService;
     }
 
-    //Every night at 3:00
-    @Scheduled(cron = "0 0 3 * * *") //TODO: naar config
+    @Scheduled(cron = "${api.tomato.schedule-expression}")
     public void start() {
         start("EU");
         start("NA");
