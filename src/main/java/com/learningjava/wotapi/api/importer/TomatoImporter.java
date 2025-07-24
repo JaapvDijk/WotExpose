@@ -1,9 +1,7 @@
 package com.learningjava.wotapi.api.importer;
 
-import com.learningjava.wotapi.api.config.ApiProperties;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
 import com.learningjava.wotapi.api.service.TomatoService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;

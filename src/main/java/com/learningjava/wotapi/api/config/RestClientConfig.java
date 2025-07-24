@@ -12,10 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
 public class RestClientConfig {
-    private final ApiProperties apiProperties;
+    private final WargamingProperties wargamingProperties;
+    private final TomatoProperties tomatoProperties;
 
-    public RestClientConfig(ApiProperties apiProperties) {
-        this.apiProperties = apiProperties;
+    public RestClientConfig(WargamingProperties wargamingProperties, TomatoProperties tomatoProperties) {
+        this.wargamingProperties = wargamingProperties;
+        this.tomatoProperties = tomatoProperties;
     }
 
     @Bean
@@ -23,7 +25,7 @@ public class RestClientConfig {
     public RestClient tomatoRestClient() {
 
         return RestClient.builder()
-                .baseUrl(apiProperties.getTomato().getBaseUrl())
+                .baseUrl(tomatoProperties.getBaseUrl())
                 .build();
     }
 
@@ -53,9 +55,9 @@ public class RestClientConfig {
 
         private RestClient buildClient(String region) {
             String baseUrl = switch (region) {
-                case "EU" -> apiProperties.getWargaming().getBaseUrlEu();
-                case "NA" -> apiProperties.getWargaming().getBaseUrlNa();
-                case "ASIA" -> apiProperties.getWargaming().getBaseUrlAsia();
+                case "EU" -> wargamingProperties.getBaseUrlEu();
+                case "NA" -> wargamingProperties.getBaseUrlNa();
+                case "ASIA" -> wargamingProperties.getBaseUrlAsia();
                 default -> throw new IllegalArgumentException("Unsupported region: " + region);
             };
 
