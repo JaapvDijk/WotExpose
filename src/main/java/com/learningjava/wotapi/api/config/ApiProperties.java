@@ -28,6 +28,7 @@ public class ApiProperties {
 
     public static class Tomato {
         private String baseUrl;
+        private String scheduleExpression;
 
         public String getBaseUrl() {
             return baseUrl;
@@ -35,6 +36,14 @@ public class ApiProperties {
 
         public void setBaseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
+        }
+
+        public String getScheduleExpression() {
+            return this.scheduleExpression;
+        }
+
+        public void setScheduleExpression(String scheduleExpression) {
+            this.scheduleExpression = scheduleExpression;
         }
     }
 
