@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.stream.Stream;
 
 @Table(name = "users")
 @Entity
@@ -27,9 +27,6 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
-
-    @Column
-    private List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -49,7 +46,15 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         System.out.println("called from own getAuthorities() implementation");
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).toList();
+
+        var roleAuthorities = roles.stream()
+                .map(r -> new SimpleGrantedAuthority(r.getName()));
+
+        var privilegeAuthorities = roles.stream()
+                .flatMap(r -> r.getPrivileges().stream())
+                .map(p -> new SimpleGrantedAuthority(p.getName()));
+
+        return Stream.concat(roleAuthorities, privilegeAuthorities).toList();
     }
 
     @Override
