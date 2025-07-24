@@ -64,6 +64,7 @@ public class RestClientConfig {
             return RestClient.builder()
                     .baseUrl(baseUrl)
                     //.defaultRequest(req -> req.url(url -> url.queryParam("application_id", appId))) would be nice
+                    //.requestInitializer(myCustomInitializer)
                     .defaultUriVariables(Map.of("application_id", appId))
                     .build();
         }

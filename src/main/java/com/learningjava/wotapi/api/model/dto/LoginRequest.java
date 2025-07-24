@@ -1,7 +1,9 @@
 package com.learningjava.wotapi.api.model.dto;
 
-//TODO: validation
-public class LoginUserDto {
+import jakarta.validation.constraints.Email;
+
+public class LoginRequest {
+    @Email
     private String email;
 
     private String password;

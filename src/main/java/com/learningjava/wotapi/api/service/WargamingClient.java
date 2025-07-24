@@ -2,7 +2,6 @@ package com.learningjava.wotapi.api.service;
 
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayersResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.learningjava.wotapi.api.config.RestClientConfig.RestClientProxy;
 

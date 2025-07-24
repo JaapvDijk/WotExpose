@@ -33,7 +33,7 @@ public class TomatoImporter {
     public boolean start(String region) {
         logger.info("[Tomato Import] Started for {} ..", region);
 
-        TomatoTankPerformanceResponse tankPerformance = tomatoService.fetchTankPerformance(region);
+        var tankPerformance = tomatoService.fetchTankPerformance(region);
 
         if (Objects.isNull(tankPerformance)) {
             logger.info("[Tomato Import] aborted: Api call returned null..");

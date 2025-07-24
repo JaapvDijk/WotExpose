@@ -1,9 +1,14 @@
 package com.learningjava.wotapi.api.model.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
+
 //TODO: validation
-public class RegisterUserDto {
+public class RegisterUserRequest {
+    @Email
     private String email;
 
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
     private String fullName;

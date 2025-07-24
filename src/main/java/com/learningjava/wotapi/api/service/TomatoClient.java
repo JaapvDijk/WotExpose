@@ -1,14 +1,11 @@
 package com.learningjava.wotapi.api.service;
 
-import com.learningjava.wotapi.api.config.RetryConfig;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;

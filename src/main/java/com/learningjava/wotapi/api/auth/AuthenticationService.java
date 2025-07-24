@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.api.auth;
 
-import com.learningjava.wotapi.api.model.dto.LoginUserDto;
-import com.learningjava.wotapi.api.model.dto.RegisterUserDto;
+import com.learningjava.wotapi.api.model.dto.LoginRequest;
+import com.learningjava.wotapi.api.model.dto.RegisterUserRequest;
 import com.learningjava.wotapi.api.model.entities.User;
 import com.learningjava.wotapi.api.repo.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,7 +25,7 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User signup(RegisterUserDto input) {
+    public User signup(RegisterUserRequest input) {
         var user = new User();
         user.setEmail(input.getEmail());
         user.setFullName(input.getFullName());
@@ -34,7 +34,7 @@ public class AuthenticationService {
         return userRepository.save(user);
     }
 
-    public User authenticate(LoginUserDto input) {
+    public User authenticate(LoginRequest input) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         input.getEmail(),

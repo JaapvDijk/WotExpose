@@ -1,7 +1,6 @@
 package com.learningjava.wotapi.api.service;
 
 import com.learningjava.wotapi.api.mapper.TankPerformanceMapper;
-import com.learningjava.wotapi.api.model.HttpContext;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
 import com.learningjava.wotapi.api.model.tomato.entity.TankPerformance;
 import com.learningjava.wotapi.api.repo.TomatoTankPerformanceRepository;
