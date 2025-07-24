@@ -19,7 +19,7 @@ public class PlayerService {
 
         var players = wgClient.getPlayers(name);
 
-        return PlayerResponseMapper.INSTANCE.toEntityList(players.getData());
+        return PlayerResponseMapper.INSTANCE.toDtoList(players.getData());
     }
 
     public String getPlayerInfo(int id) {

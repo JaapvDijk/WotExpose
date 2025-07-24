@@ -11,7 +11,7 @@ import java.util.List;
 public interface PlayerResponseMapper {
     PlayerResponseMapper INSTANCE = Mappers.getMapper(PlayerResponseMapper.class);
 
-    PlayerResponse toEntity(WoTPlayersResponse.Player dto);
+    PlayerResponse toDto(WoTPlayersResponse.Player dto);
 
-    List<PlayerResponse> toEntityList(List<WoTPlayersResponse.Player> dtos);
+    List<PlayerResponse> toDtoList(List<WoTPlayersResponse.Player> dtos);
 }
