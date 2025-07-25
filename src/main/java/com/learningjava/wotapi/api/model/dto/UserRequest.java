@@ -1,22 +1,12 @@
 package com.learningjava.wotapi.api.model.dto;
 
-public class UserResponse {
-    private Integer id;
+public class UserRequest {
     private String fullName;
     private String email;
 
-    public UserResponse(Integer id, String fullName, String email) {
-        this.id = id;
+    public UserRequest(String fullName, String email) {
         this.fullName = fullName;
         this.email = email;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getFullName() {

@@ -17,24 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
     private final JwtService jwtService;
+    private final AuthenticationService service;
 
-    private final AuthenticationService authenticationService;
-
-    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
+    public AuthenticationController(JwtService jwtService, AuthenticationService service) {
         this.jwtService = jwtService;
-        this.authenticationService = authenticationService;
+        this.service = service;
     }
 
     @PostMapping("/signup")
     public ResponseEntity<User> register(@Valid @RequestBody RegisterUserRequest registerUserRequest) {
-        var result = authenticationService.signup(registerUserRequest);
+        var result = service.signup(registerUserRequest);
 
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
-        var authenticatedUser = authenticationService.authenticate(loginRequest);
+        var authenticatedUser = service.authenticate(loginRequest);
 
         var jwtToken = jwtService.generateToken(authenticatedUser);
 
@@ -44,4 +43,8 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(result);
     }
+
+    //TODO: refresh token
+
+    //TODO: password reset
 }

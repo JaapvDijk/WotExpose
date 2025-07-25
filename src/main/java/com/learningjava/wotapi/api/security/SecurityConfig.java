@@ -33,18 +33,18 @@ public class SecurityConfig {
     public SecurityFilterChain AuthorizationSecurityFilterChain(HttpSecurity http) throws Exception {
             http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/player/**", "/users/**").permitAll()
+                        .requestMatchers("/auth/**", "/player/**").permitAll()
                         .requestMatchers("/h2/**", "/v3/**", "/swagger/**", "/swagger-ui/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**", "user/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) //H2 console
-                .exceptionHandling((exceptions) -> exceptions
-                        .defaultAuthenticationEntryPointFor(
-                                new LoginUrlAuthenticationEntryPoint("/auth/login"),
-                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML))
-                );
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)); //Fix for H2 console
+//                .exceptionHandling((exceptions) -> exceptions
+//                        .defaultAuthenticationEntryPointFor(
+//                                new LoginUrlAuthenticationEntryPoint("/auth/login"),
+//                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML))
+//                );
         return http.build();
     }
 
