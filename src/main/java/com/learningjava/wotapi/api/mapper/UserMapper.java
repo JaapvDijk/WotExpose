@@ -3,14 +3,8 @@ package com.learningjava.wotapi.api.mapper;
 import com.learningjava.wotapi.api.model.dto.UserResponse;
 import com.learningjava.wotapi.api.model.entity.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring")
-public interface UserResponseMapper {
-    UserResponseMapper INSTANCE = Mappers.getMapper(UserResponseMapper.class);
-
+public interface UserMapper {
     UserResponse toDto(User entity);
-
-    Page<UserResponse> toDtoList(Page<User> entities);
 }
