@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.auth;
+package com.learningjava.wotapi.api.security;
 
 import com.learningjava.wotapi.api.model.dto.LoginRequest;
 import com.learningjava.wotapi.api.model.dto.RegisterUserRequest;

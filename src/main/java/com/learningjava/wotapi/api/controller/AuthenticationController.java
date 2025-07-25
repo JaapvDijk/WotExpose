@@ -4,7 +4,7 @@ import com.learningjava.wotapi.api.model.dto.LoginResponse;
 import com.learningjava.wotapi.api.model.dto.LoginRequest;
 import com.learningjava.wotapi.api.model.dto.RegisterUserRequest;
 import com.learningjava.wotapi.api.model.entity.User;
-import com.learningjava.wotapi.api.auth.AuthenticationService;
+import com.learningjava.wotapi.api.security.AuthenticationService;
 import com.learningjava.wotapi.api.service.JwtService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
