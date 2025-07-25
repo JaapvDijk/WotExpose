@@ -12,17 +12,19 @@ import java.util.*;
 @Service
 public class TomatoService {
 
-    private final TomatoClient tomatoClient;
+    private final TomatoClient client;
     private final TomatoTankPerformanceRepository repo;
+    private final TankPerformanceMapper mapper;
 
-    public TomatoService(TomatoClient tomatoClient, TomatoTankPerformanceRepository repo) {
-        this.tomatoClient = tomatoClient;
+    public TomatoService(TomatoClient client, TomatoTankPerformanceRepository repo, TankPerformanceMapper mapper) {
+        this.client = client;
         this.repo = repo;
+        this.mapper = mapper;
     }
 
     public TomatoTankPerformanceResponse fetchTankPerformance(String region)
     {
-        return tomatoClient.getTankPerformance(region);
+        return client.getTankPerformance(region);
     }
 
     public void saveTankPerformance(TomatoTankPerformanceResponse tankPerformanceResponse, String region)
@@ -33,7 +35,7 @@ public class TomatoService {
            return;
         }
 
-        List<TankPerformance> result = TankPerformanceMapper.INSTANCE.toEntityList(tankPerformanceResponse.getData());
+        var result = mapper.toEntityList(tankPerformanceResponse.getData());
         result = result.stream().peek(t -> { t.setImportDate(localDate); t.setRegion(region); }).toList();
 
         repo.saveAll(result);

@@ -9,20 +9,22 @@ import java.util.List;
 @Service
 public class PlayerService {
 
-    private final WargamingClient wgClient;
+    private final WargamingClient client;
+    private final PlayerResponseMapper mapper;
 
-    public PlayerService(WargamingClient wargamingClient) {
-        this.wgClient = wargamingClient;
+    public PlayerService(WargamingClient client, PlayerResponseMapper mapper) {
+        this.client = client;
+        this.mapper = mapper;
     }
 
     public List<PlayerResponse> getPlayers(String name) {
 
-        var players = wgClient.getPlayers(name);
+        var players = client.getPlayers(name);
 
-        return PlayerResponseMapper.INSTANCE.toDtoList(players.getData());
+        return mapper.toDtoList(players.getData());
     }
 
     public String getPlayerInfo(int id) {
-        return wgClient.getPlayerInfo(id);
+        return client.getPlayerInfo(id);
     }
 }

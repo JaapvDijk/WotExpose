@@ -10,16 +10,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserRepository repo;
+    private final UserResponseMapper mapper;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(UserRepository repo, UserResponseMapper mapper) {
+        this.repo = repo;
+        this.mapper = mapper;
     }
 
     public Page<UserResponse> getUsers(int page, int size) {
         var pageable = PageRequest.of(page, size);
-        var usersPage = userRepository.findAll(pageable);
+        var usersPage = repo.findAll(pageable);
 
-        return UserResponseMapper.INSTANCE.toDtoList(usersPage);
+        return mapper.toDtoList(usersPage);
     }
 }
