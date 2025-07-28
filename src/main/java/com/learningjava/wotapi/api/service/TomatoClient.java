@@ -23,22 +23,21 @@ public class TomatoClient {
     }
 
     public TomatoTankPerformanceResponse getTankPerformance(String region) {
-        return retryTemplate.execute(a -> restClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .pathSegment("tank-performance", "recent", region + ".json")
-                        .queryParam("mode", "recent")
-                        .queryParam("server", region)
-                        .build())
-                .retrieve()
-                .onStatus(HttpStatusCode::isError, (request, response) -> {
-                    logger.error("[Tomato Import] Error {} calling {}", response.getStatusCode(), request.getURI());
-                })
-                .body(TomatoTankPerformanceResponse.class));
-    }
-
-    @Recover
-    public TomatoTankPerformanceResponse recover(RuntimeException e) {
-        logger.error("All retry attempts failed: {}", e.getMessage());
-        return null;
+        return retryTemplate.execute(
+                __ -> restClient.get()
+                        .uri(uriBuilder -> uriBuilder
+                                .pathSegment("tank-performance", "recent", region + ".json")
+                                .queryParam("mode", "recent")
+                                .queryParam("server", region)
+                                .build())
+                        .retrieve()
+                        .onStatus(HttpStatusCode::isError, (request, response) -> {
+                            logger.error("[Tomato Import] Error {} calling {}", response.getStatusCode(), request.getURI());
+                        })
+                        .body(TomatoTankPerformanceResponse.class),
+                e -> {
+                    logger.error("All retry attempts failed: {}", e);
+                    return null;
+                });
     }
 }
