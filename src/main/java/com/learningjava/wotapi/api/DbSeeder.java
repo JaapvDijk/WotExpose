@@ -6,6 +6,7 @@ import com.learningjava.wotapi.api.model.entity.User;
 import com.learningjava.wotapi.api.repo.PrivilegeRepository;
 import com.learningjava.wotapi.api.repo.RoleRepository;
 import com.learningjava.wotapi.api.repo.UserRepository;
+import com.learningjava.wotapi.api.contant.Roles;
 import jakarta.annotation.PostConstruct;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,14 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class InitDbService {
+public class DbSeeder {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PrivilegeRepository privilegeRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public InitDbService(UserRepository userRepository, RoleRepository roleRepository, PrivilegeRepository privilegeRepository, PasswordEncoder passwordEncoder) {
+    public DbSeeder(UserRepository userRepository, RoleRepository roleRepository, PrivilegeRepository privilegeRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.privilegeRepository = privilegeRepository;
@@ -37,12 +38,12 @@ public class InitDbService {
         privilegeRepository.saveAll(Arrays.asList(readPrivilege, writePrivilege));
 
         Role adminRole = new Role();
-        adminRole.setName("ROLE_ADMIN");
+        adminRole.setName(Roles.ROLE_ADMIN);
         adminRole.setPrivileges(Arrays.asList(readPrivilege, writePrivilege));
         roleRepository.save(adminRole);
 
         Role userRole = new Role();
-        userRole.setName("ROLE_USER");
+        userRole.setName(Roles.ROLE_USER);
         userRole.setPrivileges(List.of(readPrivilege));
         roleRepository.save(userRole);
 
