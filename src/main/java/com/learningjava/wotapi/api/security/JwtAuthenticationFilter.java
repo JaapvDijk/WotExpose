@@ -1,6 +1,5 @@
 package com.learningjava.wotapi.api.security;
 
-import com.learningjava.wotapi.api.model.HttpContext;
 import com.learningjava.wotapi.api.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
