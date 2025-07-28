@@ -1,6 +1,5 @@
 package com.learningjava.wotapi.api.importer;
 
-import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
 import com.learningjava.wotapi.api.service.TomatoService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -31,18 +30,18 @@ public class TomatoImporter {
     }
 
     public boolean start(String region) {
-        logger.info("[Tomato Import] Started for {} ..", region);
+        logger.info("[Tomato Import] Started for {}", region);
 
         var tankPerformance = tomatoService.fetchTankPerformance(region);
 
         if (Objects.isNull(tankPerformance)) {
-            logger.info("[Tomato Import] aborted: Api call returned null..");
+            logger.info("[Tomato Import] aborted: Api call returned null {}", region);
             return false;
         }
 
         tomatoService.saveTankPerformance(tankPerformance, region);
 
-        logger.info("[Tomato Import] Finished successfully");
+        logger.info("[Tomato Import] Finished successfully for {}", region);
 
         return true;
     }
