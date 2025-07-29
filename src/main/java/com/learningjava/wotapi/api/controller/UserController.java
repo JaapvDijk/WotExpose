@@ -3,6 +3,7 @@ package com.learningjava.wotapi.api.controller;
 import com.learningjava.wotapi.api.model.dto.UserRequest;
 import com.learningjava.wotapi.api.model.dto.UserResponse;
 import com.learningjava.wotapi.api.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,7 +36,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable Integer id, @RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Integer id, @Valid @RequestBody UserRequest request) {
         var result = userService.updateUser(id, request);
         return ResponseEntity.ok(result);
     }

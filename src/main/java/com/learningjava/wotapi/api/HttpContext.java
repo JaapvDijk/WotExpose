@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.model;
+package com.learningjava.wotapi.api;
 
 public class HttpContext {
 

@@ -1,7 +1,10 @@
 package com.learningjava.wotapi.api.model.dto;
 
+import jakarta.validation.constraints.Email;
+
 public class UserRequest {
     private String fullName;
+    @Email(message = "Must be a valid email address")
     private String email;
 
     public UserRequest(String fullName, String email) {

@@ -1,6 +1,6 @@
 package com.learningjava.wotapi.api.service;
 
-import com.learningjava.wotapi.api.model.HttpContext;
+import com.learningjava.wotapi.api.HttpContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
