@@ -1,11 +1,12 @@
 package com.learningjava.wotapi.api.controller;
 
-import com.learningjava.wotapi.api.model.dto.PlayerInfoRequest;
+import com.learningjava.wotapi.api.model.dto.PlayerRequest;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchPlayerRequest;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
-import com.learningjava.wotapi.api.service.PlayerService;
 
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTanksResponse;
+import com.learningjava.wotapi.api.service.WargamingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,30 +19,33 @@ import java.util.Objects;
 @RequestMapping("/player")
 public class PlayerController {
 
-    private final PlayerService playerService;
+    private final WargamingService wargamingService;
 
     @Autowired
-    public PlayerController(PlayerService playerService) {
-        this.playerService = playerService;
+    public PlayerController(WargamingService wargamingService) {
+        this.wargamingService = wargamingService;
     }
 
     @GetMapping("/search")
     public ResponseEntity<List<PlayerResponse>> search(@Valid @ModelAttribute PlayerSearchPlayerRequest request)
     {
-        var result = playerService.getPlayers(request.getName());
+        var result = wargamingService.getPlayers(request.getName());
 
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<WoTPlayerInfoResponse> getPlayer(@PathVariable Integer id, @Valid @ModelAttribute PlayerInfoRequest request)
+    @GetMapping("/info/{id}")
+    public ResponseEntity<WoTPlayerInfoResponse> getInfo(@PathVariable Integer id, @Valid @ModelAttribute PlayerRequest request)
     {
-        var result = playerService.getPlayerInfo(id);
+        var result = wargamingService.getPlayerInfo(id);
 
-        if (Objects.isNull(result))
-        {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/tanks/{id}")
+    public ResponseEntity<WoTPlayerTanksResponse> getTanks(@PathVariable Integer id, @Valid @ModelAttribute PlayerRequest request)
+    {
+        var result = wargamingService.getPlayerTanks(id);
 
         return ResponseEntity.ok(result);
     }

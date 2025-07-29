@@ -1,18 +1,22 @@
 package com.learningjava.wotapi;
 
 import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
-import com.learningjava.wotapi.api.service.PlayerService;
 import com.learningjava.wotapi.api.importer.TomatoImporter;
 
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
+import com.learningjava.wotapi.api.service.WargamingService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
@@ -24,32 +28,32 @@ import static org.hamcrest.Matchers.containsString;
 
 //TODO: Tests for endpoints:
 // - Player/Info/{Id}
+// - Player/Tanks/{Id}
 @SpringBootTest
 @AutoConfigureMockMvc
+//@ImportAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 public class PlayerControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
     @MockitoBean
-    private PlayerService playerService;
+    private WargamingService wargamingService;
 
     @MockitoBean
     private TomatoImporter tomatoImporter;
 
+    private final int playerId = 537793577;
+    private final String playerName = "iyouxin";
+
+    //region SEARCH ENDPOINTS
     @Test
     public void testSearch_withValidInput_returnsOk() throws Exception {
-        // Arrange
-        PlayerResponse mockPlayer = new PlayerResponse("QuickBaby", 518017681);
-        Mockito.when(playerService.getPlayers("QuickBaby"))
-                .thenReturn(List.of(mockPlayer));
-
-        // Act & Assert
         mockMvc.perform(get("/player/search")
-                        .param("name", "QuickBaby")
+                        .param("name", playerName)
                         .param("region", "EU"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].nickname").value("QuickBaby"))
-                .andExpect(jsonPath("$[0].account_id").value(518017681));
+                .andExpect(jsonPath("nickname").value(playerName))
+                .andExpect(jsonPath("account_id").value(playerId));
     }
 
     @Test
@@ -85,4 +89,31 @@ public class PlayerControllerTests {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string(containsString("Region must be either 'EU', 'NA' or 'ASIA'")));
     }
+    //endregion
+
+    //region INFO ENDPOINTS
+    @Test
+    public void testGetInfo_withValidId_returnsOk() throws Exception {
+        ResultActions a=  mockMvc.perform(get("/player/info/{id}", playerId)
+                .param("region", "EU"));
+
+        mockMvc.perform(get("/player/info/{id}", playerId)
+                        .param("region", "EU"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accountId").value(playerId))
+                .andExpect(jsonPath("$.nickname").value(playerName));
+    }
+
+    @Test
+    public void testGetInfo_withUnknownId_returnsNotFound() throws Exception {
+        //Arrange
+        int unknownId = 123456789;
+        Mockito.when(wargamingService.getPlayerInfo(unknownId)).thenReturn(null);
+
+        //Act & Assert
+        mockMvc.perform(get("/player/info/{id}", unknownId)
+                        .param("region", "EU"))
+                .andExpect(status().isNotFound());
+    }
+    //endregion
 }
