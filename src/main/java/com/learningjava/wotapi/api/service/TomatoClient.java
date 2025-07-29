@@ -3,7 +3,6 @@ package com.learningjava.wotapi.api.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
