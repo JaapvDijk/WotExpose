@@ -16,6 +16,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -27,7 +29,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain AuthorizationSecurityFilterChain(HttpSecurity http) throws Exception {
-            http.csrf(AbstractHttpConfigurer::disable)
+            http.cors(withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**", "/player/**").permitAll()
                         .requestMatchers("/h2/**", "/v3/**", "/swagger/**", "/swagger-ui/**").permitAll()
@@ -48,9 +51,10 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource(@Value("${server.port}") int port) {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:"+port));
-        configuration.setAllowedMethods(List.of("GET","POST"));
+        configuration.setAllowedOrigins(List.of("http://localhost:"+port)); //TODO: add production ip from config
+        configuration.setAllowedMethods(List.of("GET", "POST", "UPDATE", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
+        configuration.setAllowCredentials(true); //For JWT (Authorization header)
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 

@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class App {
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(App.class, args);
+        SpringApplication.run(App.class, args);
 
         //CHECK: https://blog.tericcabrel.com/handle-database-migrations-in-a-springboot-application-with-flyway/
     }

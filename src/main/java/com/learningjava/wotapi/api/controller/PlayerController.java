@@ -1,8 +1,9 @@
 package com.learningjava.wotapi.api.controller;
 
-import com.learningjava.wotapi.api.model.dto.PlayerInfoPlayerRequest;
+import com.learningjava.wotapi.api.model.dto.PlayerInfoRequest;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchPlayerRequest;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
 import com.learningjava.wotapi.api.service.PlayerService;
 
 import jakarta.validation.Valid;
@@ -32,10 +33,10 @@ public class PlayerController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/info/{id}")
-    public ResponseEntity<String> getPlayer(@Valid @ModelAttribute PlayerInfoPlayerRequest request)
+    @GetMapping("/{id}")
+    public ResponseEntity<WoTPlayerInfoResponse> getPlayer(@PathVariable Integer id, @Valid @ModelAttribute PlayerInfoRequest request)
     {
-        var result = playerService.getPlayerInfo(request.getId());
+        var result = playerService.getPlayerInfo(id);
 
         if (Objects.isNull(result))
         {

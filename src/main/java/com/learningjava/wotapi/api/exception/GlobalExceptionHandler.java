@@ -27,16 +27,26 @@ public class GlobalExceptionHandler {
         return error(HttpStatus.BAD_REQUEST, "Bad request", ex.getMessage());
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> handleNotFound(EntityNotFoundException ex) {
-        return error(HttpStatus.NOT_FOUND, "Not found", ex.getMessage());
-    }
-
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handleBadRequest(IllegalArgumentException ex) {
         return error(HttpStatus.BAD_REQUEST, "Bad request", ex.getMessage());
     }
 
+    //From @Valid
+    @ExceptionHandler(MethodArgumentNotValidException.class) //From @Valid
+    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
+        return error(HttpStatus.BAD_REQUEST, "Validation failed", ex.getMessage());
+    }
+
+    @ExceptionHandler(BindException.class) //From @Valid
+    public ResponseEntity<?> handleBindErrors(BindException ex) {
+        return error(HttpStatus.BAD_REQUEST, "Validation failed", ex.getMessage());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<?> handleNotFound(EntityNotFoundException ex) {
+        return error(HttpStatus.NOT_FOUND, "Not found", ex.getMessage());
+    }
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex) {
         return error(HttpStatus.UNAUTHORIZED, "Invalid username or password", ex.getMessage());
@@ -50,18 +60,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<?> handleJwtExpired(ExpiredJwtException ex) {
         return error(HttpStatus.FORBIDDEN, "The JWT token has expired", ex.getMessage());
-    }
-
-    //From @Valid
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
-        return error(HttpStatus.BAD_REQUEST, "Validation failed", ex.getMessage());
-    }
-
-    //From @Valid
-    @ExceptionHandler(BindException.class)
-    public ResponseEntity<?> handleBindErrors(BindException ex) {
-        return error(HttpStatus.BAD_REQUEST, "Validation failed", ex.getMessage());
     }
 
     private ResponseEntity<?> error(HttpStatus status, String error, String message) {
