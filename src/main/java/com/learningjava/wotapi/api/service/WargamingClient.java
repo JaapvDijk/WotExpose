@@ -2,6 +2,7 @@ package com.learningjava.wotapi.api.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learningjava.wotapi.api.exception.PlayerNotFoundException;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTanksResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayersResponse;
@@ -71,7 +72,7 @@ public class WargamingClient {
 
         JsonNode dataNode = root.get("data").get(String.valueOf(accountId));
         if (dataNode == null || dataNode.isNull()) {
-            throw new IllegalStateException("No player found for account ID: " + accountId);
+            throw new PlayerNotFoundException("No player found for account ID: " + accountId);
         }
 
         return dataNode;

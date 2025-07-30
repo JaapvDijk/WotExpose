@@ -1,24 +1,19 @@
 package com.learningjava.wotapi;
 
-import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
 import com.learningjava.wotapi.api.importer.TomatoImporter;
 
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
+import com.learningjava.wotapi.api.service.WargamingClient;
 import com.learningjava.wotapi.api.service.WargamingService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-
-import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,32 +26,24 @@ import static org.hamcrest.Matchers.containsString;
 // - Player/Tanks/{Id}
 @SpringBootTest
 @AutoConfigureMockMvc
-//@ImportAutoConfiguration(exclude = SecurityAutoConfiguration.class)
+//@ImportAutoConfiguration(exclude = SecurityAutoConfiguration.class) //Required For admin, user controller tests?
 public class PlayerControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
-    private WargamingService wargamingService;
-
-    @MockitoBean
-    private TomatoImporter tomatoImporter;
-
     private final int playerId = 537793577;
     private final String playerName = "iyouxin";
+    private final int unknownId = 123456789;
 
     //region SEARCH ENDPOINTS
     @Test
     public void testSearch_withValidInput_returnsOk() throws Exception {
        var a = mockMvc.perform(get("/player/search")
                         .param("name", playerName)
-                        .param("region", "EU"));
-
-       var b =a.andReturn().getResponse().getContentAsString();
-       int ad = 1;
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("nickname").value(playerName))
-//                .andExpect(jsonPath("account_id").value(playerId));
+                        .param("region", "EU"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0].nickname").value(playerName))
+                .andExpect(jsonPath("[0].account_id").value(playerId));
     }
 
     @Test
@@ -97,22 +84,16 @@ public class PlayerControllerTests {
     //region INFO ENDPOINTS
     @Test
     public void testGetInfo_withValidId_returnsOk() throws Exception {
-        ResultActions a=  mockMvc.perform(get("/player/info/{id}", playerId)
-                .param("region", "EU"));
 
         mockMvc.perform(get("/player/info/{id}", playerId)
                         .param("region", "EU"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("accountId").value(playerId))
+                .andExpect(jsonPath("account_id").value(playerId))
                 .andExpect(jsonPath("nickname").value(playerName));
     }
 
     @Test
     public void testGetInfo_withUnknownId_returnsNotFound() throws Exception {
-        //Arrange
-        int unknownId = 123456789;
-        Mockito.when(wargamingService.getPlayerInfo(unknownId)).thenReturn(null);
-
         //Act & Assert
         mockMvc.perform(get("/player/info/{id}", unknownId)
                         .param("region", "EU"))

@@ -32,7 +32,6 @@ public class GlobalExceptionHandler {
         return error(HttpStatus.BAD_REQUEST, "Bad request", ex.getMessage());
     }
 
-    //From @Valid
     @ExceptionHandler(MethodArgumentNotValidException.class) //From @Valid
     public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
         return error(HttpStatus.BAD_REQUEST, "Validation failed", ex.getMessage());
@@ -47,19 +46,25 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleNotFound(EntityNotFoundException ex) {
         return error(HttpStatus.NOT_FOUND, "Not found", ex.getMessage());
     }
+
+    @ExceptionHandler(PlayerNotFoundException.class)
+    public ResponseEntity<?> handlePlayerNotFound(PlayerNotFoundException ex) {
+        return error(HttpStatus.NOT_FOUND, "Player not found", ex.getMessage());
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex) {
         return error(HttpStatus.UNAUTHORIZED, "Invalid username or password", ex.getMessage());
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<?> handleAccessDenied(AccessDeniedException ex) {
-        return error(HttpStatus.FORBIDDEN, "You are not authorized to access this resource", ex.getMessage());
-    }
-
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<?> handleJwtExpired(ExpiredJwtException ex) {
-        return error(HttpStatus.FORBIDDEN, "The JWT token has expired", ex.getMessage());
+        return error(HttpStatus.UNAUTHORIZED, "The JWT token has expired", ex.getMessage());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<?> handleAccessDenied(AccessDeniedException ex) {
+        return error(HttpStatus.UNAUTHORIZED, "You are not authorized to access this resource", ex.getMessage());
     }
 
     private ResponseEntity<?> error(HttpStatus status, String error, String message) {
