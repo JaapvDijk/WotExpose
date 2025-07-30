@@ -50,7 +50,7 @@ public class PlayerControllerTests {
     public void testSearch_withValidInput_returnsOk() throws Exception {
         mockMvc.perform(get("/player/search")
                         .param("name", playerName)
-                        .param("region", "EU"))
+                        .param("region", "EU")).andDo(a -> System.out.println(a.getResponse().getContentAsString()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("nickname").value(playerName))
                 .andExpect(jsonPath("account_id").value(playerId));
@@ -100,8 +100,8 @@ public class PlayerControllerTests {
         mockMvc.perform(get("/player/info/{id}", playerId)
                         .param("region", "EU"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.accountId").value(playerId))
-                .andExpect(jsonPath("$.nickname").value(playerName));
+                .andExpect(jsonPath("accountId").value(playerId))
+                .andExpect(jsonPath("nickname").value(playerName));
     }
 
     @Test

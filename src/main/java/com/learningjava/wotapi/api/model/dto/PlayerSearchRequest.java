@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class PlayerSearchPlayerRequest extends PlayerRequestBase {
+public class PlayerSearchRequest extends PlayerRequestBase {
     @NotBlank(message = "Name is required")
     @Size(min = 3, message = "Name must be at least 3 characters long")
     private String name;
 
-    public PlayerSearchPlayerRequest(String name, String region) {
+    public PlayerSearchRequest(String name, String region) {
         super(region);
         this.name = name;
     }
