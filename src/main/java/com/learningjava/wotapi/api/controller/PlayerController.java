@@ -2,7 +2,7 @@ package com.learningjava.wotapi.api.controller;
 
 import com.learningjava.wotapi.api.model.dto.PlayerRequest;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchRequest;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
+import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
 
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTanksResponse;
@@ -26,7 +26,7 @@ public class PlayerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PlayerResponse>> search(@Valid @ModelAttribute PlayerSearchRequest request)
+    public ResponseEntity<List<PlayerSearchResponse>> search(@Valid @ModelAttribute PlayerSearchRequest request)
     {
         var result = wargamingService.getPlayers(request.getName());
 

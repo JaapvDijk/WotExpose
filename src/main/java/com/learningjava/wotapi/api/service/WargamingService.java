@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.api.service;
 
 import com.learningjava.wotapi.api.mapper.PlayerMapper;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.PlayerResponse;
+import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTanksResponse;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class WargamingService {
         this.mapper = mapper;
     }
 
-    public List<PlayerResponse> getPlayers(String name) {
+    public List<PlayerSearchResponse> getPlayers(String name) {
         var players = client.getPlayers(name);
 
         return mapper.toDtoList(players.getData());

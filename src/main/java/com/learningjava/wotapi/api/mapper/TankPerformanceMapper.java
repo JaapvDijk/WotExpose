@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface TankPerformanceMapper {
-    TankPerformance toEntity(TomatoTankPerformanceResponse.TankPerformance dto);
+    TankPerformance toEntity(TomatoTankPerformanceResponse.TankPerformance tank);
 
-    List<TankPerformance> toEntityList(List<TomatoTankPerformanceResponse.TankPerformance> dtos);
+    List<TankPerformance> toEntityList(List<TomatoTankPerformanceResponse.TankPerformance> tanks);
 }
