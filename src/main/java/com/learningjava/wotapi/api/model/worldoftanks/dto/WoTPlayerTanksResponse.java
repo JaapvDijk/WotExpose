@@ -1,27 +1,12 @@
 package com.learningjava.wotapi.api.model.worldoftanks.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.ArrayList;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class WoTPlayerTanksResponse {
-    public List<TankStatistics> data;
-
-    @Data
-    @NoArgsConstructor
-    public static class TankStatistics{
-        public Statistics statistics;
-        public int mark_of_mastery;
-        public int tank_id;
-    }
-
-    @Data
-    @NoArgsConstructor
-    public static class Statistics{
-        public int wins;
-        public int battles;
-    }
-}
+public final class WoTPlayerTanksResponse extends ArrayList<TankStatisticsResponse> {}

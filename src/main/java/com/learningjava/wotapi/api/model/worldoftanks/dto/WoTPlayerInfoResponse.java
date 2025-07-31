@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WoTPlayerInfoResponse {
+public final class WoTPlayerInfoResponse {
     @JsonProperty("client_language")
     private String clientLanguage;
     @JsonProperty("last_battle_time")

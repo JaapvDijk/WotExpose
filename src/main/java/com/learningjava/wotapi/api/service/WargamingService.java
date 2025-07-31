@@ -22,7 +22,7 @@ public class WargamingService {
     public List<PlayerSearchResponse> getPlayers(String name) {
         var players = client.getPlayers(name);
 
-        return mapper.toDtoList(players.getData());
+        return mapper.toDtoList(players);
     }
 
     public WoTPlayerInfoResponse getPlayerInfo(int id) {

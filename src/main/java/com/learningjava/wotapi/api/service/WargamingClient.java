@@ -16,6 +16,7 @@ public class WargamingClient {
     private final RestClientProxy restClient;
     private final ObjectMapper objectMapper;
 
+    //TODO: add access token for private info .queryParam("access_token", access_token)
     public WargamingClient(@Qualifier("wargamingRestClient") RestClientProxy restClient,
                            ObjectMapper objectMapper) {
         this.restClient = restClient;
@@ -24,14 +25,22 @@ public class WargamingClient {
 
     //Accounts
     public WoTPlayersResponse getPlayers(String name) {
-        return restClient.getRequest()
+        var root = restClient.getRequest()
                 .uri(builder ->
                         builder.path("/account/list/")
                                 .queryParam("application_id", "{application_id}")
                                 .queryParam("search", name)
                                 .build())
                 .retrieve()
-                .body(WoTPlayersResponse.class);
+                .body(JsonNode.class);
+
+        if (root == null || !root.has("data")) {
+            throw new IllegalStateException("Response JSON missing 'data' node");
+        }
+
+        var dataNode = root.get("data");
+
+        return objectMapper.convertValue(dataNode, WoTPlayersResponse.class);
     }
 
     public WoTPlayerInfoResponse getPlayerInfo(int accountId) {
@@ -40,7 +49,6 @@ public class WargamingClient {
                         builder.path("/account/info/")
                                 .queryParam("application_id", "{application_id}")
                                 .queryParam("account_id", accountId)
-//                                .queryParam("access_token", access_token) //TODO: for private info
                                 .build())
                 .retrieve()
                 .body(JsonNode.class);
