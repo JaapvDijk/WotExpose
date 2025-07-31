@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.api.mapper;
 
 import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayersResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public interface PlayerMapper {
 
     @Mapping(target = "accountId", source = "account_id")
-    PlayerSearchResponse toDto(WoTPlayersResponse.Player player);
+    PlayerSearchResponse toDto(WoTPlayerResponse player);
 
-    List<PlayerSearchResponse> toDtoList(List<WoTPlayersResponse.Player> players);
+    List<PlayerSearchResponse> toDtoList(List<WoTPlayerResponse> players);
 }
