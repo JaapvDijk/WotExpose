@@ -8,5 +8,5 @@ import java.time.LocalDate;
 public interface TomatoTankPerformanceRepository extends JpaRepository<TankPerformance, Long> {
     TankPerformance findLatestByName(String name);
 
-    boolean existsByImportDateAndRegionEquals(LocalDate importDate, String region);
+    boolean existsByImportDateAndRegionEquals(LocalDate localDate, String region);
 }

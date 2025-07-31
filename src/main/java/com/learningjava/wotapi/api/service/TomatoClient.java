@@ -43,14 +43,14 @@ public class TomatoClient {
                     return null;
                 });
 
-        if (root == null || !root.has("pageProps")) {
-            throw new IllegalStateException("Response JSON missing 'pageProps' node");
+        if (root == null) {
+            throw new NullPointerException("Response JSON root node is null, ID in tomato.base-url might be invalid");
         }
 
         JsonNode pageProps = root.get("pageProps");
         JsonNode data = pageProps.get("data");
         if (data == null || data.isNull()) {
-            throw new IllegalStateException("Response JSON missing 'data' node inside 'pageProps'");
+            throw new IllegalStateException("Response JSON missing pageProps");
         }
 
         return objectMapper.convertValue(data, TomatoTankPerformanceResponse.class);
