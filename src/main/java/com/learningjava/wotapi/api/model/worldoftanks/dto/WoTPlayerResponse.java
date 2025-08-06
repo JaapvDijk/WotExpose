@@ -1,5 +1,6 @@
 package com.learningjava.wotapi.api.model.worldoftanks.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,5 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WoTPlayerResponse {
     private String nickname;
-    private int account_id;
+    @JsonProperty("account_id")
+    private int accountId;
 }

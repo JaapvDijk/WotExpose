@@ -9,41 +9,91 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class TankPerformanceResponse {
-    private int tank_id;
+    @JsonProperty("tank_id")
+    private int tankId;
+
     private String name;
     private String nation;
     private int tier;
 
     @JsonProperty("class")
-    private String tank_class;
+    private String tankClass;
 
     private String image;
-    private String big_image;
+
+    @JsonProperty("big_image")
+    private String bigImage;
+
     private int battles;
-    private int player_wn8;
+
+    @JsonProperty("player_wn8")
+    private int playerWn8;
+
     private double winrate;
-    private double player_winrate;
-    private double winrate_differential;
+
+    @JsonProperty("player_winrate")
+    private double playerWinrate;
+
+    @JsonProperty("winrate_differential")
+    private double winrateDifferential;
+
     private int damage;
-    private int sniper_damage;
+
+    @JsonProperty("sniper_damage")
+    private int sniperDamage;
+
     private double frags;
-    private double shots_fired;
-    private double direct_hits;
+
+    @JsonProperty("shots_fired")
+    private double shotsFired;
+
+    @JsonProperty("direct_hits")
+    private double directHits;
+
     private double penetrations;
-    private double hit_rate;
-    private double pen_rate;
-    private int spotting_assist;
-    private int tracking_assist;
+
+    @JsonProperty("hit_rate")
+    private double hitRate;
+
+    @JsonProperty("pen_rate")
+    private double penRate;
+
+    @JsonProperty("spotting_assist")
+    private int spottingAssist;
+
+    @JsonProperty("tracking_assist")
+    private int trackingAssist;
+
     private double spots;
-    private int damage_blocked;
-    private int damage_received;
-    private int potential_damage_received;
-    private double base_capture_points;
-    private double base_defense_points;
-    private int life_time;
+
+    @JsonProperty("damage_blocked")
+    private int damageBlocked;
+
+    @JsonProperty("damage_received")
+    private int damageReceived;
+
+    @JsonProperty("potential_damage_received")
+    private int potentialDamageReceived;
+
+    @JsonProperty("base_capture_points")
+    private double baseCapturePoints;
+
+    @JsonProperty("base_defense_points")
+    private double baseDefensePoints;
+
+    @JsonProperty("life_time")
+    private int lifeTime;
+
     private double survival;
-    private int distance_traveled;
-    private int base_xp;
+
+    @JsonProperty("distance_traveled")
+    private int distanceTraveled;
+
+    @JsonProperty("base_xp")
+    private int baseXp;
+
     private int wn8;
+
+    @JsonProperty("is_prem")
     private boolean isPrem;
 }
