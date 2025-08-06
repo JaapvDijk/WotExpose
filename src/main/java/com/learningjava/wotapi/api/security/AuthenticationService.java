@@ -6,7 +6,7 @@ import com.learningjava.wotapi.api.model.entity.User;
 import com.learningjava.wotapi.api.model.entity.Role;
 import com.learningjava.wotapi.api.repo.RoleRepository;
 import com.learningjava.wotapi.api.repo.UserRepository;
-import com.learningjava.wotapi.api.contant.Roles;
+import com.learningjava.wotapi.api.constant.Roles;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

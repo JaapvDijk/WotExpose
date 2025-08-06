@@ -6,7 +6,7 @@ import com.learningjava.wotapi.api.model.entity.User;
 import com.learningjava.wotapi.api.repo.PrivilegeRepository;
 import com.learningjava.wotapi.api.repo.RoleRepository;
 import com.learningjava.wotapi.api.repo.UserRepository;
-import com.learningjava.wotapi.api.contant.Roles;
+import com.learningjava.wotapi.api.constant.Roles;
 import jakarta.annotation.PostConstruct;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

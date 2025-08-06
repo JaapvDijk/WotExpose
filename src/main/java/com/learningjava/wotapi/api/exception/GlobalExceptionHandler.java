@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGeneric(Exception ex) {
-        return error(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", ex.getMessage());
+        return error(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", "");
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
