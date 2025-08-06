@@ -1,9 +1,8 @@
 package com.learningjava.wotapi;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learningjava.wotapi.api.DbSeeder;
 import com.learningjava.wotapi.api.model.dto.UserRequest;
-import com.learningjava.wotapi.api.model.entity.Role;
 import com.learningjava.wotapi.api.model.entity.User;
 import com.learningjava.wotapi.api.repo.UserRepository;
 import jakarta.transaction.Transactional;
@@ -15,11 +14,12 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -32,6 +32,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Transactional
 @ImportAutoConfiguration(exclude = SecurityAutoConfiguration.class)
+@Import(DbSeeder.class)
+@ActiveProfiles("test")
+@WithMockUser(username = "admin", roles = {"ADMIN"})
 public class UserControllerTest {
 
     @Autowired
@@ -43,35 +46,36 @@ public class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private User testUser;
+    @Autowired
+    private DbSeeder dbSeeder;
+
+    private User adminUser;
 
     @BeforeEach
     void setup() {
-        testUser = new User();
-        testUser.setEmail("admin@test.com");
-        testUser.setFullName("Admin");
-        var roles = List.of(new Role());
-        testUser.setRoles(roles);
-        userRepository.save(testUser);
+        dbSeeder.init();
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
     void testGetUserPage_returnsUserList() throws Exception {
         mockMvc.perform(get("/user/page")
                         .param("pageNr", "0")
                         .param("amount", "10"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].email").value("admin@test.com"))
-                .andExpect(jsonPath("$.content[0].fullName").value("Test Admin"));
+                .andExpect(jsonPath("$.content[0].email").value("admin@wotapi.nl"))
+                .andExpect(jsonPath("$.content[0].fullName").value("admin"))
+                .andExpect(jsonPath("$.content[1].email").value("user@wotapi.nl"))
+                .andExpect(jsonPath("$.content[1].fullName").value("user"));
     }
 
     @Test
     void testGetUserById_returnsUser() throws Exception {
-        mockMvc.perform(get("/user/" + testUser.getId()))
+        int id = dbSeeder.getAdminUser().getId();
+
+        mockMvc.perform(get("/user/" + id))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("admin@test.com"))
-                .andExpect(jsonPath("$.fullName").value("Admin"));
+                .andExpect(jsonPath("$.email").value("admin@wotapi.nl"))
+                .andExpect(jsonPath("$.fullName").value("admin"));
     }
 
     @Test
@@ -81,10 +85,12 @@ public class UserControllerTest {
     }
 
     @Test
+    @Rollback
     void testUpdateUser_success() throws Exception {
+        int id = dbSeeder.getAdminUser().getId();
         UserRequest update = new UserRequest("Updated Name", "new@test.com");
 
-        mockMvc.perform(put("/user/" + testUser.getId())
+        mockMvc.perform(put("/user/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(update)))
                 .andExpect(status().isOk())
@@ -94,17 +100,21 @@ public class UserControllerTest {
 
     @Test
     void testUpdateUser_invalidEmail_returnsBadRequest() throws Exception {
+        int id = dbSeeder.getNormalUser().getId();
         UserRequest update = new UserRequest("Name", "invalid-email");
 
-        mockMvc.perform(put("/user/" + testUser.getId())
+        mockMvc.perform(put("/user/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(update)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
+    @Rollback
     void testDeleteUser_success() throws Exception {
-        mockMvc.perform(delete("/user/" + testUser.getId()))
+        int id = dbSeeder.getNormalUser().getId();
+
+        mockMvc.perform(delete("/user/" + id))
                 .andExpect(status().isNoContent());
     }
 

@@ -1,5 +1,6 @@
 package com.learningjava.wotapi.api.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.model.tomato.dto.TomatoTankPerformanceResponse;
@@ -28,31 +29,48 @@ public class TomatoClient {
     }
 
     public TomatoTankPerformanceResponse getTankPerformance(String region) {
-        var root = retryTemplate.execute(
-                __ -> restClient.get()
-                        .uri(uriBuilder -> uriBuilder
-                                .pathSegment("tank-performance", "recent", region + ".json")
-                                .queryParam("mode", "recent")
-                                .queryParam("server", region)
-                                .build())
-                        .retrieve()
-                        .onStatus(HttpStatusCode::isError, (request, response) -> logger.error("[Tomato Import] Error {} calling {}", response.getStatusCode(), request.getURI()))
-                        .body(JsonNode.class),
-                e -> {
-                    logger.error("All retry attempts failed: {}", e);
-                    return null;
-                });
+        try {
+            JsonNode root = retryTemplate.execute(
+                    context -> restClient.get()
+                            .uri(uriBuilder -> uriBuilder
+                                    .pathSegment("tank-performance", "recent", region + ".json")
+                                    .queryParam("mode", "recent")
+                                    .queryParam("server", region)
+                                    .build())
+                            .retrieve()
+                            .onStatus(HttpStatusCode::isError, (request, response) ->
+                                    logger.error("[Tomato Import] HTTP Error {} calling {}", response.getStatusCode(), request.getURI()))
+                            .body(JsonNode.class),
+                    e -> {
+                        logger.error("[Tomato Import] All retry attempts failed for region '{}'", region, e);
+                        return null;
+                    });
 
-        if (root == null) {
-            throw new NullPointerException("Response JSON root node is null, ID in tomato.base-url might be invalid");
+            if (root == null) {
+                logger.warn("[Tomato Import] No JSON root received (region: {})", region);
+                return null;
+            }
+
+            JsonNode pageProps = root.get("pageProps");
+            if (pageProps == null) {
+                logger.warn("[Tomato Import] Missing 'pageProps' node in response (region: {})", region);
+                return null;
+            }
+
+            JsonNode data = pageProps.get("data");
+            if (data == null) {
+                logger.warn("[Tomato Import] Missing 'data' node in pageProps (region: {})", region);
+                return null;
+            }
+
+            return objectMapper.treeToValue(data, TomatoTankPerformanceResponse.class);
+
+        } catch (JsonProcessingException e) {
+            logger.error("[Tomato Import] JSON mapping failed for region '{}'", region, e);
+        } catch (Exception e) {
+            logger.error("[Tomato Import] Unexpected error while processing response for region '{}'", region, e);
         }
 
-        JsonNode pageProps = root.get("pageProps");
-        JsonNode data = pageProps.get("data");
-        if (data == null || data.isNull()) {
-            throw new IllegalStateException("Response JSON missing pageProps");
-        }
-
-        return objectMapper.convertValue(data, TomatoTankPerformanceResponse.class);
+        return null;
     }
 }

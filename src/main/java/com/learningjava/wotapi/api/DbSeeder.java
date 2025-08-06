@@ -7,20 +7,26 @@ import com.learningjava.wotapi.api.repo.PrivilegeRepository;
 import com.learningjava.wotapi.api.repo.RoleRepository;
 import com.learningjava.wotapi.api.repo.UserRepository;
 import com.learningjava.wotapi.api.constant.Roles;
-import jakarta.annotation.PostConstruct;
+import lombok.Getter;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Service
+@Component
+@Profile({"dev", "test"})
 public class DbSeeder {
-
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PrivilegeRepository privilegeRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @Getter
+    private User adminUser;
+    @Getter
+    private User normalUser;
 
     public DbSeeder(UserRepository userRepository, RoleRepository roleRepository, PrivilegeRepository privilegeRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -29,8 +35,11 @@ public class DbSeeder {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostConstruct
     public void init() {
+        privilegeRepository.deleteAll();
+        roleRepository.deleteAll();
+        userRepository.deleteAll();
+
         Privilege readPrivilege = new Privilege();
         readPrivilege.setName("READ_PRIVILEGE");
         Privilege writePrivilege = new Privilege();
@@ -52,13 +61,13 @@ public class DbSeeder {
         admin.setEmail("admin@wotapi.nl");
         admin.setPassword(passwordEncoder.encode("admin123"));
         admin.setRoles(List.of(adminRole));
-        userRepository.save(admin);
+        adminUser = userRepository.save(admin);
 
         User user = new User();
         user.setFullName("user");
         user.setEmail("user@wotapi.nl");
         user.setPassword(passwordEncoder.encode("user123"));
         user.setRoles(List.of(userRole));
-        userRepository.save(user);
+        normalUser = userRepository.save(user);
     }
 }
