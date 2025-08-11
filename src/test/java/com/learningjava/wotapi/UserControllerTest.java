@@ -26,8 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ImportAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 @Import(DbSeeder.class)
 @ActiveProfiles("test")
 @WithMockUser(username = "admin", roles = {"ADMIN"})
