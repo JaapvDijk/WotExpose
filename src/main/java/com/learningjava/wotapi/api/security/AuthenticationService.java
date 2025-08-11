@@ -12,7 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class AuthenticationService {
@@ -42,7 +42,7 @@ public class AuthenticationService {
         Role role = roleRepository.findByName(Roles.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("User role not found"));
 
-        user.setRoles(List.of(role));
+        user.setRoles(Set.of(role));
 
         return userRepository.save(user);
     }
