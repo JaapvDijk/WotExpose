@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 @Component
 @Profile({"dev", "test"})
@@ -36,9 +36,9 @@ public class DbSeeder {
     }
 
     public void init() {
-        privilegeRepository.deleteAll();
-        roleRepository.deleteAll();
         userRepository.deleteAll();
+        roleRepository.deleteAll();
+        privilegeRepository.deleteAll();
 
         Privilege readPrivilege = new Privilege();
         readPrivilege.setName("READ_PRIVILEGE");
@@ -48,26 +48,26 @@ public class DbSeeder {
 
         Role adminRole = new Role();
         adminRole.setName(Roles.ROLE_ADMIN);
-        adminRole.setPrivileges(Arrays.asList(readPrivilege, writePrivilege));
+        adminRole.setPrivileges(Set.of(readPrivilege, writePrivilege));
         roleRepository.save(adminRole);
 
         Role userRole = new Role();
         userRole.setName(Roles.ROLE_USER);
-        userRole.setPrivileges(List.of(readPrivilege));
+        userRole.setPrivileges(Set.of(readPrivilege));
         roleRepository.save(userRole);
 
         User admin = new User();
         admin.setFullName("admin");
         admin.setEmail("admin@wotapi.nl");
         admin.setPassword(passwordEncoder.encode("admin123"));
-        admin.setRoles(List.of(adminRole));
+        admin.setRoles(Set.of(adminRole));
         adminUser = userRepository.save(admin);
 
         User user = new User();
         user.setFullName("user");
         user.setEmail("user@wotapi.nl");
         user.setPassword(passwordEncoder.encode("user123"));
-        user.setRoles(List.of(userRole));
+        user.setRoles(Set.of(userRole));
         normalUser = userRepository.save(user);
     }
 }

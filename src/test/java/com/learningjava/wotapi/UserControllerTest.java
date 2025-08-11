@@ -3,9 +3,6 @@ package com.learningjava.wotapi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.DbSeeder;
 import com.learningjava.wotapi.api.model.dto.UserRequest;
-import com.learningjava.wotapi.api.model.entity.User;
-import com.learningjava.wotapi.api.repo.UserRepository;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -30,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Transactional
 @ImportAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 @Import(DbSeeder.class)
 @ActiveProfiles("test")
@@ -41,15 +37,10 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
     private DbSeeder dbSeeder;
-
-    private User adminUser;
 
     @BeforeEach
     void setup() {
