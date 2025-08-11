@@ -1,14 +1,11 @@
-package com.learningjava.wotapi;
+package com.learningjava.wotapi.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.DbSeeder;
 import com.learningjava.wotapi.api.model.dto.UserRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;

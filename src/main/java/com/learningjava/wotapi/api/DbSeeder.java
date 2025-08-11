@@ -9,7 +9,7 @@ import com.learningjava.wotapi.api.repo.UserRepository;
 import com.learningjava.wotapi.api.constant.Roles;
 import lombok.Getter;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -21,14 +21,16 @@ public class DbSeeder {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PrivilegeRepository privilegeRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Getter
     private User adminUser;
     @Getter
     private User normalUser;
+    @Getter
+    private final String normalUserPassword = "user123";
 
-    public DbSeeder(UserRepository userRepository, RoleRepository roleRepository, PrivilegeRepository privilegeRepository, PasswordEncoder passwordEncoder) {
+    public DbSeeder(UserRepository userRepository, RoleRepository roleRepository, PrivilegeRepository privilegeRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.privilegeRepository = privilegeRepository;
@@ -59,7 +61,7 @@ public class DbSeeder {
         User admin = new User();
         admin.setFullName("admin");
         admin.setEmail("admin@wotapi.nl");
-        admin.setPassword(passwordEncoder.encode("admin123"));
+        admin.setPassword(passwordEncoder.encode(normalUserPassword));
         admin.setRoles(Set.of(adminRole));
         adminUser = userRepository.save(admin);
 

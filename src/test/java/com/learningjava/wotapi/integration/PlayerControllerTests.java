@@ -1,4 +1,4 @@
-package com.learningjava.wotapi;
+package com.learningjava.wotapi.integration;
 
 import org.junit.jupiter.api.Test;
 
