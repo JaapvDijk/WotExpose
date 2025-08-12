@@ -2,6 +2,7 @@ package com.learningjava.wotapi.api.importer;
 
 import com.learningjava.wotapi.api.service.TomatoService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -23,10 +24,16 @@ public class TomatoImporter {
     }
 
     @Scheduled(cron = "${api.tomato.schedule-expression}")
-    public void start() {
-        start("EU");
-        start("NA");
-        start("ASIA");
+    public boolean start() {
+        return start("EU") &&
+               start("NA") &&
+               start("ASIA");
+    }
+
+    @Profile({"prod"})
+    @EventListener(ApplicationReadyEvent.class)
+    public boolean startupImport() {
+        return start();
     }
 
     public boolean start(String region) {
@@ -44,11 +51,5 @@ public class TomatoImporter {
         logger.info("[Tomato Import] Finished successfully for {}", region);
 
         return true;
-    }
-
-    //On startup
-    @EventListener(ApplicationReadyEvent.class)
-    public void startupImport() {
-        start();
     }
 }

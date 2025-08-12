@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.integration;
+package com.learningjava.wotapi.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.DbSeeder;
@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,12 +21,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 @Import(DbSeeder.class)
-@ActiveProfiles("test")
 @WithMockUser(username = "admin", roles = {"ADMIN"})
 public class UserControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -71,7 +69,6 @@ public class UserControllerTest {
     }
 
     @Test
-    @Rollback
     void testUpdateUser_success() throws Exception {
         int id = dbSeeder.getAdminUser().getId();
         UserRequest update = new UserRequest("Updated Name", "new@test.com");
@@ -96,7 +93,6 @@ public class UserControllerTest {
     }
 
     @Test
-    @Rollback
     void testDeleteUser_success() throws Exception {
         int id = dbSeeder.getNormalUser().getId();
 

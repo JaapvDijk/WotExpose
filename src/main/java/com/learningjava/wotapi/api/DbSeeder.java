@@ -30,7 +30,10 @@ public class DbSeeder {
     @Getter
     private final String normalUserPassword = "user123";
 
-    public DbSeeder(UserRepository userRepository, RoleRepository roleRepository, PrivilegeRepository privilegeRepository, BCryptPasswordEncoder passwordEncoder) {
+    public DbSeeder(UserRepository userRepository,
+                    RoleRepository roleRepository,
+                    PrivilegeRepository privilegeRepository,
+                    BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.privilegeRepository = privilegeRepository;

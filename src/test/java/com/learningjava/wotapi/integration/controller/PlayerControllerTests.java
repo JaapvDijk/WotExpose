@@ -1,5 +1,6 @@
-package com.learningjava.wotapi.integration;
+package com.learningjava.wotapi.integration.controller;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 public class PlayerControllerTests {
     @Autowired
     private MockMvc mockMvc;
@@ -80,7 +82,7 @@ public class PlayerControllerTests {
     @Test
     public void testGetInfo_withUnknownId_returnsNotFound() throws Exception {
         int unknownId = 123456789;
-        //Act & Assert
+
         mockMvc.perform(get("/player/info/{id}", unknownId)
                         .param("region", "EU"))
                 .andExpect(status().isNotFound());
@@ -101,7 +103,7 @@ public class PlayerControllerTests {
     @Test
     public void testGetTanks_withUnknownId_returnsNotFound() throws Exception {
         int unknownId = 123456789;
-        //Act & Assert
+
         mockMvc.perform(get("/player/tanks/{id}", unknownId)
                         .param("region", "EU"))
                 .andExpect(status().isNotFound());

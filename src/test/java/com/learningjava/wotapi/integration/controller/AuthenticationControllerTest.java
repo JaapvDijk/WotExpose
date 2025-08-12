@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.integration;
+package com.learningjava.wotapi.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.DbSeeder;
@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 public class AuthenticationControllerTest {
 
@@ -41,9 +41,8 @@ public class AuthenticationControllerTest {
     }
 
     @Test
-    @Rollback
     void testSignupSuccess() throws Exception {
-        RegisterUserRequest req = new RegisterUserRequest();
+        var req = new RegisterUserRequest();
         req.setEmail("new@user.com");
         req.setPassword("SomePassword");
         req.setFullName("new test user");
