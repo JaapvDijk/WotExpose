@@ -30,7 +30,7 @@ public class TomatoImporter {
                start("ASIA");
     }
 
-    @Profile({"prod"})
+    @Profile("!test")
     @EventListener(ApplicationReadyEvent.class)
     public boolean startupImport() {
         return start();
