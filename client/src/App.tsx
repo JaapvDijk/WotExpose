@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { ApiClient } from '../apiClient/ApiClient';
+import { Api } from './__generated__/Api';
 
 function App() {
   return (
