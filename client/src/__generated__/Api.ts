@@ -48,30 +48,30 @@ export interface PageUserResponse {
   totalElements?: number;
   /** @format int32 */
   totalPages?: number;
+  sort?: SortObject;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
-  first?: boolean;
-  last?: boolean;
   /** @format int32 */
   numberOfElements?: number;
   pageable?: PageableObject;
-  sort?: SortObject;
+  first?: boolean;
+  last?: boolean;
   empty?: boolean;
 }
 
 export interface PageableObject {
+  sort?: SortObject;
   /** @format int64 */
   offset?: number;
+  paged?: boolean;
   /** @format int32 */
   pageNumber?: number;
   /** @format int32 */
   pageSize?: number;
-  paged?: boolean;
   unpaged?: boolean;
-  sort?: SortObject;
 }
 
 export interface SortObject {
