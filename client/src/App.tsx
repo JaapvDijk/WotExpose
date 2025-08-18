@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import { UserList } from './components/test';
 import { Route, Routes } from 'react-router-dom';
 // import MenuBar from './components/Header';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -41,10 +39,11 @@ const theme = createTheme({
 
 function App() {
   return (
-   <div className="App">
+   <div className="App" style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
             <ThemeProvider theme={theme}>
                 {/* <MenuBar /> */}
-
+                
+                <div style={{ flex: 1 }}>
                 <Routes>
                     <Route path="/" element={
                         <>
@@ -60,6 +59,7 @@ function App() {
                         </Container>
                     } />
                 </Routes>
+                </div>
 
                 <Footer />
             </ThemeProvider>
