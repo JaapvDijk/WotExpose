@@ -9,4 +9,4 @@ import java.util.ArrayList;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public final class WoTPlayerTanksResponse extends ArrayList<TankStatisticsResponse> {}
+public final class WoTPlayerSimpleTankStatsResponse extends ArrayList<WoTPlayerSimpleTankStatResponse> {}

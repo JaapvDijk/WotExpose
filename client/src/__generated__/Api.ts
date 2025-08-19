@@ -49,13 +49,13 @@ export interface PageUserResponse {
   /** @format int32 */
   totalPages?: number;
   sort?: SortObject;
-  first?: boolean;
-  last?: boolean;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
+  first?: boolean;
+  last?: boolean;
   /** @format int32 */
   numberOfElements?: number;
   pageable?: PageableObject;
@@ -88,25 +88,328 @@ export interface PlayerRequest {
   region: string;
 }
 
-export interface Statistics {
+export interface BaseStatistics {
+  /** @format int32 */
+  spotted?: number;
+  /** @format int32 */
+  xp?: number;
+  /** @format int32 */
+  draws?: number;
+  /** @format int32 */
+  battles?: number;
+  /** @format int32 */
+  frags?: number;
+  /** @format int32 */
+  hits?: number;
   /** @format int32 */
   wins?: number;
   /** @format int32 */
-  battles?: number;
+  losses?: number;
+  /** @format int32 */
+  shots?: number;
+  /** @format int32 */
+  battles_on_stunning_vehicles?: number;
+  /** @format int32 */
+  track_assisted_damage?: number;
+  /** @format int32 */
+  survived_battles?: number;
+  /** @format int32 */
+  dropped_capture_points?: number;
+  /** @format int32 */
+  hits_percents?: number;
+  /** @format int32 */
+  damage_received?: number;
+  /** @format int32 */
+  stun_number?: number;
+  /** @format int32 */
+  capture_points?: number;
+  /** @format int32 */
+  stun_assisted_damage?: number;
+  /** @format int32 */
+  battle_avg_xp?: number;
+  /** @format int32 */
+  damage_dealt?: number;
+  /** @format int32 */
+  radio_assisted_damage?: number;
 }
 
-export interface TankStatisticsResponse {
-  statistics?: Statistics;
+export interface ExtraStats {
+  /** @format int32 */
+  spotted?: number;
+  /** @format int32 */
+  xp?: number;
+  /** @format int32 */
+  draws?: number;
+  /** @format int32 */
+  battles?: number;
+  /** @format int32 */
+  frags?: number;
+  /** @format int32 */
+  hits?: number;
+  /** @format int32 */
+  wins?: number;
+  /** @format int32 */
+  losses?: number;
+  /** @format int32 */
+  shots?: number;
+  /** @format int32 */
+  piercings?: number;
+  /** @format int32 */
+  battles_on_stunning_vehicles?: number;
+  /** @format int32 */
+  track_assisted_damage?: number;
+  /** @format int32 */
+  survived_battles?: number;
+  /** @format int32 */
+  dropped_capture_points?: number;
+  /** @format int32 */
+  hits_percents?: number;
+  /** @format int32 */
+  damage_received?: number;
+  /** @format int32 */
+  stun_number?: number;
+  /** @format int32 */
+  capture_points?: number;
+  /** @format int32 */
+  stun_assisted_damage?: number;
+  /** @format int32 */
+  battle_avg_xp?: number;
+  /** @format int32 */
+  damage_dealt?: number;
+  /** @format int32 */
+  radio_assisted_damage?: number;
+  /** @format double */
+  avg_damage_blocked?: number;
+  /** @format double */
+  avg_damage_assisted?: number;
+  /** @format double */
+  avg_damage_assisted_track?: number;
+  /** @format double */
+  avg_damage_assisted_radio?: number;
+  /** @format double */
+  avg_damage_assisted_stun?: number;
+  /** @format double */
+  tanking_factor?: number;
+  /** @format int32 */
+  direct_hits_received?: number;
+  /** @format int32 */
+  explosion_hits?: number;
+  /** @format int32 */
+  piercings_received?: number;
+  /** @format int32 */
+  no_damage_direct_hits_received?: number;
+  /** @format int32 */
+  explosion_hits_received?: number;
+}
+
+export interface MaxStats {
+  /** @format int32 */
+  spotted?: number;
+  /** @format int32 */
+  xp?: number;
+  /** @format int32 */
+  draws?: number;
+  /** @format int32 */
+  battles?: number;
+  /** @format int32 */
+  frags?: number;
+  /** @format int32 */
+  hits?: number;
+  /** @format int32 */
+  wins?: number;
+  /** @format int32 */
+  losses?: number;
+  /** @format int32 */
+  shots?: number;
+  /** @format int32 */
+  battles_on_stunning_vehicles?: number;
+  /** @format int32 */
+  track_assisted_damage?: number;
+  /** @format int32 */
+  survived_battles?: number;
+  /** @format int32 */
+  dropped_capture_points?: number;
+  /** @format int32 */
+  hits_percents?: number;
+  /** @format int32 */
+  damage_received?: number;
+  /** @format int32 */
+  stun_number?: number;
+  /** @format int32 */
+  capture_points?: number;
+  /** @format int32 */
+  stun_assisted_damage?: number;
+  /** @format int32 */
+  battle_avg_xp?: number;
+  /** @format int32 */
+  damage_dealt?: number;
+  /** @format int32 */
+  radio_assisted_damage?: number;
+  /** @format int32 */
+  max_xp?: number;
+  /** @format int32 */
+  max_damage?: number;
+  /** @format int32 */
+  max_frags?: number;
+}
+
+export interface StrongholdDefense {
+  /** @format int32 */
+  spotted?: number;
+  /** @format int32 */
+  xp?: number;
+  /** @format int32 */
+  draws?: number;
+  /** @format int32 */
+  battles?: number;
+  /** @format int32 */
+  frags?: number;
+  /** @format int32 */
+  hits?: number;
+  /** @format int32 */
+  wins?: number;
+  /** @format int32 */
+  losses?: number;
+  /** @format int32 */
+  shots?: number;
+  /** @format int32 */
+  piercings?: number;
+  /** @format int32 */
+  battles_on_stunning_vehicles?: number;
+  /** @format int32 */
+  track_assisted_damage?: number;
+  /** @format int32 */
+  survived_battles?: number;
+  /** @format int32 */
+  dropped_capture_points?: number;
+  /** @format int32 */
+  hits_percents?: number;
+  /** @format int32 */
+  damage_received?: number;
+  /** @format int32 */
+  stun_number?: number;
+  /** @format int32 */
+  capture_points?: number;
+  /** @format int32 */
+  stun_assisted_damage?: number;
+  /** @format int32 */
+  battle_avg_xp?: number;
+  /** @format int32 */
+  damage_dealt?: number;
+  /** @format int32 */
+  radio_assisted_damage?: number;
+  /** @format int32 */
+  max_xp?: number;
+  /** @format int32 */
+  direct_hits_received?: number;
+  /** @format int32 */
+  explosion_hits?: number;
+  /** @format int32 */
+  piercings_received?: number;
+  /** @format int32 */
+  max_damage?: number;
+  /** @format int32 */
+  no_damage_direct_hits_received?: number;
+  /** @format int32 */
+  max_frags?: number;
+  /** @format double */
+  tanking_factor?: number;
+  /** @format int32 */
+  explosion_hits_received?: number;
+}
+
+export interface StrongholdSkirmish {
+  /** @format int32 */
+  spotted?: number;
+  /** @format int32 */
+  xp?: number;
+  /** @format int32 */
+  draws?: number;
+  /** @format int32 */
+  battles?: number;
+  /** @format int32 */
+  frags?: number;
+  /** @format int32 */
+  hits?: number;
+  /** @format int32 */
+  wins?: number;
+  /** @format int32 */
+  losses?: number;
+  /** @format int32 */
+  shots?: number;
+  /** @format int32 */
+  piercings?: number;
+  /** @format int32 */
+  battles_on_stunning_vehicles?: number;
+  /** @format int32 */
+  track_assisted_damage?: number;
+  /** @format int32 */
+  survived_battles?: number;
+  /** @format int32 */
+  dropped_capture_points?: number;
+  /** @format int32 */
+  hits_percents?: number;
+  /** @format int32 */
+  damage_received?: number;
+  /** @format int32 */
+  stun_number?: number;
+  /** @format int32 */
+  capture_points?: number;
+  /** @format int32 */
+  stun_assisted_damage?: number;
+  /** @format int32 */
+  battle_avg_xp?: number;
+  /** @format int32 */
+  damage_dealt?: number;
+  /** @format int32 */
+  radio_assisted_damage?: number;
+  /** @format int32 */
+  max_xp?: number;
+  /** @format int32 */
+  direct_hits_received?: number;
+  /** @format int32 */
+  explosion_hits?: number;
+  /** @format int32 */
+  piercings_received?: number;
+  /** @format int32 */
+  max_damage?: number;
+  /** @format int32 */
+  no_damage_direct_hits_received?: number;
+  /** @format int32 */
+  max_frags?: number;
+  /** @format int32 */
+  explosion_hits_received?: number;
+  /** @format double */
+  tanking_factor?: number;
+}
+
+export interface WoTPlayerTankStatResponse {
+  clan?: MaxStats;
+  company?: BaseStatistics;
+  all?: ExtraStats;
+  team?: MaxStats;
+  globalmap?: ExtraStats;
+  frags?: any;
+  stronghold_skirmish?: StrongholdSkirmish;
+  regular_team?: MaxStats;
+  /** @format int32 */
+  account_id?: number;
+  /** @format int32 */
+  max_xp?: number;
+  stronghold_defense?: StrongholdDefense;
+  /** @format int32 */
+  max_frags?: number;
   /** @format int32 */
   mark_of_mastery?: number;
+  in_garage?: any;
   /** @format int32 */
   tank_id?: number;
 }
 
-export interface WoTPlayerTanksResponse {
+export interface WoTPlayerTankStatsResponse {
   empty?: boolean;
-  first?: TankStatisticsResponse;
-  last?: TankStatisticsResponse;
+  first?: WoTPlayerTankStatResponse;
+  last?: WoTPlayerTankStatResponse;
 }
 
 export interface PlayerSearchRequest {
@@ -126,6 +429,87 @@ export interface PlayerSearchResponse {
   nickname?: string;
   /** @format int32 */
   account_id?: number;
+}
+
+export interface ExtraStatistics {
+  /** @format int32 */
+  spotted?: number;
+  /** @format int32 */
+  piercings?: number;
+  /** @format int32 */
+  xp?: number;
+  /** @format int32 */
+  draws?: number;
+  /** @format int32 */
+  battles?: number;
+  /** @format int32 */
+  frags?: number;
+  /** @format int32 */
+  hits?: number;
+  /** @format int32 */
+  wins?: number;
+  /** @format int32 */
+  losses?: number;
+  /** @format int32 */
+  shots?: number;
+  /** @format int32 */
+  battles_on_stunning_vehicles?: number;
+  /** @format int32 */
+  track_assisted_damage?: number;
+  /** @format double */
+  avg_damage_blocked?: number;
+  /** @format int32 */
+  direct_hits_received?: number;
+  /** @format int32 */
+  explosion_hits?: number;
+  /** @format int32 */
+  piercings_received?: number;
+  /** @format int32 */
+  survived_battles?: number;
+  /** @format int32 */
+  dropped_capture_points?: number;
+  /** @format int32 */
+  hits_percents?: number;
+  /** @format int32 */
+  damage_received?: number;
+  /** @format double */
+  avg_damage_assisted?: number;
+  /** @format double */
+  avg_damage_assisted_track?: number;
+  /** @format int32 */
+  stun_number?: number;
+  /** @format double */
+  avg_damage_assisted_radio?: number;
+  /** @format int32 */
+  capture_points?: number;
+  /** @format int32 */
+  explosion_hits_received?: number;
+  /** @format int32 */
+  stun_assisted_damage?: number;
+  /** @format int32 */
+  battle_avg_xp?: number;
+  /** @format int32 */
+  damage_dealt?: number;
+  /** @format int32 */
+  no_damage_direct_hits_received?: number;
+  /** @format int32 */
+  radio_assisted_damage?: number;
+  /** @format double */
+  avg_damage_assisted_stun?: number;
+  /** @format double */
+  tanking_factor?: number;
+  /** @format int32 */
+  max_xp?: number;
+  /** @format int32 */
+  max_xp_tank_id?: number;
+  /** @format int32 */
+  max_frags?: number;
+  /** @format int32 */
+  max_frags_tank_id?: number;
+  /** @format int32 */
+  max_damage?: number;
+  /** @format int32 */
+  max_damage_tank_id?: number;
 }
 
 export interface Private {
@@ -150,6 +534,19 @@ export interface Private {
 
 export interface Restrictions {
   chat_ban_time?: any;
+}
+
+export interface Statistics {
+  clan?: BaseStatistics;
+  all?: ExtraStatistics;
+  company?: BaseStatistics;
+  historical?: ExtraStatistics;
+  team?: ExtraStatistics;
+  regular_team?: ExtraStatistics;
+  /** @format int32 */
+  trees_cut?: number;
+  stronghold_skirmish?: ExtraStatistics;
+  stronghold_defense?: ExtraStatistics;
 }
 
 export interface WoTPlayerInfoResponse {
@@ -468,17 +865,17 @@ export class Api<
      * No description
      *
      * @tags player-controller
-     * @name GetTanks
+     * @name GetTankStats
      * @request GET:/player/tanks/{id}
      */
-    getTanks: (
+    getTankStats: (
       id: number,
       query: {
         request: PlayerRequest;
       },
       params: RequestParams = {},
     ) =>
-      this.request<WoTPlayerTanksResponse, any>({
+      this.request<WoTPlayerTankStatsResponse, any>({
         path: `/player/tanks/${id}`,
         method: "GET",
         query: query,

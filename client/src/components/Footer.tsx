@@ -4,8 +4,9 @@ import Grid from '@mui/material/Grid'
 const Footer = () => {
     return (
         <footer style={{
-            backgroundColor: 'whitesmoke',
             padding: '10px',
+            borderTop: '1px dotted',
+            borderBottom: '1px dotted',
         }}>
             <Box ml={4} mr={4}>
                 <Grid container justifyContent='center' alignItems='center' style={{ height: '100%' }}>

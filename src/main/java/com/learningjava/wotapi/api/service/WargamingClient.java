@@ -4,7 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.exception.PlayerNotFoundException;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTanksResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerSimpleTankStatsResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatsResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayersResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -58,10 +59,25 @@ public class WargamingClient {
         return objectMapper.convertValue(dataNode, WoTPlayerInfoResponse.class);
     }
 
-    public WoTPlayerTanksResponse getPlayerTanks(int accountId) {
+//    public WoTPlayerTanksResponse getPlayerTanks(int accountId) {
+//        var root = restClient.getRequest()
+//                .uri(builder ->
+//                        builder.path("/account/tanks/")
+//                                .queryParam("application_id", "{application_id}")
+//                                .queryParam("account_id", accountId)
+//                                .build())
+//                .retrieve()
+//                .body(JsonNode.class);
+//
+//        var dataNode = getData(accountId, root);
+//
+//        return objectMapper.convertValue(dataNode, WoTPlayerTanksResponse.class);
+//    }
+
+    public WoTPlayerTankStatsResponse getPlayerTanks(int accountId) {
         var root = restClient.getRequest()
                 .uri(builder ->
-                        builder.path("/account/tanks/")
+                        builder.path("/tanks/stats/")
                                 .queryParam("application_id", "{application_id}")
                                 .queryParam("account_id", accountId)
                                 .build())
@@ -70,7 +86,7 @@ public class WargamingClient {
 
         var dataNode = getData(accountId, root);
 
-        return objectMapper.convertValue(dataNode, WoTPlayerTanksResponse.class);
+        return objectMapper.convertValue(dataNode, WoTPlayerTankStatsResponse.class);
     }
 
     private JsonNode getData(int accountId, JsonNode root) {

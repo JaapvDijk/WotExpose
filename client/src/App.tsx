@@ -1,68 +1,33 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 // import MenuBar from './components/Header';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container } from '@mui/material';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#1476A3',
-        },
-        secondary: {
-            main: '#292977',
-        },
-    },
-    typography: {
-        fontSize: 16,
-        fontFamily: ['Raleway, Arial'].join(','),
-    },
-    components: {
-        MuiPaper: {
-            styleOverrides: {
-                rounded: {
-                    borderRadius: '12px',
-                },
-            },
-        },
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    borderRadius: '8px',
-                },
-            },
-        },
-    },
-})
+import PlayerInfoPage from './pages/PlayerInfoPage';
 
 function App() {
   return (
    <div className="App" style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-            <ThemeProvider theme={theme}>
-                {/* <MenuBar /> */}
-                
-                <div style={{ flex: 1 }}>
-                <Routes>
-                    <Route path="/" element={
-                        <>
-                            <Banner />
-                            <Container maxWidth="lg" sx={{ padding: "0", textAlign: "center", minHeight: "500px" }}>
-                            </Container>
-                        </>
-                    } />
-                </Routes>
-                <Routes>
-                    <Route path="/profile" element={
-                        <Container maxWidth="lg" sx={{ padding: "0", textAlign: "center", minHeight: "500px" }}>
-                        </Container>
-                    } />
-                </Routes>
-                </div>
+    {/* <MenuBar /> */}
+    <div style={{ flex: 1 }}>
+        <Routes>
+            <Route path="/" element={
+                <>
+                    <Banner />
+                </>
+            } />
+        </Routes>
+        <Routes>
+            <Route path="/info/:id" element={
+                <Container maxWidth="lg" sx={{ padding: "0", textAlign: "center", minHeight: "100px" }}>
+                    <PlayerInfoPage />
+                </Container>
+            } />
+        </Routes>
+    </div>
 
-                <Footer />
-            </ThemeProvider>
+    <Footer />
     </div>
   );
 }
