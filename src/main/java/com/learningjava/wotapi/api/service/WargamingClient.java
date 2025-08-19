@@ -3,13 +3,12 @@ package com.learningjava.wotapi.api.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.exception.PlayerNotFoundException;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerSimpleTankStatsResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatsResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayersResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import com.learningjava.wotapi.api.config.RestClientConfig.RestClientProxy;
+
+import java.util.List;
 
 @Component
 public class WargamingClient {
@@ -74,7 +73,7 @@ public class WargamingClient {
 //        return objectMapper.convertValue(dataNode, WoTPlayerTanksResponse.class);
 //    }
 
-    public WoTPlayerTankStatsResponse getPlayerTanks(int accountId) {
+    public List<WoTPlayerTankStatResponse> getPlayerTanks(int accountId) {
         var root = restClient.getRequest()
                 .uri(builder ->
                         builder.path("/tanks/stats/")

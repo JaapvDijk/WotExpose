@@ -38,7 +38,7 @@ function PlayerInfoPage() {
                     : infoResult.isError ? (<>Error: {(infoResult.error as Error).message}</>)
                     : info ? (<>
                         {info.nickname}#{info.account_id} - Rating: {info.global_rating} - 
-                         Winrate: {getPercentage(info.statistics?.all?.battles, info.statistics?.all?.wins)}
+                        Winrate: {getPercentage(info.statistics?.all?.battles, info.statistics?.all?.wins)}
                         <br/>Registered: {timestampToDate(info.created_at)} Last battle: {timestampToDate(info.last_battle_time)}
                     </>)
                     : ("No player info") }
@@ -50,7 +50,7 @@ function PlayerInfoPage() {
                     <Card>
                         <CardContent>
                             <Typography variant="body2" color="textSecondary">
-                                aa { tanks?.first?.all?.damage_dealt }
+                                tanks: { tanks?.first?.all?.explosion_hits }
                             </Typography>
                         </CardContent>
                     </Card>
