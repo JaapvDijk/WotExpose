@@ -1,7 +1,9 @@
 package com.learningjava.wotapi.api.service;
 
+import com.learningjava.wotapi.api.factory.PlayerTankStatsFactory;
 import com.learningjava.wotapi.api.mapper.PlayerMapper;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
+import com.learningjava.wotapi.api.model.dto.PlayerTankStatsResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatsResponse;
@@ -30,7 +32,7 @@ public class WargamingService {
         return client.getPlayerInfo(id);
     }
 
-    public List<WoTPlayerTankStatResponse> getPlayerTankStats(int id) {
-        return client.getPlayerTanks(id);
+    public PlayerTankStatsResponse getPlayerTankStats(int id) {
+        return PlayerTankStatsFactory.from(client.getPlayerTanks(id));
     }
 }
