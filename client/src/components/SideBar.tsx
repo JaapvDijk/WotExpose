@@ -7,58 +7,83 @@ import {
   ListItemButton,
   ListItemIcon,
   useTheme,
-  ThemeProvider,
-  createTheme,
+  useMediaQuery,
+  IconButton,
+  Box,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
+import MenuIcon from "@mui/icons-material/Menu";
 
-const collapsedWidth = 60;
-const expandedWidth = 200;
+const collapsedWidth = 55;
+const expandedWidth = 175;
 
 export default function Sidebar() {
   const [hovered, setHovered] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-    const mainTheme = useTheme();
-
-  const theme = createTheme(mainTheme, {
-    components: {
-    MuiListItemButton: {
-        styleOverrides: {
-        root: {
-            minHeight: 48,
-            paddingLeft: 16,
-            paddingRight: 16,
-            justifyContent: hovered ? "initial" : "center",
-            },
-        },
-        },
-        MuiListItemIcon: {
-        styleOverrides: {
-        root: {
-            minWidth: 0,
-            justifyContent: "center",
-            marginRight: hovered ? 24 : "auto",
-          },
-        },
-      },
-    },
-  });
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   const items = [
     { text: "Home", icon: <HomeIcon />, href: "/" },
     { text: "About", icon: <InfoIcon />, href: "/about" },
   ];
 
+  const drawerContent = (
+    <Box
+      onMouseEnter={() => !isMobile && setHovered(true)}
+      onMouseLeave={() => !isMobile && setHovered(false)}
+    >
+      <Toolbar />
+      <List>
+        {items.map((item) => (
+          <ListItemButton
+            key={item.text}
+            component="a"
+            href={item.href}
+            sx={{
+              justifyContent: hovered || isMobile ? "initial" : "center",
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                justifyContent: "center",
+                mr: hovered || isMobile ? 2 : "auto",
+              }}
+            >
+              {item.icon}
+            </ListItemIcon>
+            {(hovered || isMobile) && <ListItemText primary={item.text} />}
+          </ListItemButton>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      {isMobile && (
+        <IconButton
+          color="inherit"
+          edge="start"
+          onClick={() => setMobileOpen(true)}
+          sx={{ position: "fixed", top: 8, left: 8, zIndex: 2000 }}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
+
       <Drawer
-        variant="permanent"
+        variant={isMobile ? "temporary" : "permanent"}
+        open={isMobile ? mobileOpen : true}
+        onClose={() => setMobileOpen(false)}
         sx={{
-          width: hovered ? expandedWidth : collapsedWidth,
+          width: (hovered || mobileOpen) ? expandedWidth : collapsedWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: hovered ? expandedWidth : collapsedWidth,
+            width: (hovered || mobileOpen) ? expandedWidth : collapsedWidth,
             transition: "width 0.3s ease",
             overflowX: "hidden",
             position: "fixed",
@@ -66,19 +91,9 @@ export default function Sidebar() {
             height: "100vh",
           },
         }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
       >
-        <Toolbar />
-        <List>
-          {items.map((item) => (
-            <ListItemButton key={item.text} component="a" href={item.href}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              {hovered && <ListItemText primary={item.text} />}
-            </ListItemButton>
-          ))}
-        </List>
+        {drawerContent}
       </Drawer>
-    </ThemeProvider>
+    </>
   );
 }
