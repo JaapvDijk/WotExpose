@@ -44,16 +44,16 @@ export interface LoginResponse {
 }
 
 export interface PageUserResponse {
-  /** @format int32 */
-  totalPages?: number;
   /** @format int64 */
   totalElements?: number;
-  sort?: SortObject;
+  /** @format int32 */
+  totalPages?: number;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
+  sort?: SortObject;
   first?: boolean;
   last?: boolean;
   /** @format int32 */
@@ -63,14 +63,14 @@ export interface PageUserResponse {
 }
 
 export interface PageableObject {
-  sort?: SortObject;
   /** @format int64 */
   offset?: number;
+  sort?: SortObject;
+  paged?: boolean;
   /** @format int32 */
   pageNumber?: number;
   /** @format int32 */
   pageSize?: number;
-  paged?: boolean;
   unpaged?: boolean;
 }
 
@@ -251,6 +251,26 @@ export interface MaxStats {
   max_damage?: number;
   /** @format int32 */
   max_frags?: number;
+}
+
+export interface PlayerTankStatsResponse {
+  tankStats?: WoTPlayerTankStatResponse[];
+  /** @format int32 */
+  totalBattlesAll?: number;
+  /** @format int32 */
+  totalBattlesClan?: number;
+  /** @format int32 */
+  totalBattlesStrongholdSkirmish?: number;
+  /** @format int32 */
+  totalBattlesRegularTeam?: number;
+  /** @format int32 */
+  totalBattlesCompany?: number;
+  /** @format int32 */
+  totalBattlesStrongholdDefense?: number;
+  /** @format int32 */
+  totalBattlesTeam?: number;
+  /** @format int32 */
+  totalBattlesGlobalmap?: number;
 }
 
 export interface StrongholdDefense {
@@ -869,7 +889,7 @@ export class Api<
       },
       params: RequestParams = {},
     ) =>
-      this.request<WoTPlayerTankStatResponse[], any>({
+      this.request<PlayerTankStatsResponse, any>({
         path: `/player/tanks/${id}`,
         method: "GET",
         query: query,
