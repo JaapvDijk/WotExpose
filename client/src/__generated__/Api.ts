@@ -44,10 +44,10 @@ export interface LoginResponse {
 }
 
 export interface PageUserResponse {
-  /** @format int64 */
-  totalElements?: number;
   /** @format int32 */
   totalPages?: number;
+  /** @format int64 */
+  totalElements?: number;
   sort?: SortObject;
   /** @format int32 */
   size?: number;
@@ -67,9 +67,9 @@ export interface PageableObject {
   /** @format int64 */
   offset?: number;
   /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
   pageNumber?: number;
+  /** @format int32 */
+  pageSize?: number;
   paged?: boolean;
   unpaged?: boolean;
 }
@@ -404,12 +404,6 @@ export interface WoTPlayerTankStatResponse {
   in_garage?: any;
   /** @format int32 */
   tank_id?: number;
-}
-
-export interface WoTPlayerTankStatsResponse {
-  empty?: boolean;
-  first?: WoTPlayerTankStatResponse;
-  last?: WoTPlayerTankStatResponse;
 }
 
 export interface PlayerSearchRequest {
@@ -875,7 +869,7 @@ export class Api<
       },
       params: RequestParams = {},
     ) =>
-      this.request<WoTPlayerTankStatsResponse, any>({
+      this.request<WoTPlayerTankStatResponse[], any>({
         path: `/player/tanks/${id}`,
         method: "GET",
         query: query,
