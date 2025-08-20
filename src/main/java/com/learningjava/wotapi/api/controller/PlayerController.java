@@ -3,6 +3,7 @@ package com.learningjava.wotapi.api.controller;
 import com.learningjava.wotapi.api.model.dto.PlayerRequest;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchRequest;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
+import com.learningjava.wotapi.api.model.dto.PlayerTankStatsResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
 
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatResponse;
@@ -43,7 +44,7 @@ public class PlayerController {
     }
 
     @GetMapping("/tanks/{id}")
-    public ResponseEntity<List<WoTPlayerTankStatResponse>> getTankStats(@PathVariable Integer id, @Valid @ModelAttribute PlayerRequest request)
+    public ResponseEntity<PlayerTankStatsResponse> getTankStats(@PathVariable Integer id, @Valid @ModelAttribute PlayerRequest request)
     {
         var result = wargamingService.getPlayerTankStats(id);
 
