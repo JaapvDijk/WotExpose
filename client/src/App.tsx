@@ -9,14 +9,12 @@ import Sidebar from './components/SideBar';
 
 function App() {
   return (
-   <div className="App" style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+   <div className="App">
     <Sidebar />
     <div style={{ flex: 1 }}>
         <Routes>
             <Route path="/" element={
-                <>
-                    <IndexPage />
-                </>
+                <IndexPage />
             } />
         </Routes>
         <Routes>

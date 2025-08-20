@@ -17,7 +17,8 @@ body {
   background-attachment: "fixed";
   animation: gradientMove 3.5s ease;
   
-  padding-top: 73px;
+  text-align: center;
+  padding-top: 70px;
   padding-bottom: 50px;
   min-height: calc(100vh - var(--footer-height, 0px));
 }
