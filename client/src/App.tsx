@@ -21,7 +21,7 @@ function App() {
         </Routes>
         <Routes>
             <Route path="/info/:id" element={
-                <Container maxWidth="lg" sx={{ padding: "0", textAlign: "center", minHeight: "100px" }}>
+                <Container>
                     <PlayerInfoPage />
                 </Container>
             } />
