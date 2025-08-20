@@ -2,16 +2,24 @@ body {
   margin: 0;
 }
 
-@keyframes gradientMove {
-  0% { background-position: 5% 0%; }
-  50% { background-position: 5% 0%; }
+:root {
+  --footer-height: 42px;
 }
 
-.banner {
+@keyframes gradientMove {
+  0% { background-position: 9% 0%; }
+  50% { background-position: 10% 0%; }
+}
+
+.home-page {
   background: linear-gradient(270deg, #292977, #0c4763, #000);
-  background-size: 500%;
-  animation: gradientMove 4s ease;
-  animation-iteration-count: 1;
+  background-size: 425%;
+  background-attachment: "fixed";
+  animation: gradientMove 3.5s ease;
+  
+  padding-top: 73px;
+  padding-bottom: 50px;
+  min-height: calc(100vh - var(--footer-height, 0px));
 }
 
 .logo {
@@ -38,11 +46,14 @@ body {
 footer {
   background: rgba(255,255,255,0.05);
   border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: '1px dotted';
   text-align: center;
   padding: 10px;
   font-size: 14px;
   color: #aaa;
+  padding: '10px';
 }
+
 footer:hover {
   color: #fff;
 }

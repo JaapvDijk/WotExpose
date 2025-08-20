@@ -1,19 +1,16 @@
 ﻿import Box from "@mui/material/Box";
-import Grid from '@mui/material/Grid'
+import Grid from '@mui/material/Grid';
+import { Container } from "@mui/material";
 
 const Footer = () => {
     return (
-        <footer style={{
-            padding: '10px',
-            borderTop: '1px dotted',
-            borderBottom: '1px dotted',
-        }}>
+        <footer>
             <Box ml={4} mr={4}>
-                <Grid container justifyContent='center' alignItems='center' style={{ height: '100%' }}>
-                    <Grid size={{xs:12, sm:6}} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Container>
+                    <Grid size={{xs:12, sm:6}}>
                         Footer
                     </Grid>
-                </Grid>
+                </Container>
             </Box>
         </footer>
     )
