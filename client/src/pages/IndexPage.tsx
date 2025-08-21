@@ -14,7 +14,6 @@ import { PlayerSearchResponse } from "../__generated__/Api";
 import Box from "@mui/material/Box";
 import WotStats from "../images/wotstats.png";
 import { PlayerSearchRequest } from "../__generated__/Api";
-import { useQuery } from "@tanstack/react-query";
 import { Api } from "../__generated__/Api";
 import { isValidName } from "../utils/StringUtils";
 

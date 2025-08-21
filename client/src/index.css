@@ -6,21 +6,28 @@ body {
   --footer-height: 42px;
 }
 
-@keyframes gradientMove {
+@keyframes gradientMoveRight {
   0% { background-position: 9% 0%; }
   50% { background-position: 10% 0%; }
+}
+
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(270deg,rgba(0,0,0,0.95),rgba(12,71,99,0.30), rgba(0,0,0,0.9)),
+              url("./images/tank_background.jpg") no-repeat center center;
+  background-size: "cover";
 }
 
 .home-page {
   background: linear-gradient(270deg, #292977, #0c4763, #000);
   background-size: 425%;
   background-attachment: "fixed";
-  animation: gradientMove 3.5s ease;
+  animation: gradientMoveRight 3.5s ease;
   
   text-align: center;
   padding-top: 70px;
   padding-bottom: 50px;
-  min-height: calc(100vh - var(--footer-height, 0px));
+  min-height: 100vh;  /* calc(100vh - var(--footer-height, 0px)) */
 }
 
 .logo {

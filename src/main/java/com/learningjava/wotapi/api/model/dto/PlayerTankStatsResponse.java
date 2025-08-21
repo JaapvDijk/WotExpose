@@ -13,11 +13,4 @@ public class PlayerTankStatsResponse {
     private List<WoTPlayerTankStatResponse> data;
 
     private int totalBattlesAll;
-    private int totalBattlesClan;
-    private int totalBattlesStrongholdSkirmish;
-    private int totalBattlesRegularTeam;
-    private int totalBattlesCompany;
-    private int totalBattlesStrongholdDefense;
-    private int totalBattlesTeam;
-    private int totalBattlesGlobalmap;
 }

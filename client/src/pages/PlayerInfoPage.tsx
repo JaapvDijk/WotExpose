@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
 import { Box, Card, CardContent, Typography, Skeleton, Divider } from "@mui/material";
-import { Api, PlayerRequest } from '../__generated__/Api';
-import { useQuery } from "@tanstack/react-query";
 import Grid from '@mui/material/Grid';
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Api, PlayerRequest } from '../__generated__/Api';
 import { timestampToDate } from "../utils/DateUtils";
 import { getPercentage, getWinrateVerdict, getWinrateXVMColour } from '../utils/StatUtils';
 
@@ -28,7 +28,7 @@ function PlayerInfoPage() {
 
     const info = infoResult?.data?.data;
     const tanks = tanksResult?.data?.data;
-    
+
     const winrate = getPercentage(info?.statistics?.all?.battles, info?.statistics?.all?.wins);
     
     return (
@@ -89,29 +89,29 @@ function PlayerInfoPage() {
                 </Grid>
             ) : tanksResult.isError ? (
                 <Grid size={{xs:12}}>
-                    Could not load player tank stats: {(tanksResult.error as Error).message}
+                    Could not load tank stats: {(tanksResult.error as Error).message}
                 </Grid>
-            ) : tanks ? (
+            ) : tanks && tanks.totalBattlesAll && tanks.totalBattlesAll > 500 ? (
                 <> 
                     <Grid size={{xs:12}} sx={{ textAlign: 'left' }}>
                         <Card>
                             <CardContent>
                                 <Typography variant="body2" color="textSecondary">
-                                    total: {tanks?.totalBattlesAll} <br/>
-                                    clan: {tanks?.totalBattlesClan} <br/>
-                                    company: {tanks?.totalBattlesCompany}  <br/>
-                                    team: {tanks?.totalBattlesTeam}  <br/>
-                                    regularteam: {tanks?.totalBattlesRegularTeam}  <br/>
-                                    globalmap: {tanks?.totalBattlesGlobalmap}  <br/>
-                                    strongholddef: {tanks?.totalBattlesStrongholdDefense}  <br/>
-                                    strongholdskirmish: {tanks?.totalBattlesStrongholdSkirmish}  <br/>
+                                    total: {tanks.totalBattlesAll} <br/>
+
+                                    most battles: {tanks?.data?.at(0)?.all?.battles}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    total: {tanks.totalBattlesAll} <br/>
+
+                                    most battles: {tanks?.data?.at(0)?.all?.battles}
                                 </Typography>
                             </CardContent>
                         </Card>
                     </Grid>
                 </>
             ) : (
-                <CardContent>No tanks info</CardContent>
+                <CardContent>No tank stats found, or not enough battles (500+) {tanks?.totalBattlesAll}</CardContent>
             )}
             </Grid>
         </Box>

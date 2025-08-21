@@ -5,38 +5,27 @@ import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatRespo
 
 import java.util.List;
 
+import static java.util.Comparator.comparingInt;
+
 public class PlayerTankStatsFactory {
     public static PlayerTankStatsResponse from(List<WoTPlayerTankStatResponse> rawStats) {
+        rawStats.sort(comparingInt((WoTPlayerTankStatResponse s) -> s.all.battles).reversed());
+
         var result = new PlayerTankStatsResponse();
         result.setData(rawStats);
 
-        setTotalBattles(result);
+        int totalBattlesAll = 0;
 
-        return result;
-    }
+        for (WoTPlayerTankStatResponse tankAny : result.getData()) {
+            var tank = tankAny.all; //Because it contains the 15v15 random battles
 
-    private static void setTotalBattles(PlayerTankStatsResponse result) {
-        int totalAll = 0, totalClan = 0, totalStrongholdSkirmish = 0, totalRegularTeam = 0;
-        int totalCompany = 0, totalStrongholdDefense = 0, totalTeam = 0, totalGlobalmap = 0;
-
-        for (WoTPlayerTankStatResponse tank : result.getData()) {
-            if (tank.all != null) totalAll += tank.all.battles;
-            if (tank.clan != null) totalClan += tank.clan.battles;
-            if (tank.strongholdSkirmish != null) totalStrongholdSkirmish += tank.strongholdSkirmish.battles;
-            if (tank.regularTeam != null) totalRegularTeam += tank.regularTeam.battles;
-            if (tank.company != null) totalCompany += tank.company.battles;
-            if (tank.strongholdDefense != null) totalStrongholdDefense += tank.strongholdDefense.battles;
-            if (tank.team != null) totalTeam += tank.team.battles;
-            if (tank.globalmap != null) totalGlobalmap += tank.globalmap.battles;
+            if (tank != null) {
+                totalBattlesAll += tank.battles;
+            }
         }
 
-        result.setTotalBattlesAll(totalAll);
-        result.setTotalBattlesClan(totalClan);
-        result.setTotalBattlesStrongholdSkirmish(totalStrongholdSkirmish);
-        result.setTotalBattlesRegularTeam(totalRegularTeam);
-        result.setTotalBattlesCompany(totalCompany);
-        result.setTotalBattlesStrongholdDefense(totalStrongholdDefense);
-        result.setTotalBattlesTeam(totalTeam);
-        result.setTotalBattlesGlobalmap(totalGlobalmap);
+        result.setTotalBattlesAll(totalBattlesAll);
+
+        return result;
     }
 }

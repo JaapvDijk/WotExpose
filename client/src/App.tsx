@@ -1,11 +1,11 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-// import MenuBar from './components/Header';
 import { Container } from '@mui/material';
 import IndexPage from './pages/IndexPage';
 import Footer from './components/Footer';
 import PlayerInfoPage from './pages/PlayerInfoPage';
 import Sidebar from './components/SideBar';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -16,17 +16,26 @@ function App() {
             <Route path="/" element={
                 <IndexPage />
             } />
-        </Routes>
-        <Routes>
+
             <Route path="/info/:id" element={
-                <Container>
+                
+                <><Container>
                     <PlayerInfoPage />
                 </Container>
+                <Footer />
+                </>
             } />
+
+            <Route path="/login" element={
+                    <LoginPage />
+            } />
+
+            <Route path="/admin" element={
+                    <h2>Admin page</h2>
+            } />
+
         </Routes>
     </div>
-
-    <Footer />
     </div>
   );
 }
