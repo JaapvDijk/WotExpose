@@ -48,12 +48,12 @@ export interface PageUserResponse {
   totalElements?: number;
   /** @format int32 */
   totalPages?: number;
+  sort?: SortObject;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
-  sort?: SortObject;
   first?: boolean;
   last?: boolean;
   /** @format int32 */
@@ -63,10 +63,10 @@ export interface PageUserResponse {
 }
 
 export interface PageableObject {
-  /** @format int64 */
-  offset?: number;
   sort?: SortObject;
   paged?: boolean;
+  /** @format int64 */
+  offset?: number;
   /** @format int32 */
   pageNumber?: number;
   /** @format int32 */
@@ -75,8 +75,8 @@ export interface PageableObject {
 }
 
 export interface SortObject {
-  empty?: boolean;
   sorted?: boolean;
+  empty?: boolean;
   unsorted?: boolean;
 }
 
@@ -254,23 +254,9 @@ export interface MaxStats {
 }
 
 export interface PlayerTankStatsResponse {
-  tankStats?: WoTPlayerTankStatResponse[];
+  data?: WoTPlayerTankStatResponse[];
   /** @format int32 */
   totalBattlesAll?: number;
-  /** @format int32 */
-  totalBattlesClan?: number;
-  /** @format int32 */
-  totalBattlesStrongholdSkirmish?: number;
-  /** @format int32 */
-  totalBattlesRegularTeam?: number;
-  /** @format int32 */
-  totalBattlesCompany?: number;
-  /** @format int32 */
-  totalBattlesStrongholdDefense?: number;
-  /** @format int32 */
-  totalBattlesTeam?: number;
-  /** @format int32 */
-  totalBattlesGlobalmap?: number;
 }
 
 export interface StrongholdDefense {
