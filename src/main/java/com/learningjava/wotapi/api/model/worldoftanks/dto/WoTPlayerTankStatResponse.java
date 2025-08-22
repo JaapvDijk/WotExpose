@@ -1,149 +1,97 @@
 package com.learningjava.wotapi.api.model.worldoftanks.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.learningjava.wotapi.api.model.shared.BaseStatistics;
+import com.learningjava.wotapi.api.model.shared.ExtraStatistics;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @NoArgsConstructor
 public class WoTPlayerTankStatResponse {
-    public MaxStats clan;
+    private MaxStats clan;
     @JsonProperty("stronghold_skirmish")
-    public StrongholdSkirmish strongholdSkirmish;
+    private StrongholdSkirmish strongholdSkirmish;
     @JsonProperty("regular_team")
-    public MaxStats regularTeam;
+    private MaxStats regularTeam;
     @JsonProperty("account_id")
-    public int accountId;
+    private int accountId;
     @JsonProperty("max_xp")
-    public int maxXp;
-    public BaseStatistics company;
-    public ExtraStats all;
+    private int maxXp;
+    private BaseStatistics company;
+    private ExtraStatistics all;
     @JsonProperty("stronghold_defense")
-    public StrongholdDefense strongholdDefense;
+    private StrongholdDefense strongholdDefense;
     @JsonProperty("max_frags")
-    public int maxFrags;
-    public MaxStats team;
-    public ExtraStats globalmap;
-    public Object frags;
+    private int maxFrags;
+    private MaxStats team;
+    private ExtraStatistics globalmap;
+    private Object frags;
     @JsonProperty("mark_of_mastery")
-    public int markOfMastery;
+    private int markOfMastery;
     @JsonProperty("in_garage")
-    public Object inGarage;
+    private Object inGarage;
     @JsonProperty("tank_id")
-    public int tankId;
+    private int tankId;
 
-    public static class BaseStatistics {
-        public int spotted;
-        @JsonProperty("battles_on_stunning_vehicles")
-        public int battlesOnStunningVehicles;
-        @JsonProperty("track_assisted_damage")
-        public int trackAssistedDamage;
-        public int xp;
-        @JsonProperty("survived_battles")
-        public int survivedBattles;
-        @JsonProperty("dropped_capture_points")
-        public int droppedCapturePoints;
-        @JsonProperty("hits_percents")
-        public int hitsPercents;
-        public int draws;
-        public int battles;
-        @JsonProperty("damage_received")
-        public int damageReceived;
-        public int frags;
-        @JsonProperty("stun_number")
-        public int stunNumber;
-        @JsonProperty("capture_points")
-        public int capturePoints;
-        @JsonProperty("stun_assisted_damage")
-        public int stunAssistedDamage;
-        public int hits;
-        @JsonProperty("battle_avg_xp")
-        public int battleAvgXp;
-        public int wins;
-        public int losses;
-        @JsonProperty("damage_dealt")
-        public int damageDealt;
-        public int shots;
-        @JsonProperty("radio_assisted_damage")
-        public int radioAssistedDamage;
-    }
-
-    public static class ExtraStats extends BaseStatistics {
-        @JsonProperty("avg_damage_blocked")
-        public double avgDamageBlocked;
-        @JsonProperty("avg_damage_assisted")
-        public double avgDamageAssisted;
-        @JsonProperty("avg_damage_assisted_track")
-        public double avgDamageAssistedTrack;
-        @JsonProperty("avg_damage_assisted_radio")
-        public double avgDamageAssistedRadio;
-        @JsonProperty("avg_damage_assisted_stun")
-        public double avgDamageAssistedStun;
-        @JsonProperty("tanking_factor")
-        public double tankingFactor;
-        @JsonProperty("direct_hits_received")
-        public int directHitsReceived;
-        @JsonProperty("explosion_hits")
-        public int explosionHits;
-        @JsonProperty("piercings_received")
-        public int piercingsReceived;
-        public int piercings;
-        @JsonProperty("no_damage_direct_hits_received")
-        public int noDamageDirectHitsReceived;
-        @JsonProperty("explosion_hits_received")
-        public int explosionHitsReceived;
-    }
-
-    public static class MaxStats extends BaseStatistics {
+    @Getter
+    @Setter
+    private static class MaxStats extends BaseStatistics {
         @JsonProperty("max_xp")
-        public int maxXp;
+        private int maxXp;
         @JsonProperty("max_damage")
-        public int maxDamage;
+        private int maxDamage;
         @JsonProperty("max_frags")
-        public int maxFrags;
+        private int maxFrags;
     }
 
+    @Getter
+    @Setter
     public static class StrongholdDefense extends BaseStatistics {
         @JsonProperty("max_xp")
-        public int maxXp;
+        private int maxXp;
         @JsonProperty("direct_hits_received")
-        public int directHitsReceived;
+        private int directHitsReceived;
         @JsonProperty("explosion_hits")
-        public int explosionHits;
+        private int explosionHits;
         @JsonProperty("piercings_received")
-        public int piercingsReceived;
-        public int piercings;
+        private int piercingsReceived;
+        private int piercings;
         @JsonProperty("max_damage")
-        public int maxDamage;
+        private int maxDamage;
         @JsonProperty("no_damage_direct_hits_received")
-        public int noDamageDirectHitsReceived;
+        private int noDamageDirectHitsReceived;
         @JsonProperty("max_frags")
-        public int maxFrags;
+        private int maxFrags;
         @JsonProperty("tanking_factor")
-        public double tankingFactor;
+        private double tankingFactor;
         @JsonProperty("explosion_hits_received")
-        public int explosionHitsReceived;
+        private int explosionHitsReceived;
     }
 
+    @Getter
+    @Setter
     public static class StrongholdSkirmish extends BaseStatistics {
         @JsonProperty("max_xp")
-        public int maxXp;
+        private int maxXp;
         @JsonProperty("direct_hits_received")
-        public int directHitsReceived;
+        private int directHitsReceived;
         @JsonProperty("explosion_hits")
-        public int explosionHits;
+        private int explosionHits;
         @JsonProperty("piercings_received")
-        public int piercingsReceived;
-        public int piercings;
+        private int piercingsReceived;
+        private int piercings;
         @JsonProperty("max_damage")
-        public int maxDamage;
+        private int maxDamage;
         @JsonProperty("no_damage_direct_hits_received")
-        public int noDamageDirectHitsReceived;
+        private int noDamageDirectHitsReceived;
         @JsonProperty("max_frags")
-        public int maxFrags;
+        private int maxFrags;
         @JsonProperty("explosion_hits_received")
-        public int explosionHitsReceived;
+        private int explosionHitsReceived;
         @JsonProperty("tanking_factor")
-        public double tankingFactor;
+        private double tankingFactor;
     }
 }
