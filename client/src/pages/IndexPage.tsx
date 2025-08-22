@@ -1,6 +1,5 @@
 import {
   Autocomplete,
-  Container,
   InputLabel,
   ListItem,
   ListItemText,
@@ -16,6 +15,7 @@ import WotStats from "../images/wotstats.png";
 import { PlayerSearchRequest } from "../__generated__/Api";
 import { Api } from "../__generated__/Api";
 import { isValidName } from "../utils/StringUtils";
+import HeartbeatChecker from "../components/HeartBeatChecker";
 
 const api = new Api();
 
@@ -99,6 +99,7 @@ function Banner() {
         onInputChange={onInputChange}
       />
     </Grid>
+    <HeartbeatChecker />
   </Grid>
   );
 }
