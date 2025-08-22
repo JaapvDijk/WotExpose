@@ -44,16 +44,16 @@ export interface LoginResponse {
 }
 
 export interface PageUserResponse {
-  /** @format int64 */
-  totalElements?: number;
   /** @format int32 */
   totalPages?: number;
-  sort?: SortObject;
+  /** @format int64 */
+  totalElements?: number;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
+  sort?: SortObject;
   first?: boolean;
   last?: boolean;
   /** @format int32 */
@@ -63,10 +63,10 @@ export interface PageUserResponse {
 }
 
 export interface PageableObject {
-  sort?: SortObject;
-  paged?: boolean;
   /** @format int64 */
   offset?: number;
+  sort?: SortObject;
+  paged?: boolean;
   /** @format int32 */
   pageNumber?: number;
   /** @format int32 */
@@ -75,8 +75,8 @@ export interface PageableObject {
 }
 
 export interface SortObject {
-  sorted?: boolean;
   empty?: boolean;
+  sorted?: boolean;
   unsorted?: boolean;
 }
 
@@ -257,6 +257,14 @@ export interface PlayerTankStatsResponse {
   data?: WoTPlayerTankStatResponse[];
   /** @format int32 */
   totalBattlesAll?: number;
+  /** @format int32 */
+  totalBattlesLight?: number;
+  /** @format int32 */
+  totalBattlesMedium?: number;
+  /** @format int32 */
+  totalBattlesHeavy?: number;
+  /** @format int32 */
+  totalBattlesSPG?: number;
 }
 
 export interface StrongholdDefense {
@@ -923,22 +931,57 @@ export class Api<
         ...params,
       }),
   };
+  heartbeat = {
+    /**
+     * No description
+     *
+     * @tags heartbeat-controller
+     * @name Get
+     * @request GET:/heartbeat
+     */
+    get: (params: RequestParams = {}) =>
+      this.request<string, any>({
+        path: `/heartbeat`,
+        method: "GET",
+        ...params,
+      }),
+  };
   admin = {
     /**
      * No description
      *
      * @tags admin-controller
-     * @name DoImport
-     * @request GET:/admin/import
+     * @name DoImportVehicles
+     * @request GET:/admin/import/vehicle
      */
-    doImport: (
+    doImportVehicles: (
       query: {
         region: string;
       },
       params: RequestParams = {},
     ) =>
       this.request<string, any>({
-        path: `/admin/import`,
+        path: `/admin/import/vehicle`,
+        method: "GET",
+        query: query,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags admin-controller
+     * @name DoImportTomato
+     * @request GET:/admin/import/tomato
+     */
+    doImportTomato: (
+      query: {
+        region: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<string, any>({
+        path: `/admin/import/tomato`,
         method: "GET",
         query: query,
         ...params,
