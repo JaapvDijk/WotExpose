@@ -1,6 +1,7 @@
 package com.learningjava.wotapi.api.controller;
 
 import com.learningjava.wotapi.api.importer.TomatoImporter;
+import com.learningjava.wotapi.api.importer.VehicleImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,9 +17,17 @@ import java.util.Objects;
 public class AdminController {
 
     private final TomatoImporter tomatoImporter;
+    private final VehicleImporter vehiclesImporter;
 
-    @GetMapping("/import")
-    public ResponseEntity<String> doImport(String region)
+    @Autowired
+    public AdminController(TomatoImporter tomatoImporter,
+                           VehicleImporter vehiclesImporter) {
+        this.tomatoImporter = tomatoImporter;
+        this.vehiclesImporter = vehiclesImporter;
+    }
+
+    @GetMapping("/import/tomato")
+    public ResponseEntity<String> doImportTomato(String region)
     {
         if (Objects.isNull(region)) { ResponseEntity.ok("Missing: 'region' query parameter"); }
 
@@ -29,8 +38,15 @@ public class AdminController {
         return ResponseEntity.ok("Import successful");
     }
 
-    @Autowired
-    public AdminController(TomatoImporter tomatoImporter) {
-        this.tomatoImporter = tomatoImporter;
+    @GetMapping("/import/vehicle")
+    public ResponseEntity<String> doImportVehicles(String region)
+    {
+        if (Objects.isNull(region)) { ResponseEntity.ok("Missing: 'region' query parameter"); }
+
+        var success = vehiclesImporter.start(region);
+
+        if (!success) { ResponseEntity.internalServerError().body("Import failed"); }
+
+        return ResponseEntity.ok("Import successful");
     }
 }
