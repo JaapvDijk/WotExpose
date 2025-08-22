@@ -11,9 +11,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "tank_performance", indexes = {
-        @Index(name = "idx_name", columnList = "name"),
-        @Index(name = "idx_import_date", columnList = "import_date"),
-        @Index(name = "idx_region", columnList = "region")
+        @Index(name = "idx_tank_performance_name", columnList = "name"),
+        @Index(name = "idx_tank_performance_import_date", columnList = "import_date"),
+        @Index(name = "idx_tank_performance_region", columnList = "region")
 })
 public class TankPerformance {
 
