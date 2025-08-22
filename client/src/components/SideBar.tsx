@@ -27,6 +27,7 @@ export default function Sidebar() {
 
   const items = [
     { text: "Home", icon: <HomeIcon />, href: "/" },
+    { text: "Login", icon: <InfoIcon />, href: "/login" },
     { text: "About", icon: <InfoIcon />, href: "/about" },
   ];
 
