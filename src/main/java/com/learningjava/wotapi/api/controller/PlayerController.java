@@ -6,8 +6,6 @@ import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
 import com.learningjava.wotapi.api.model.dto.PlayerTankStatsResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
 
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatsResponse;
 import com.learningjava.wotapi.api.service.WargamingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
