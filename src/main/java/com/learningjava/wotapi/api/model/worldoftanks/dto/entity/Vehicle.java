@@ -12,22 +12,17 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "vehicle", indexes = {
         @Index(name = "idx_vehicle_import_date", columnList = "import_date"),
-        @Index(name = "idx_vehicle_region", columnList = "region"),
-        @Index(name = "idx_vehicle_tank_id", columnList = "region")
+        @Index(name = "idx_vehicle_tank_id", columnList = "tank_id"),
+        @Index(name = "idx_vehicle_region", columnList = "region")
 })
 public class Vehicle {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @CreationTimestamp
     @Column(name = "import_date")
     private LocalDate importDate;
 
-    @Column(name = "tank_id")
-    private int tankId;
-
-    private String region;
+    @EmbeddedId
+    @Column(name = "vehicle_key")
+    private VehicleKey id;
 
     private String name;
 
