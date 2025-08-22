@@ -56,11 +56,6 @@ public class WargamingService {
         return playerTankStatsFactory.from(result);
     }
 
-    public Vehicle getVehicle(int tankId, String region) {
-        return vehicleRepository.findById_TankIdAndId_Region(tankId, region)
-                .orElseThrow(() -> new RuntimeException("Vehicle not found for:" + tankId + " " + region));
-    }
-
     public void saveVehicles(List<WoTVehicleResponse> vehicles, String region)
     {
         vehicles.forEach(vehicle -> {
