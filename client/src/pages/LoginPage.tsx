@@ -25,8 +25,8 @@ function LoginPage() {
     onSuccess: (data) => {
       if (data.data.token)
       {
-        authThunks.login(data.data.token+"");
         console.log("TOKEN: " + data.data.token);
+        authThunks.login(data.data.token+"");
         // api.setSecurityData(data.data.token);
         navigate("../admin", { replace: true });
       }
@@ -41,7 +41,7 @@ function LoginPage() {
 
     login.mutate(loginRequest);
     
-    navigate('../admin', { replace: true })
+    navigate('../admin', { replace: false })
   };
 
   const formik = useFormik({

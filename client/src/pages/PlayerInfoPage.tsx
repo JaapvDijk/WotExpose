@@ -98,13 +98,9 @@ function PlayerInfoPage() {
                             <CardContent>
                                 <Typography variant="body2" color="textSecondary">
                                     total: {tanks.totalBattlesAll} <br/>
-
-                                    most battles: {tanks?.data?.at(0)?.all?.battles}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    total: {tanks.totalBattlesAll} <br/>
-
-                                    most battles: {tanks?.data?.at(0)?.all?.battles}
+                                    most battles tank: {tanks?.data?.at(0)?.all?.battles}
                                 </Typography>
                             </CardContent>
                         </Card>
