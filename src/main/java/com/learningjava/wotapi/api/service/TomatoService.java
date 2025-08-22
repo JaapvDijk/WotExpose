@@ -37,7 +37,6 @@ public class TomatoService {
         var result = mapper.toEntityList(tankPerformanceResponse.getData());
         result = result.stream().peek(t ->
             {
-                t.setImportDate(localDate);
                 t.setRegion(region);
                 t.setUpdated(tankPerformanceResponse.getMeta().getUpdated());
             }).toList();
