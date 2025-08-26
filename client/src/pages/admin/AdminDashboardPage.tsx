@@ -26,7 +26,7 @@ function AdminDashboardPage() {
   }, [token, navigate]);
 
   const { data, isLoading } = useQuery({
-    queryKey: ["usersCount"],
+    queryKey: ["users", "count"],
     queryFn: async () => {
       const res = await privateApi.user.getUsers({ pageNr: 0, amount: 1 }); 
       return res.data?.totalElements ?? 0;
@@ -35,12 +35,7 @@ function AdminDashboardPage() {
 
   return (
     <Container
-      sx={{
-        minHeight: "calc(100vh - var(--footer-height, 0px))",
-        background: "linear-gradient(180deg, #1f1f1f, #121212)",
-        p: 3,
-      }}
-    >
+      sx={{ background: "linear-gradient(180deg, #1f1f1f, #121212)", p: 3 }}>
       <Typography variant="h4" gutterBottom color="white">
         Admin Dashboard
       </Typography>
@@ -52,8 +47,7 @@ function AdminDashboardPage() {
           boxShadow: 3,
           background: "linear-gradient(135deg, #1976d2, #1565c0)",
           color: "white",
-        }}
-      >
+        }}>
         <CardActionArea onClick={() => navigate("/userManagement")}>
           <CardContent sx={{ textAlign: "center" }}>
             <Typography variant="h6">Total Users</Typography>
