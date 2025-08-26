@@ -20,7 +20,7 @@ body {
 
 .home-page {
   background: linear-gradient(270deg, #292977, #0c4763, #000);
-  background-size: 350%;
+  background-size: 300%;
   background-attachment: "fixed";
   animation: gradientMoveRight 3.5s ease;
   

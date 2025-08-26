@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import PlayerInfoPage from './pages/PlayerInfoPage';
 import Sidebar from './components/SideBar';
 import LoginPage from './pages/LoginPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -18,22 +19,18 @@ function App() {
             } />
 
             <Route path="/info/:id" element={
-                
-                <><Container>
+                <>
                     <PlayerInfoPage />
-                </Container>
-                <Footer />
+                    <Footer />
                 </>
             } />
 
             <Route path="/login" element={
-                    <LoginPage />
+                <LoginPage />
             } />
 
             <Route path="/admin" element={
-                <Container>
-                    <h2>Admin page</h2>
-                </Container>
+                <AdminPage />
             } />
 
         </Routes>

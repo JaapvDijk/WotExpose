@@ -1,7 +1,7 @@
 ﻿import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { jwtDecode } from "jwt-decode";
-import { AccesJwtPayload } from "../types/AccesJwtPayload";
+import { AccessJwtPayload } from "../types/AccessJwtPayload";
 
 type SliceState = {
     token: string,
@@ -36,7 +36,7 @@ export const authThunks = {
 
 export const authSelectors = {
     selectToken: (state: RootState) => state.auth.token,
-    selectTokenPayload: (state: RootState) => state.auth.isAuthenticated ? jwtDecode<AccesJwtPayload>(state.auth.token) : null,
+    selectTokenPayload: (state: RootState) => state.auth.isAuthenticated ? jwtDecode<AccessJwtPayload>(state.auth.token) : null,
     selectIsAuthenticated: (state: RootState) => state.auth.isAuthenticated
 };
 

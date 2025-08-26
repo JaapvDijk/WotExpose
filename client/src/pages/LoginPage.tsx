@@ -67,9 +67,12 @@ function LoginPage() {
     <Grid container component="main" sx={{ height: "calc(100vh - var(--footer-height, 0px))" }}>
       <Grid size={{xs:false, sm:3, md:7}} className="login-page" />
       <Grid size={{xs:12, sm:8, md:5}} component={Paper}>
-        <Box sx={{paddingTop:15, display: "flex",
-            flexDirection: "column",
-            alignItems: "center", background:"linear-gradient(270deg,rgba(12,71,99,0.8), rgba(0,0,0,0.35)"}}>
+        <Box sx={{
+              paddingTop:15, 
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center", 
+              background:"linear-gradient(270deg,rgba(12,71,99,0.8), rgba(0,0,0,0.35)"}}>
           <Typography component="h1" variant="h5">
             {"Login"}
           </Typography>

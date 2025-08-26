@@ -1,51 +1,35 @@
 import { jwtDecode } from "jwt-decode";
-import { store } from "./redux/store";
+import { store, RootState } from "./redux/store";
 import { Api } from "./__generated__/Api";
+import { AccessJwtPayload } from "./types/AccessJwtPayload";
 import { authThunks } from "./redux/auth";
-import { AccesJwtPayload } from "./types/AccesJwtPayload";
+import { useSelector } from "react-redux";
 
-const authenticatedFetch: WindowOrWorkerGlobalScope['fetch'] = async (input: RequestInfo, init?: RequestInit) => {
-    const token = store.getState().auth.token;
-
-    if (UserIsValid(token)) {
-        const customHeaders = {
-            'Authorization': `Bearer ${token}`,
-        };
-
-        if (init && init.headers) {
-            init.headers = new Headers(init.headers);
-            Object.entries(customHeaders).forEach(([key, value]) => {
-                (init!.headers as Headers).append(key, value);
-            });
-        } else {
-            init = { ...init, headers: customHeaders };
-        }
-    }
-    else {
-        store.dispatch(authThunks.logout());
-    }
-
-    return fetch(input, init);
-};
-
-export class ApiClient extends Api<String | null> {
+export class ApiClient extends Api<string | null> {
   private static authInstance: ApiClient;
   private static publicInstance: ApiClient;
 
-  private constructor() {
-    super();
+  private static baseUrl: string = "http://localhost:5000";
+
+  private constructor(config?: any) {
+    super(config);
   }
 
   static getAuthInstance() {
     if (!this.authInstance) {
-      this.authInstance = new Api({
-        baseURL: "http://localhost:5000",
+      this.authInstance = new ApiClient({
+        baseURL: ApiClient.baseUrl,
         secure: true,
         securityWorker: () => {
           const token = store.getState().auth.token;
-          return UserIsValid(token)
-            ? { headers: { Authorization: `Bearer ${token}` } }
-            : {};
+
+          if (UserIsValid(token)) {
+            return { headers: { Authorization: `Bearer ${token}` } };
+          } 
+          else {
+            store.dispatch(authThunks.logout());
+            return {};
+          }
         },
       });
     }
@@ -54,18 +38,33 @@ export class ApiClient extends Api<String | null> {
 
   static getInstance() {
     if (!this.publicInstance) {
-      this.publicInstance = new Api({
-        baseURL: "http://localhost:5000",
+      this.publicInstance = new ApiClient({
+        baseURL: ApiClient.baseUrl
       });
     }
     return this.publicInstance;
   }
 }
 
-export function UserIsValid(token: string) {
-    if (token.length < 20)
-        return false;
+export function UserIsValid(token?: string) {
+  if (!token || token.length < 20) return false;
+  const decodedToken = jwtDecode<AccessJwtPayload>(token);
+  return decodedToken.exp! > new Date().getTime() / 1000;
+}
 
-    var decodedToken = jwtDecode<AccesJwtPayload>(token);
-    return decodedToken.exp! > new Date().getTime() / 1000;
+export function UserIsAdmin(token?: string) {
+  if (!token) return false;
+
+  if (!UserIsValid(token)) return false;
+
+  try {
+    const decoded = jwtDecode<AccessJwtPayload>(token);
+    const hasAdminRole = decoded.roles.some(
+      (role) => role.authority === "ROLE_ADMIN"
+    );
+
+    return hasAdminRole;
+  } catch {
+    return false;
+  }
 }
