@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PlayerRequest } from '../__generated__/Api';
 import { timestampToDate } from "../utils/DateUtils";
 import { getPercentage, getWinrateVerdict, getWinrateXVMColour } from '../utils/StatUtils';
-import { ApiClient } from "../__generated__/ApiClient" 
+import { ApiClient } from "../ApiClient";
 
 const publicApi = ApiClient.getInstance();
 

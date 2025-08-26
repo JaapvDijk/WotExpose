@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ApiClient } from "../__generated__/ApiClient";
+import { ApiClient } from "../ApiClient";
 import Box from "@mui/material/Box";
 import { heartbeatThunks, heartbeatSelectors } from "../redux/heartbeat";
 import { useSelector, useDispatch } from "react-redux";

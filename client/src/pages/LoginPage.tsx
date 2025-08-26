@@ -14,7 +14,7 @@ import * as Yup from "yup";
 import { authThunks } from "../redux/auth";
 import { useMutation } from "@tanstack/react-query";
 import { LoginRequest } from '../__generated__/Api';
-import { ApiClient } from "../__generated__/ApiClient"
+import { ApiClient } from "../ApiClient";
 import { useDispatch } from "react-redux";
 
 const publicApi = ApiClient.getInstance();

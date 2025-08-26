@@ -13,7 +13,7 @@ import { PlayerSearchResponse } from "../__generated__/Api";
 import Box from "@mui/material/Box";
 import WotStats from "../images/wotstats.png";
 import { PlayerSearchRequest } from "../__generated__/Api";
-import { Api } from "../__generated__/Api";
+import { ApiClient } from "../ApiClient";
 import { isValidName } from "../utils/StringUtils";
 import HeartbeatChecker from "../components/HeartBeatChecker";
 
