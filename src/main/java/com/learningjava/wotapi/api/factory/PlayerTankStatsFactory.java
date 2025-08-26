@@ -4,11 +4,13 @@ import com.learningjava.wotapi.api.HttpContext;
 import com.learningjava.wotapi.api.mapper.TankStatMapper;
 import com.learningjava.wotapi.api.model.dto.PlayerTankStatResponse;
 import com.learningjava.wotapi.api.model.dto.PlayerTankStatsResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerTankStatResponse;
+import com.learningjava.wotapi.api.model.shared.StatTotals;
+import com.learningjava.wotapi.api.model.worldoftanks.WoTPlayerTankStatResponse;
+import com.learningjava.wotapi.api.service.TomatoService;
 import com.learningjava.wotapi.api.service.VehicleService;
-import com.learningjava.wotapi.api.service.WargamingService;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Comparator.comparingInt;
@@ -17,11 +19,16 @@ import static java.util.Comparator.comparingInt;
 public class PlayerTankStatsFactory {
 
     private final VehicleService vehicleService;
+    private final TomatoService tomatoService;
     private final TankStatMapper tankStatMapper;
+    private ArrayList<Integer> counter = new ArrayList<>();
+    private ArrayList<Integer> counter2 = new ArrayList<>();
 
     public PlayerTankStatsFactory(VehicleService vehicleService,
+                                  TomatoService tomatoService,
                                   TankStatMapper tankStatMapper) {
         this.vehicleService = vehicleService;
+        this.tomatoService = tomatoService;
         this.tankStatMapper = tankStatMapper;
     }
 
@@ -34,32 +41,32 @@ public class PlayerTankStatsFactory {
         var result = new PlayerTankStatsResponse();
         result.setData(tankStats);
 
-        int totalBattlesAll = 0;
-
-        int totalBattlesLight = 0;
-        int totalBattlesMedium = 0;
-        int totalBattlesHeavy = 0;
-        int totalBattlesSPG = 0;
-
+        var totals = new StatTotals();
         for (PlayerTankStatResponse tank : result.getData()) {
-            var tankAll = tank.getAll(); //Because it contains the 15v15 random battles
+            var battleInfo = tank.getAll();
             var vehicleInfo = vehicleService.getVehicle(tank.getTankId(), region);
+            var tomatoInfo = tomatoService.getLatestTankPerformance(tank.getTankId(), region);
 
-            if (tankAll != null) {
-                totalBattlesAll += tankAll.getBattles();
+            if (vehicleInfo.isEmpty()) {
+                counter.add(tank.getTankId());
+            }
+            else if (battleInfo != null) {
+                counter2.add(1);
+                totals.addBattles(
+                        vehicleInfo.get().getType(),
+                        vehicleInfo.get().getTier(),
+                        battleInfo.getBattles()
+                );
             }
 
-//                totalBattlesLight += 0;
-//                if (true) totalBattlesMedium += tank.;
-//                totalBattlesHeavy += 0;
-//                totalBattlesSPG += 0;
+            if (tomatoInfo != null) {
+
+            }
         }
 
-        result.setTotalBattlesAll(totalBattlesAll);
-        result.setTotalBattlesLight(totalBattlesLight);
-        result.setTotalBattlesMedium(totalBattlesMedium);
-        result.setTotalBattlesHeavy(totalBattlesHeavy);
-        result.setTotalBattlesSPG(totalBattlesSPG);
+        totals.calculatePercentages();
+
+        result.setTotals(totals);
 
         return result;
     }
