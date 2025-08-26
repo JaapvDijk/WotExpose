@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Api } from "../__generated__/Api";
 import Box from "@mui/material/Box";
+import { heartbeatThunks, heartbeatSelectors } from "../redux/heartbeat";
+import { useSelector, useDispatch } from "react-redux";
 
 const api = new Api();
 
 const HeartbeatChecker: React.FC = () => {
-  const [isOk, setIsOk] = useState<boolean | null>(null);
-
-  useEffect(() => {
+  const dispatch = useDispatch();
+  const isAlive = useSelector(heartbeatSelectors.selectIsAlive);
+  
+useEffect(() => {
     const checkHeartbeat = async () => {
       try {
         const response = await api.heartbeat.get();
-        setIsOk(response.status === 200);
+        dispatch(heartbeatThunks.setHeartbeat(response.status === 200));
       } catch (error) {
         console.error("Heartbeat check failed:", error);
-        setIsOk(false);
+        dispatch(heartbeatThunks.setHeartbeat(false));
       }
     };
 
     checkHeartbeat();
-
-    const intervalId = setInterval(checkHeartbeat, 2000);
+    const intervalId = setInterval(checkHeartbeat, 4000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [dispatch]);
 
   return (
     <Box className="p-4 rounded-xl shadow bg-white">
-      {/* {isOk === null && <p>Checking...</p>}
-      {isOk === true && <p className="text-green-600">✅ API connection </p>} */}
-      {isOk === false && <p className="text-red-600">❌ API connection</p>}
+      {isAlive}
+      {!isAlive && <p className="text-red-600">❌ API connection</p>}
     </Box>
   );
 };
-
 export default HeartbeatChecker;

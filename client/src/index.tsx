@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { persistor, store } from './redux/store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,10 +9,18 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+//React devtools
+const script = document.createElement("script");
+script.src = "http://localhost:8097";
+script.async = true;
+document.head.appendChild(script);
+
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -42,12 +52,16 @@ root.render(
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"></link>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-        <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-        </QueryClientProvider>
-      </ThemeProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <QueryClientProvider client={queryClient}>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+          </QueryClientProvider>
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
 
   </React.StrictMode>
 );
