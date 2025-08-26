@@ -1,6 +1,7 @@
 package com.learningjava.wotapi.api.model.worldoftanks.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "vehicle", indexes = {
         @Index(name = "idx_vehicle_import_date", columnList = "import_date"),
@@ -39,4 +41,6 @@ public class Vehicle {
     private String type;
 
     private int tier;
+
+    private boolean isMissingFromSource;
 }

@@ -24,7 +24,7 @@ public class VehicleService {
         this.client = client;
     }
 
-    public Optional<Vehicle> getVehicle(int tankId, String region) {
+    public Optional<Vehicle> findVehicle(int tankId, String region) {
         return vehicleRepository.findById_TankIdAndId_Region(tankId, region);
 //                .orElseThrow(() -> new VehicleNotFoundException("Vehicle not found for:" + tankId + " " + region));
     }

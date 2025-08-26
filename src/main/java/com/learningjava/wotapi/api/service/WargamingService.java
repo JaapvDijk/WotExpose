@@ -5,6 +5,7 @@ import com.learningjava.wotapi.api.mapper.PlayerMapper;
 import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
 import com.learningjava.wotapi.api.model.dto.PlayerTankStatsResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,14 +15,14 @@ public class WargamingService {
 
     private final WargamingClient client;
     private final PlayerMapper playerMapper;
-    private final PlayerTankStatsFactory playerTankStatsFactory;
+    private final ObjectProvider<PlayerTankStatsFactory> factoryProvider;
 
     public WargamingService(WargamingClient client,
                             PlayerMapper mapper,
-                            PlayerTankStatsFactory playerTankStatsFactory) {
+                            ObjectProvider<PlayerTankStatsFactory> playerTankStatsFactory) {
         this.client = client;
         this.playerMapper = mapper;
-        this.playerTankStatsFactory = playerTankStatsFactory;
+        this.factoryProvider = playerTankStatsFactory;
     }
 
     public List<PlayerSearchResponse> getPlayers(String name) {
@@ -36,6 +37,8 @@ public class WargamingService {
 
     public PlayerTankStatsResponse getPlayerTankStats(int id) {
         var result = client.getPlayerTanks(id);
+
+        var playerTankStatsFactory = factoryProvider.getObject();
 
         return playerTankStatsFactory.from(result);
     }
