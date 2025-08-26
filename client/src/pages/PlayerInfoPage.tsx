@@ -2,11 +2,12 @@ import { Box, Card, CardContent, Typography, Skeleton, Divider } from "@mui/mate
 import Grid from '@mui/material/Grid';
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Api, PlayerRequest } from '../__generated__/Api';
+import { PlayerRequest } from '../__generated__/Api';
 import { timestampToDate } from "../utils/DateUtils";
 import { getPercentage, getWinrateVerdict, getWinrateXVMColour } from '../utils/StatUtils';
+import { ApiClient } from "../__generated__/ApiClient" 
 
-const api = new Api();
+const publicApi = ApiClient.getInstance();
 
 function PlayerInfoPage() {
     const { id } = useParams();
@@ -16,13 +17,13 @@ function PlayerInfoPage() {
 
     const infoResult = useQuery({
         queryKey: ['info', id],
-        queryFn: () => api.player.getInfo(playerId, playerRequest as any),
+        queryFn: () => publicApi.player.getInfo(playerId, playerRequest as any),
         enabled: !isNaN(playerId),
     })
 
     const tanksResult = useQuery({
         queryKey: ['tanks', id],
-        queryFn: () => api.player.getTankStats(playerId, playerRequest as any),
+        queryFn: () => publicApi.player.getTankStats(playerId, playerRequest as any),
         enabled: !isNaN(playerId),
     })
 

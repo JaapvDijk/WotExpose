@@ -13,17 +13,18 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authThunks } from "../redux/auth";
 import { useMutation } from "@tanstack/react-query";
-import { Api, LoginRequest } from '../__generated__/Api';
- import { useDispatch } from "react-redux";
+import { LoginRequest } from '../__generated__/Api';
+import { ApiClient } from "../__generated__/ApiClient"
+import { useDispatch } from "react-redux";
 
- const api = new Api();
+const publicApi = ApiClient.getInstance();
 
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const login = useMutation({
-    mutationFn: (loginRequest: LoginRequest) => api.auth.authenticate(loginRequest),
+    mutationFn: (loginRequest: LoginRequest) => publicApi.auth.authenticate(loginRequest),
     onSuccess: (data) => {
       if (data.data.token)
       {

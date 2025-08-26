@@ -44,16 +44,16 @@ export interface LoginResponse {
 }
 
 export interface PageUserResponse {
-  /** @format int32 */
-  totalPages?: number;
   /** @format int64 */
   totalElements?: number;
-  sort?: SortObject;
+  /** @format int32 */
+  totalPages?: number;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
+  sort?: SortObject;
   first?: boolean;
   last?: boolean;
   /** @format int32 */
@@ -63,14 +63,14 @@ export interface PageUserResponse {
 }
 
 export interface PageableObject {
-  sort?: SortObject;
   /** @format int64 */
   offset?: number;
-  paged?: boolean;
+  sort?: SortObject;
   /** @format int32 */
   pageNumber?: number;
   /** @format int32 */
   pageSize?: number;
+  paged?: boolean;
   unpaged?: boolean;
 }
 
@@ -219,6 +219,7 @@ export interface PlayerTankStatResponse {
 export interface PlayerTankStatsResponse {
   data?: PlayerTankStatResponse[];
   totals?: StatTotals;
+  notInEncyclopedia?: PlayerTankStatResponse[];
 }
 
 export interface StatTotals {

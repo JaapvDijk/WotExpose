@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { Api } from "../__generated__/Api";
+import { ApiClient } from "../__generated__/ApiClient";
 import Box from "@mui/material/Box";
 import { heartbeatThunks, heartbeatSelectors } from "../redux/heartbeat";
 import { useSelector, useDispatch } from "react-redux";
 
-const api = new Api();
+const publicApi = ApiClient.getInstance();
 
 const HeartbeatChecker: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const HeartbeatChecker: React.FC = () => {
 useEffect(() => {
     const checkHeartbeat = async () => {
       try {
-        const response = await api.heartbeat.get();
+        const response = await publicApi.heartbeat.get();
         dispatch(heartbeatThunks.setHeartbeat(response.status === 200));
       } catch (error) {
         console.error("Heartbeat check failed:", error);
@@ -22,7 +22,7 @@ useEffect(() => {
     };
 
     checkHeartbeat();
-    const intervalId = setInterval(checkHeartbeat, 4000);
+    const intervalId = setInterval(checkHeartbeat, 2000);
 
     return () => clearInterval(intervalId);
   }, [dispatch]);

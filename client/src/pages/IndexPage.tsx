@@ -17,7 +17,7 @@ import { Api } from "../__generated__/Api";
 import { isValidName } from "../utils/StringUtils";
 import HeartbeatChecker from "../components/HeartBeatChecker";
 
-const api = new Api();
+const publicApi = ApiClient.getInstance();
 
 function Banner() {
   const [options, setOptions] = useState<PlayerSearchResponse[]>([]);
@@ -27,7 +27,7 @@ function Banner() {
 
     const playerSearchRequest: PlayerSearchRequest = { region: "EU", name: searchTerm };
 
-    const response = await api.player.search(playerSearchRequest as any);
+    const response = await publicApi.player.search(playerSearchRequest as any);
 
     setOptions(response.data ?? []);
   };
