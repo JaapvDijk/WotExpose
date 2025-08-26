@@ -4,12 +4,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.api.exception.PlayerNotFoundException;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.*;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.WoTPlayerTankStatResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayersResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.WoTVehicleResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import com.learningjava.wotapi.api.config.RestClientConfig.RestClientProxy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -17,6 +21,7 @@ public class WargamingClient {
 
     private final RestClientProxy restClient;
     private final ObjectMapper objectMapper;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //TODO: add access token for private info .queryParam("access_token", access_token)
     public WargamingClient(@Qualifier("wargamingRestClient") RestClientProxy restClient,

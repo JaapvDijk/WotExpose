@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.api.mapper;
 
 import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerResponse;
+import com.learningjava.wotapi.api.model.worldoftanks.WoTPlayerResponse;
 import org.mapstruct.Mapper;
 
 import java.util.List;

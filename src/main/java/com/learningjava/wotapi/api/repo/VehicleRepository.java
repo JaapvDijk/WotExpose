@@ -1,6 +1,6 @@
 package com.learningjava.wotapi.api.repo;
 
-import com.learningjava.wotapi.api.model.worldoftanks.dto.entity.Vehicle;
+import com.learningjava.wotapi.api.model.worldoftanks.entity.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

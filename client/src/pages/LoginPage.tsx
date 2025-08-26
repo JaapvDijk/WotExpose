@@ -14,10 +14,12 @@ import * as Yup from "yup";
 import { authThunks } from "../redux/auth";
 import { useMutation } from "@tanstack/react-query";
 import { Api, LoginRequest } from '../__generated__/Api';
- 
-const api = new Api();
+ import { useDispatch } from "react-redux";
+
+ const api = new Api();
 
 function LoginPage() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const login = useMutation({
@@ -26,7 +28,7 @@ function LoginPage() {
       if (data.data.token)
       {
         console.log("TOKEN: " + data.data.token);
-        authThunks.login(data.data.token+"");
+        dispatch(authThunks.login(data.data.token));
         // api.setSecurityData(data.data.token);
         navigate("../admin", { replace: true });
       }

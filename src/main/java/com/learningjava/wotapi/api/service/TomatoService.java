@@ -44,8 +44,8 @@ public class TomatoService {
         repo.saveAll(result);
     }
 
-    public TankPerformance getRecentTankPerformanceByName(String name) {
-        return repo.findLatestByName(name);
+    public TankPerformance getLatestTankPerformance(int tank_id, String region) {
+        return repo.getLatestByTankIdAndRegionEquals(tank_id, region);
     }
 }
 

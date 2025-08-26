@@ -1,8 +1,7 @@
 package com.learningjava.wotapi.api.importer;
 
 import com.learningjava.wotapi.api.HttpContext;
-import com.learningjava.wotapi.api.service.TomatoService;
-import com.learningjava.wotapi.api.service.WargamingService;
+import com.learningjava.wotapi.api.service.VehicleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -18,10 +17,10 @@ public class VehicleImporter { //TODO: tests
 
     private static final Logger logger = LoggerFactory.getLogger(VehicleImporter.class);
 
-    private final WargamingService wargamingService;
+    private final VehicleService vehicleService;
 
-    public VehicleImporter(WargamingService wargamingService) {
-        this.wargamingService = wargamingService;
+    public VehicleImporter(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
     }
 
     @Scheduled(cron = "${api.tomato.schedule-expression}")
@@ -42,14 +41,14 @@ public class VehicleImporter { //TODO: tests
 
         logger.info("[Vehicle Import] Started for {}", region);
 
-        var vehicles = wargamingService.fetchVehicles(); //region?
+        var vehicles = vehicleService.fetchVehicles(); //region?
 
         if (Objects.isNull(vehicles)) {
             logger.info("[Vehicle Import] aborted: Api call returned null {}", region);
             return false;
         }
 
-        wargamingService.saveVehicles(vehicles, region);
+        vehicleService.saveVehicles(vehicles, region);
 
         logger.info("[Vehicle Import] Finished successfully for {}", region);
 

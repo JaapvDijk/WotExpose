@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.model.worldoftanks.dto;
+package com.learningjava.wotapi.api.model.worldoftanks;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.learningjava.wotapi.api.model.shared.BaseStatistics;

@@ -91,13 +91,13 @@ function PlayerInfoPage() {
                 <Grid size={{xs:12}}>
                     Could not load tank stats: {(tanksResult.error as Error).message}
                 </Grid>
-            ) : tanks && tanks.totalBattlesAll && tanks.totalBattlesAll > 500 ? (
+            ) : tanks && tanks.totals?.battlesAll && tanks.totals?.battlesAll > 500 ? (
                 <> 
                     <Grid size={{xs:12}} sx={{ textAlign: 'left' }}>
                         <Card>
                             <CardContent>
                                 <Typography variant="body2" color="textSecondary">
-                                    total: {tanks.totalBattlesAll} <br/>
+                                    total: {tanks.totals?.battlesAll} <br/>
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
                                     most battles tank: {tanks?.data?.at(0)?.all?.battles}
@@ -107,7 +107,7 @@ function PlayerInfoPage() {
                     </Grid>
                 </>
             ) : (
-                <CardContent>No tank stats found, or not enough battles (500+) {tanks?.totalBattlesAll}</CardContent>
+                <CardContent>No tank stats found, or not enough battles (500+) {tanks?.totals?.battlesAll}</CardContent>
             )}
             </Grid>
         </Box>

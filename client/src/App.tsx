@@ -31,7 +31,9 @@ function App() {
             } />
 
             <Route path="/admin" element={
+                <Container>
                     <h2>Admin page</h2>
+                </Container>
             } />
 
         </Routes>
