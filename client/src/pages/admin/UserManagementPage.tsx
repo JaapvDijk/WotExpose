@@ -71,7 +71,7 @@ function UserManagementPage() {
 
   const createUserMutation = useMutation({
     mutationFn: (newUser: UserRequest) =>
-      privateApi.auth.register({ ...newUser, password: "Default123!" }),
+      privateApi.auth.register({ ...newUser, password: "user123" }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
@@ -148,7 +148,7 @@ function UserManagementPage() {
   };
 
   return (
-    <Container sx={{ minHeight: 'calc(100vh - var(--footer-height, 0px))', background: "linear-gradient(180deg, #1f1f1f, #121212)", p: 3 }}>
+    <Container sx={{ background: "linear-gradient(180deg, #1f1f1f, #121212)", p: 3 }}>
       <Typography variant="h4" gutterBottom>
         User Management
       </Typography>
