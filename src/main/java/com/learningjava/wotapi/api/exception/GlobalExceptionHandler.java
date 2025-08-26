@@ -52,6 +52,11 @@ public class GlobalExceptionHandler {
         return error(HttpStatus.NOT_FOUND, "Player not found", ex.getMessage());
     }
 
+    @ExceptionHandler(VehicleNotFoundException.class)
+    public ResponseEntity<?> handleVehicleNotFound(VehicleNotFoundException ex) {
+        return error(HttpStatus.NOT_FOUND, "Vehicle not found", ex.getMessage());
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex) {
         return error(HttpStatus.UNAUTHORIZED, "Invalid username or password", ex.getMessage());

@@ -15,6 +15,6 @@ public class HeartbeatController {
     @GetMapping("")
     public ResponseEntity<String> get()
     {
-        return ResponseEntity.ok("ok");
+        return ResponseEntity.ok("");
     }
 }
