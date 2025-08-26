@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.model.worldoftanks.dto.entity;
+package com.learningjava.wotapi.api.model.worldoftanks.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
