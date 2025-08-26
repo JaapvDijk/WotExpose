@@ -16,10 +16,10 @@ const root = ReactDOM.createRoot(
 );
 
 //React devtools
-const script = document.createElement("script");
-script.src = "http://localhost:8097";
-script.async = true;
-document.head.appendChild(script);
+// const script = document.createElement("script");
+// script.src = "http://localhost:8097";
+// script.async = true;
+// document.head.appendChild(script);
 
 
 const queryClient = new QueryClient({
