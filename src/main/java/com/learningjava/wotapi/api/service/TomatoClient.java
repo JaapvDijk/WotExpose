@@ -15,7 +15,7 @@ import org.springframework.web.client.RestClient;
 @Component
 public class TomatoClient {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(TomatoClient.class);
     private final RestClient restClient;
     private final RetryTemplate retryTemplate;
     private final ObjectMapper objectMapper;
