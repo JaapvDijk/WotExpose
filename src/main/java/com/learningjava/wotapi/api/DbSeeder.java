@@ -90,6 +90,16 @@ public class DbSeeder {
         user.setPassword(passwordEncoder.encode("user123"));
         user.setRoles(Set.of(userRole));
         normalUser = userRepository.save(user);
+
+        for (int i = 0; i < 100; i++)
+        {
+            user = new User();
+            user.setFullName("user"+i);
+            user.setEmail("user"+i+"@wotapi.nl");
+            user.setPassword(passwordEncoder.encode("user123"));
+            user.setRoles(Set.of(userRole));
+            userRepository.save(user);
+        }
     }
 
     private void addMissingVehicles() {
