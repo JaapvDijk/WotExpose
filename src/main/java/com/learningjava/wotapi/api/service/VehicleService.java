@@ -1,6 +1,5 @@
 package com.learningjava.wotapi.api.service;
 
-import com.learningjava.wotapi.api.exception.VehicleNotFoundException;
 import com.learningjava.wotapi.api.mapper.VehicleMapper;
 import com.learningjava.wotapi.api.model.worldoftanks.WoTVehicleResponse;
 import com.learningjava.wotapi.api.model.worldoftanks.entity.Vehicle;
