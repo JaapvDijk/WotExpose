@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.api.controller;
 
-import com.learningjava.wotapi.api.importer.TomatoImporter;
-import com.learningjava.wotapi.api.importer.VehicleImporter;
+import com.learningjava.wotapi.application.importer.TomatoImporter;
+import com.learningjava.wotapi.application.importer.VehicleImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

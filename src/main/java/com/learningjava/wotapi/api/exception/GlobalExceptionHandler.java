@@ -1,5 +1,8 @@
 package com.learningjava.wotapi.api.exception;
 
+
+import com.learningjava.wotapi.shared.exception.PlayerNotFoundException;
+import com.learningjava.wotapi.shared.exception.VehicleNotFoundException;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;

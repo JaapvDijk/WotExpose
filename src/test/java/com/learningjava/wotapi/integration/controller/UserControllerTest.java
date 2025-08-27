@@ -1,8 +1,8 @@
 package com.learningjava.wotapi.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learningjava.wotapi.api.DbSeeder;
-import com.learningjava.wotapi.api.model.dto.UserRequest;
+import com.learningjava.wotapi.infrastructure.DbSeeder;
+import com.learningjava.wotapi.application.dto.UserRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

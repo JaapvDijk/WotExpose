@@ -1,10 +1,10 @@
 package com.learningjava.wotapi.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learningjava.wotapi.api.DbSeeder;
-import com.learningjava.wotapi.api.model.dto.LoginRequest;
-import com.learningjava.wotapi.api.model.dto.RegisterUserRequest;
-import com.learningjava.wotapi.api.service.JwtService;
+import com.learningjava.wotapi.infrastructure.DbSeeder;
+import com.learningjava.wotapi.application.dto.LoginRequest;
+import com.learningjava.wotapi.application.dto.RegisterUserRequest;
+import com.learningjava.wotapi.application.service.JwtService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

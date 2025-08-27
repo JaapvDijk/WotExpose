@@ -1,12 +1,8 @@
 package com.learningjava.wotapi.api.controller;
 
-import com.learningjava.wotapi.api.model.dto.PlayerRequest;
-import com.learningjava.wotapi.api.model.dto.PlayerSearchRequest;
-import com.learningjava.wotapi.api.model.dto.PlayerSearchResponse;
-import com.learningjava.wotapi.api.model.dto.PlayerTankStatsResponse;
-import com.learningjava.wotapi.api.model.worldoftanks.dto.WoTPlayerInfoResponse;
+import com.learningjava.wotapi.application.dto.*;
 
-import com.learningjava.wotapi.api.service.WargamingService;
+import com.learningjava.wotapi.application.service.WargamingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +30,7 @@ public class PlayerController {
     }
 
     @GetMapping("/info/{id}")
-    public ResponseEntity<WoTPlayerInfoResponse> getInfo(@PathVariable Integer id, @Valid @ModelAttribute PlayerRequest request)
+    public ResponseEntity<PlayerInfoResponse> getInfo(@PathVariable Integer id, @Valid @ModelAttribute PlayerRequest request)
     {
         var result = wargamingService.getPlayerInfo(id);
 

@@ -1,8 +1,8 @@
 package com.learningjava.wotapi.api.controller;
 
-import com.learningjava.wotapi.api.model.dto.UserRequest;
-import com.learningjava.wotapi.api.model.dto.UserResponse;
-import com.learningjava.wotapi.api.service.UserService;
+import com.learningjava.wotapi.application.dto.UserRequest;
+import com.learningjava.wotapi.application.dto.UserResponse;
+import com.learningjava.wotapi.application.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
