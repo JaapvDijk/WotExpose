@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.infrastructure;
 
-import com.learningjava.wotapi.shared.constant.Region;
-import com.learningjava.wotapi.shared.constant.Roles;
+import com.learningjava.wotapi.shared.constant.RegionType;
+import com.learningjava.wotapi.shared.constant.RoleType;
 import com.learningjava.wotapi.infrastructure.model.entity.Privilege;
 import com.learningjava.wotapi.infrastructure.model.entity.Role;
 import com.learningjava.wotapi.infrastructure.model.entity.User;
@@ -69,12 +69,12 @@ public class DbSeeder {
         privilegeRepository.saveAll(Arrays.asList(readPrivilege, writePrivilege));
 
         Role adminRole = new Role();
-        adminRole.setName(Roles.ROLE_ADMIN);
+        adminRole.setRole(RoleType.ADMIN);
         adminRole.setPrivileges(Set.of(readPrivilege, writePrivilege));
         roleRepository.save(adminRole);
 
         Role userRole = new Role();
-        userRole.setName(Roles.ROLE_USER);
+        userRole.setRole(RoleType.USER);
         userRole.setPrivileges(Set.of(readPrivilege));
         roleRepository.save(userRole);
 
@@ -107,11 +107,11 @@ public class DbSeeder {
         //TODO: add missing for NA & ASIA
         //TODO Add -64833 research what it is
         var missingVehicles = new ArrayList<Vehicle>(List.of(
-            new Vehicle(LocalDate.now(), new VehicleKey(17153, Region.EU), "Obj. 430B", "Object 430B", "ussr", false, "", "mediumTank", 10, true),
-            new Vehicle(LocalDate.now(), new VehicleKey(16913, Region.EU), "Waffenträger auf E 100", "Waffenträger auf E 100", "germany", false, "", "AT-SPG", 10, true),
-            new Vehicle(LocalDate.now(), new VehicleKey(14337, Region.EU), "Object 263B", "Object 263B", "ussr", false, "", "AT-SPG", 10, true),
-            new Vehicle(LocalDate.now(), new VehicleKey(12033, Region.EU), "SU-122-5", "SU-122-5", "ussr", false, "", "AT-SPG", 9, true),
-            new Vehicle(LocalDate.now(), new VehicleKey(56833, Region.EU), "T-44-122", "T-44-122", "ussr", true, "", "AT-SPG", 7, true)
+            new Vehicle(LocalDate.now(), new VehicleKey(17153, RegionType.EU), "Obj. 430B", "Object 430B", "ussr", false, "", "mediumTank", 10, true),
+            new Vehicle(LocalDate.now(), new VehicleKey(16913, RegionType.EU), "Waffenträger auf E 100", "Waffenträger auf E 100", "germany", false, "", "AT-SPG", 10, true),
+            new Vehicle(LocalDate.now(), new VehicleKey(14337, RegionType.EU), "Object 263B", "Object 263B", "ussr", false, "", "AT-SPG", 10, true),
+            new Vehicle(LocalDate.now(), new VehicleKey(12033, RegionType.EU), "SU-122-5", "SU-122-5", "ussr", false, "", "AT-SPG", 9, true),
+            new Vehicle(LocalDate.now(), new VehicleKey(56833, RegionType.EU), "T-44-122", "T-44-122", "ussr", true, "", "AT-SPG", 7, true)
         ));
 
         vehicleRepository.saveAll(missingVehicles);

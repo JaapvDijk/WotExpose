@@ -8,7 +8,7 @@ import com.learningjava.wotapi.infrastructure.model.entity.User;
 import com.learningjava.wotapi.infrastructure.model.entity.Role;
 import com.learningjava.wotapi.infrastructure.repo.RoleRepository;
 import com.learningjava.wotapi.infrastructure.repo.UserRepository;
-import com.learningjava.wotapi.shared.constant.Roles;
+import com.learningjava.wotapi.shared.constant.RoleType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,7 +45,7 @@ public class AuthenticationService {
         user.setFullName(input.getFullName());
         user.setPassword(passwordEncoder.encode(input.getPassword()));
 
-        Role role = roleRepository.findByName(Roles.ROLE_USER)
+        Role role = roleRepository.findByRole(RoleType.USER)
                 .orElseThrow(() -> new RuntimeException("User role not found"));
 
         user.setRoles(new HashSet<>(List.of(role)));

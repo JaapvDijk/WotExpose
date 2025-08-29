@@ -8,7 +8,7 @@ import com.learningjava.wotapi.infrastructure.HttpContext;
 import com.learningjava.wotapi.infrastructure.model.value.StatTotals;
 import com.learningjava.wotapi.application.service.TomatoService;
 import com.learningjava.wotapi.application.service.VehicleService;
-import com.learningjava.wotapi.shared.constant.Region;
+import com.learningjava.wotapi.shared.constant.RegionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -36,7 +36,7 @@ public class PlayerTankStatsFactory {
     }
 
     public PlayerTankStatsResponse from(List<WoTPlayerTankStatResponse> wotTankStats) {
-        Region region = HttpContext.getRegion();
+        RegionType region = HttpContext.getRegion();
 
         var tankStats = tankStatMapper.toPlayerTankStatList(wotTankStats);
         tankStats.sort(comparingInt((PlayerTankStatResponse s) -> s.getAll().getBattles()).reversed());

@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.application.configuration;
 
 import com.learningjava.wotapi.infrastructure.HttpContext;
-import com.learningjava.wotapi.shared.constant.Region;
+import com.learningjava.wotapi.shared.constant.RegionType;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -39,14 +39,14 @@ public class RestClientConfig {
     public class RestClientProxy {
 
         private final String appId;
-        private final Map<Region, RestClient> clientCache = new ConcurrentHashMap<>();
+        private final Map<RegionType, RestClient> clientCache = new ConcurrentHashMap<>();
 
         public RestClientProxy(String appId) {
             this.appId = appId;
         }
 
         public RestClient get() {
-            Region region = HttpContext.getRegion();
+            RegionType region = HttpContext.getRegion();
             if (region == null) {
                 throw new IllegalStateException("No region set in HttpContext.");
             }
@@ -54,11 +54,11 @@ public class RestClientConfig {
             return clientCache.computeIfAbsent(region, this::buildClient);
         }
 
-        private RestClient buildClient(Region region) {
+        private RestClient buildClient(RegionType region) {
             String baseUrl = switch (region) {
-                case Region.EU -> wargamingProperties.getBaseUrlEu();
-                case Region.NA -> wargamingProperties.getBaseUrlNa();
-                case Region.ASIA -> wargamingProperties.getBaseUrlAsia();
+                case RegionType.EU -> wargamingProperties.getBaseUrlEu();
+                case RegionType.NA -> wargamingProperties.getBaseUrlNa();
+                case RegionType.ASIA -> wargamingProperties.getBaseUrlAsia();
                 default -> throw new IllegalArgumentException("Unsupported region: " + region);
             };
 

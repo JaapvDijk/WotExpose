@@ -1,5 +1,6 @@
 package com.learningjava.wotapi.infrastructure.model.entity;
 
+import com.learningjava.wotapi.shared.constant.RoleType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,9 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, unique = true, length = 20)
+    private RoleType role;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();

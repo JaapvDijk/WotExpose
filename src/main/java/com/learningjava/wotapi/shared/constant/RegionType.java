@@ -1,11 +1,13 @@
 package com.learningjava.wotapi.shared.constant;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Arrays;
 
 @Getter
-public enum Region {
+@AllArgsConstructor
+public enum RegionType {
     EU("EU", "Europe"),
     NA("NA", "North America"),
     ASIA("ASIA", "Asia");
@@ -13,12 +15,7 @@ public enum Region {
     private final String code;
     private final String displayName;
 
-    Region(String code, String displayName) {
-        this.code = code;
-        this.displayName = displayName;
-    }
-
-    public static Region fromCode(String code) {
+    public static RegionType fromCode(String code) {
         if (code == null) return null;
 
         return Arrays.stream(values())

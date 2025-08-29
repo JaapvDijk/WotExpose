@@ -2,7 +2,6 @@ package com.learningjava.wotapi.infrastructure.repo;
 
 import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.Vehicle;
 import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.VehicleKey;
-import com.learningjava.wotapi.shared.constant.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

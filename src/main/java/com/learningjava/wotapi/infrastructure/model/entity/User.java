@@ -50,7 +50,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         var roleAuthorities = roles.stream()
-                .map(r -> new SimpleGrantedAuthority(r.getName()));
+                .map(r -> new SimpleGrantedAuthority(r.getRole().getCode()));
 
         var privilegeAuthorities = roles.stream()
                 .flatMap(r -> r.getPrivileges().stream())

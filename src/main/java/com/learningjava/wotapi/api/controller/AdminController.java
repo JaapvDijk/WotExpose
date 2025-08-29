@@ -2,7 +2,7 @@ package com.learningjava.wotapi.api.controller;
 
 import com.learningjava.wotapi.application.importer.TomatoImporter;
 import com.learningjava.wotapi.application.importer.VehicleImporter;
-import com.learningjava.wotapi.shared.constant.Region;
+import com.learningjava.wotapi.shared.constant.RegionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +40,7 @@ public class AdminController {
     }
 
     @GetMapping("/import/vehicle")
-    public ResponseEntity<String> doImportVehicles(Region region)
+    public ResponseEntity<String> doImportVehicles(RegionType region)
     {
         if (Objects.isNull(region)) { ResponseEntity.ok("Missing: 'region' query parameter"); }
 
