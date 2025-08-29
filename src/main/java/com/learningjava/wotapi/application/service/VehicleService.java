@@ -1,8 +1,10 @@
 package com.learningjava.wotapi.application.service;
 
+import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.VehicleKey;
+import com.learningjava.wotapi.shared.constant.Region;
 import com.learningjava.wotapi.shared.exception.VehicleNotFoundException;
 import com.learningjava.wotapi.infrastructure.mapper.VehicleMapper;
-import com.learningjava.wotapi.infrastructure.dto.worldoftanks.WoTVehicleResponse;
+import com.learningjava.wotapi.infrastructure.model.dto.worldoftanks.WoTVehicleResponse;
 import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.Vehicle;
 import com.learningjava.wotapi.infrastructure.repo.VehicleRepository;
 import com.learningjava.wotapi.infrastructure.client.WargamingClient;
@@ -24,8 +26,9 @@ public class VehicleService {
         this.client = client;
     }
 
-    public Vehicle findVehicle(int tankId, String region) {
-        return vehicleRepository.findById_TankIdAndId_Region(tankId, region)
+    public Vehicle findVehicle(int tankId, Region region) {
+        var key = new VehicleKey(tankId, region);
+        return vehicleRepository.findById(key)
                 .orElseThrow(() -> new VehicleNotFoundException("Vehicle not found for:" + tankId + " " + region));
     }
 
@@ -33,7 +36,7 @@ public class VehicleService {
         return client.getVehicles();
     }
 
-    public void saveVehicles(List<WoTVehicleResponse> vehicles, String region)
+    public void saveVehicles(List<WoTVehicleResponse> vehicles, Region region)
     {
         vehicles.forEach(vehicle -> {
             var result = vehicleMapper.toEntity(vehicle);

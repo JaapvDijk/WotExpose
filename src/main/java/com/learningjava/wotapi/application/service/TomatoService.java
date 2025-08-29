@@ -1,10 +1,11 @@
 package com.learningjava.wotapi.application.service;
 
-import com.learningjava.wotapi.infrastructure.dto.tomato.TomatoTankPerformancesResponse;
+import com.learningjava.wotapi.infrastructure.model.dto.tomato.TomatoTankPerformancesResponse;
 import com.learningjava.wotapi.infrastructure.mapper.TankPerformanceMapper;
 import com.learningjava.wotapi.infrastructure.model.entity.tomato.TankPerformance;
 import com.learningjava.wotapi.infrastructure.repo.TomatoTankPerformanceRepository;
 import com.learningjava.wotapi.infrastructure.client.TomatoClient;
+import com.learningjava.wotapi.shared.constant.Region;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -45,7 +46,7 @@ public class TomatoService {
         repo.saveAll(result);
     }
 
-    public TankPerformance getLatestTankPerformance(int tank_id, String region) {
+    public TankPerformance getLatestTankPerformance(int tank_id, Region region) {
         return repo.getLatestByTankIdAndRegionEquals(tank_id, region);
     }
 }

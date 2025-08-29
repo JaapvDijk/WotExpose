@@ -1,7 +1,10 @@
 package com.learningjava.wotapi.infrastructure.model.entity.worldoftanks;
 
+import com.learningjava.wotapi.shared.constant.Region;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +23,9 @@ public class VehicleKey implements Serializable {
     @Column(name = "tank_id")
     private int tankId;
 
-    private String region;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "region", nullable = false, length = 10)
+    private Region region = Region.EU;
 
     @Override
     public boolean equals(Object o) {

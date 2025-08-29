@@ -1,6 +1,8 @@
 package com.learningjava.wotapi.infrastructure.repo;
 
 import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.Vehicle;
+import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.VehicleKey;
+import com.learningjava.wotapi.shared.constant.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
-    Optional<Vehicle> findById_TankIdAndId_Region(int tankId, String region);
+//    Optional<Vehicle> findById_TankIdAndId_Region(int tankId, Region region);
+    Optional<Vehicle> findById(VehicleKey vehicleKey);
 }

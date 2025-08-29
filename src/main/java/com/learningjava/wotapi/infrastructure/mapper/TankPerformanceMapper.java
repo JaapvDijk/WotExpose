@@ -1,6 +1,6 @@
 package com.learningjava.wotapi.infrastructure.mapper;
 
-import com.learningjava.wotapi.infrastructure.dto.tomato.TomatoTankPerformanceResponse;
+import com.learningjava.wotapi.infrastructure.model.dto.tomato.TomatoTankPerformanceResponse;
 import com.learningjava.wotapi.infrastructure.model.entity.tomato.TankPerformance;
 import org.mapstruct.Mapper;
 

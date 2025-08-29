@@ -1,14 +1,16 @@
 package com.learningjava.wotapi.infrastructure;
 
+import com.learningjava.wotapi.shared.constant.Region;
+
 public class HttpContext {
 
-    private static final ThreadLocal<String> regionHolder = new ThreadLocal<>();
+    private static final ThreadLocal<Region> regionHolder = new ThreadLocal<>();
 
-    public static void setRegion(String region) {
-        regionHolder.set(region.toUpperCase());
+    public static void setRegion(Region region) {
+        regionHolder.set(region);
     }
 
-    public static String getRegion() {
+    public static Region getRegion() {
         return regionHolder.get();
     }
 

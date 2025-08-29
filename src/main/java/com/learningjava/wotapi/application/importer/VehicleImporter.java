@@ -2,6 +2,7 @@ package com.learningjava.wotapi.application.importer;
 
 import com.learningjava.wotapi.infrastructure.HttpContext;
 import com.learningjava.wotapi.application.service.VehicleService;
+import com.learningjava.wotapi.shared.constant.Region;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -25,9 +26,9 @@ public class VehicleImporter { //TODO: tests
 
     @Scheduled(cron = "${api.tomato.schedule-expression}")
     public boolean start() {
-        return start("EU") &&
-               start("NA") &&
-               start("ASIA");
+        return start(Region.EU) &&
+               start(Region.NA) &&
+               start(Region.ASIA);
     }
 
     @Profile("!test")
@@ -36,7 +37,7 @@ public class VehicleImporter { //TODO: tests
         return start();
     }
 
-    public boolean start(String region) {
+    public boolean start(Region region) {
         HttpContext.setRegion(region);
 
         logger.info("[Vehicle Import] Started for {}", region);

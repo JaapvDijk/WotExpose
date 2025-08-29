@@ -2,12 +2,13 @@ package com.learningjava.wotapi.application.factory;
 
 import com.learningjava.wotapi.application.dto.PlayerTankStatResponse;
 import com.learningjava.wotapi.application.dto.PlayerTankStatsResponse;
-import com.learningjava.wotapi.infrastructure.dto.worldoftanks.WoTPlayerTankStatResponse;
+import com.learningjava.wotapi.infrastructure.model.dto.worldoftanks.WoTPlayerTankStatResponse;
 import com.learningjava.wotapi.application.mapper.TankStatMapper;
 import com.learningjava.wotapi.infrastructure.HttpContext;
 import com.learningjava.wotapi.infrastructure.model.value.StatTotals;
 import com.learningjava.wotapi.application.service.TomatoService;
 import com.learningjava.wotapi.application.service.VehicleService;
+import com.learningjava.wotapi.shared.constant.Region;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -35,7 +36,7 @@ public class PlayerTankStatsFactory {
     }
 
     public PlayerTankStatsResponse from(List<WoTPlayerTankStatResponse> wotTankStats) {
-        String region = HttpContext.getRegion();
+        Region region = HttpContext.getRegion();
 
         var tankStats = tankStatMapper.toPlayerTankStatList(wotTankStats);
         tankStats.sort(comparingInt((PlayerTankStatResponse s) -> s.getAll().getBattles()).reversed());
