@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.infrastructure.dto.worldoftanks;
+package com.learningjava.wotapi.infrastructure.model.dto.worldoftanks;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

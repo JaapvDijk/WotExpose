@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.infrastructure.dto.tomato;
+package com.learningjava.wotapi.infrastructure.model.dto.tomato;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
