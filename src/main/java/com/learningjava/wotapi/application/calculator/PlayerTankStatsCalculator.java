@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.application.factory;
+package com.learningjava.wotapi.application.calculator;
 
 import com.learningjava.wotapi.application.dto.PlayerTankStatResponse;
 import com.learningjava.wotapi.application.dto.PlayerTankStatsResponse;
@@ -20,22 +20,22 @@ import static java.util.Comparator.comparingInt;
 
 @Component
 @Scope("prototype")
-public class PlayerTankStatsFactory {
+public class PlayerTankStatsCalculator {
 
     private final VehicleService vehicleService;
     private final TomatoService tomatoService;
     private final TankStatMapper tankStatMapper;
-    private final Logger logger = LoggerFactory.getLogger(PlayerTankStatsFactory.class);
+    private final Logger logger = LoggerFactory.getLogger(PlayerTankStatsCalculator.class);
 
-    public PlayerTankStatsFactory(VehicleService vehicleService,
-                                  TomatoService tomatoService,
-                                  TankStatMapper tankStatMapper) {
+    public PlayerTankStatsCalculator(VehicleService vehicleService,
+                                     TomatoService tomatoService,
+                                     TankStatMapper tankStatMapper) {
         this.vehicleService = vehicleService;
         this.tomatoService = tomatoService;
         this.tankStatMapper = tankStatMapper;
     }
 
-    public PlayerTankStatsResponse from(List<WoTPlayerTankStatResponse> wotTankStats) {
+    public PlayerTankStatsResponse calculate(List<WoTPlayerTankStatResponse> wotTankStats) {
         RegionType region = HttpContext.getRegion();
 
         var tankStats = tankStatMapper.toPlayerTankStatList(wotTankStats);
@@ -48,12 +48,12 @@ public class PlayerTankStatsFactory {
         for (PlayerTankStatResponse tank : result.getData()) {
             var battleInfo = tank.getAll();
             var vehicleInfo = vehicleService.findVehicle(tank.getTankId(), region);
-            var tomatoInfo = tomatoService.getLatestTankPerformance(tank.getTankId(), region);
+            var tomatoInfo = tomatoService.findLatestTankPerformance(tank.getTankId(), region);
 
-            if (battleInfo != null) {
+            if (vehicleInfo.isPresent() && tomatoInfo.isPresent()) {
                 totals.addBattles(
-                        vehicleInfo.getType(),
-                        vehicleInfo.getTier(),
+                        vehicleInfo.get().getType(),
+                        vehicleInfo.get().getTier(),
                         battleInfo.getBattles()
                 );
             }
