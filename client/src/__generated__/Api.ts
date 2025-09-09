@@ -44,16 +44,16 @@ export interface LoginResponse {
 }
 
 export interface PageUserResponse {
-  /** @format int32 */
-  totalPages?: number;
   /** @format int64 */
   totalElements?: number;
+  /** @format int32 */
+  totalPages?: number;
+  sort?: SortObject;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
-  sort?: SortObject;
   first?: boolean;
   last?: boolean;
   /** @format int32 */
@@ -63,14 +63,14 @@ export interface PageUserResponse {
 }
 
 export interface PageableObject {
+  sort?: SortObject;
   /** @format int64 */
   offset?: number;
-  sort?: SortObject;
   paged?: boolean;
   /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
   pageNumber?: number;
+  /** @format int32 */
+  pageSize?: number;
   unpaged?: boolean;
 }
 
@@ -250,24 +250,45 @@ export interface PlayerSearchResponse {
   account_id?: number;
 }
 
+export interface PlayerInfoResponse {
+  clientLanguage?: string;
+  /** @format int32 */
+  lastBattleTime?: number;
+  /** @format int32 */
+  accountId?: number;
+  /** @format int32 */
+  createdAt?: number;
+  /** @format int32 */
+  updatedAt?: number;
+  privateInfo?: Private;
+  /** @format int32 */
+  globalRating?: number;
+  /** @format int32 */
+  clanId?: number;
+  statistics?: Statistics;
+  nickname?: string;
+  /** @format int32 */
+  logout_at?: number;
+}
+
 export interface Private {
   restrictions?: Restrictions;
   /** @format int32 */
   gold?: number;
   /** @format int32 */
+  freeXp?: number;
+  banTime?: any;
+  /** @format int32 */
   credits?: number;
+  /** @format int32 */
+  premiumExpiresAt?: number;
   /** @format int32 */
   bonds?: number;
   /** @format int32 */
-  free_xp?: number;
-  ban_time?: any;
-  is_bound_to_phone?: boolean;
-  is_premium?: boolean;
-  /** @format int32 */
-  premium_expires_at?: number;
-  /** @format int32 */
-  battle_life_time?: number;
-  ban_info?: any;
+  battleLifeTime?: number;
+  banInfo?: any;
+  boundToPhone?: boolean;
+  premium?: boolean;
 }
 
 export interface Restrictions {
@@ -277,35 +298,14 @@ export interface Restrictions {
 export interface Statistics {
   clan?: BaseStatistics;
   all?: ExtraStatistics;
+  regularTeam?: ExtraStatistics;
+  /** @format int32 */
+  treesCut?: number;
   company?: BaseStatistics;
+  strongholdSkirmish?: ExtraStatistics;
+  strongholdDefense?: ExtraStatistics;
   historical?: ExtraStatistics;
   team?: ExtraStatistics;
-  regular_team?: ExtraStatistics;
-  /** @format int32 */
-  trees_cut?: number;
-  stronghold_skirmish?: ExtraStatistics;
-  stronghold_defense?: ExtraStatistics;
-}
-
-export interface WoTPlayerInfoResponse {
-  statistics?: Statistics;
-  nickname?: string;
-  client_language?: string;
-  /** @format int32 */
-  last_battle_time?: number;
-  /** @format int32 */
-  account_id?: number;
-  /** @format int32 */
-  created_at?: number;
-  /** @format int32 */
-  updated_at?: number;
-  private?: Private;
-  /** @format int32 */
-  global_rating?: number;
-  /** @format int32 */
-  clan_id?: number;
-  /** @format int32 */
-  logout_at?: number;
 }
 
 import type {
@@ -654,7 +654,7 @@ export class Api<
       },
       params: RequestParams = {},
     ) =>
-      this.request<WoTPlayerInfoResponse, any>({
+      this.request<PlayerInfoResponse, any>({
         path: `/player/info/${id}`,
         method: "GET",
         query: query,
@@ -686,7 +686,7 @@ export class Api<
      */
     doImportVehicles: (
       query: {
-        region: string;
+        region: "EU" | "NA" | "ASIA";
       },
       params: RequestParams = {},
     ) =>

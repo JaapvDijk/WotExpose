@@ -49,13 +49,13 @@ function PlayerInfoPage() {
                     sx={{width:'100%', textAlign:'left', p: 3, mb: 1, borderRadius: 2, background: 'linear-gradient(135deg, #0c4763 0%, #292977 100%)', color: 'white'}}>
                         <Grid>
                             <Typography variant="h6" fontWeight="bold">
-                            {info.nickname}#{info.account_id}
+                            {info.nickname}#{info.accountId}
                             </Typography>
                         </Grid>
 
                         <Grid>
                             <Typography variant="subtitle1">
-                            Rating: <strong>{info.global_rating}</strong> | Winrate: <strong>{winrate}%</strong>
+                            Rating: <strong>{info.globalRating}</strong> | Winrate: <strong>{winrate}%</strong>
                             </Typography>
                         </Grid>
 
@@ -68,11 +68,11 @@ function PlayerInfoPage() {
                     
                     <Grid size={{xs:12, md:3}} sx={{ textAlign: { xs: 'center', md: 'right' }}}>
                         <Typography variant="caption">
-                            Registered: {timestampToDate(info.created_at)}
+                            Registered: {timestampToDate(info.createdAt)}
                         </Typography>
                         <br />
                         <Typography variant="caption">
-                            Last battle: {timestampToDate(info.last_battle_time)}
+                            Last battle: {timestampToDate(info.lastBattleTime)}
                         </Typography>
                     </Grid>
                 </>
