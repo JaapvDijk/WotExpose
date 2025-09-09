@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PlayerSearchResponse {
         private String nickname;
-        @JsonProperty("account_id")
         private int accountId;
 }

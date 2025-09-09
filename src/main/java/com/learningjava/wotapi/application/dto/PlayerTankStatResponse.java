@@ -14,9 +14,7 @@ public class PlayerTankStatResponse {
 //    private WoTPlayerTankStatResponse.StrongholdSkirmish strongholdSkirmish;
 //    @JsonProperty("regular_team")
 //    private MaxStats regularTeam;
-    @JsonProperty("account_id")
     private int accountId;
-    @JsonProperty("max_xp")
     private int maxXp;
     private BaseStatistics company;
     private ExtraStatistics all;
@@ -27,10 +25,7 @@ public class PlayerTankStatResponse {
 //    private MaxStats team;
     private ExtraStatistics globalmap;
     private Object frags;
-    @JsonProperty("mark_of_mastery")
     private int markOfMastery;
-    @JsonProperty("in_garage")
     private Object inGarage;
-    @JsonProperty("tank_id")
     private int tankId;
 }
