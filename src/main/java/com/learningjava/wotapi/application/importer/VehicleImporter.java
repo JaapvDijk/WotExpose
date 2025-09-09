@@ -11,6 +11,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 @Component
@@ -26,9 +27,8 @@ public class VehicleImporter { //TODO: tests
 
     @Scheduled(cron = "${api.tomato.schedule-expression}")
     public boolean start() {
-        return start(RegionType.EU) &&
-               start(RegionType.NA) &&
-               start(RegionType.ASIA);
+        return Arrays.stream(RegionType.values())
+                .allMatch(this::start);
     }
 
     @Profile("!test")

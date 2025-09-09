@@ -2,7 +2,6 @@ package com.learningjava.wotapi.application.service;
 
 import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.VehicleKey;
 import com.learningjava.wotapi.shared.constant.RegionType;
-import com.learningjava.wotapi.shared.exception.VehicleNotFoundException;
 import com.learningjava.wotapi.infrastructure.mapper.VehicleMapper;
 import com.learningjava.wotapi.infrastructure.model.dto.worldoftanks.WoTVehicleResponse;
 import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.Vehicle;
@@ -11,6 +10,7 @@ import com.learningjava.wotapi.infrastructure.client.WargamingClient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleService {
@@ -26,10 +26,9 @@ public class VehicleService {
         this.client = client;
     }
 
-    public Vehicle findVehicle(int tankId, RegionType region) {
+    public Optional<Vehicle> findVehicle(int tankId, RegionType region) {
         var key = new VehicleKey(tankId, region);
-        return vehicleRepository.findById(key)
-                .orElseThrow(() -> new VehicleNotFoundException("Vehicle not found for:" + tankId + " " + region));
+        return vehicleRepository.findById(key);
     }
 
     public List<WoTVehicleResponse> fetchVehicles() {
