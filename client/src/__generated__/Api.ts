@@ -44,16 +44,16 @@ export interface LoginResponse {
 }
 
 export interface PageUserResponse {
-  /** @format int64 */
-  totalElements?: number;
   /** @format int32 */
   totalPages?: number;
-  sort?: SortObject;
+  /** @format int64 */
+  totalElements?: number;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
+  sort?: SortObject;
   first?: boolean;
   last?: boolean;
   /** @format int32 */
@@ -63,14 +63,14 @@ export interface PageUserResponse {
 }
 
 export interface PageableObject {
-  sort?: SortObject;
   /** @format int64 */
   offset?: number;
-  paged?: boolean;
+  sort?: SortObject;
   /** @format int32 */
   pageNumber?: number;
   /** @format int32 */
   pageSize?: number;
+  paged?: boolean;
   unpaged?: boolean;
 }
 
@@ -201,19 +201,19 @@ export interface ExtraStatistics {
 }
 
 export interface PlayerTankStatResponse {
+  /** @format int32 */
+  accountId?: number;
+  /** @format int32 */
+  maxXp?: number;
   company?: BaseStatistics;
   all?: ExtraStatistics;
   globalmap?: ExtraStatistics;
   frags?: any;
   /** @format int32 */
-  account_id?: number;
+  markOfMastery?: number;
+  inGarage?: any;
   /** @format int32 */
-  max_xp?: number;
-  /** @format int32 */
-  mark_of_mastery?: number;
-  in_garage?: any;
-  /** @format int32 */
-  tank_id?: number;
+  tankId?: number;
 }
 
 export interface PlayerTankStatsResponse {
@@ -247,7 +247,7 @@ export interface PlayerSearchRequest {
 export interface PlayerSearchResponse {
   nickname?: string;
   /** @format int32 */
-  account_id?: number;
+  accountId?: number;
 }
 
 export interface PlayerInfoResponse {
@@ -706,7 +706,7 @@ export class Api<
      */
     doImportTomato: (
       query: {
-        region: string;
+        region: "EU" | "NA" | "ASIA";
       },
       params: RequestParams = {},
     ) =>
