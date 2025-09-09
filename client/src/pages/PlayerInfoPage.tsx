@@ -61,7 +61,7 @@ function PlayerInfoPage() {
 
                         <Grid size={12}>
                             <Typography variant="body1" textAlign="left">
-                                This player performs <b style={{ textShadow: `0 0 0.6px black`, color: getWinrateXVMColour(winrate) }}>{getWinrateVerdict(winrate)}</b>, lets see why
+                                This player performs <b style={{ textShadow: '1px 1px 2px rgba(40,40,40,0.8)', color: getWinrateXVMColour(winrate) }}>{getWinrateVerdict(winrate)}</b>, lets see why
                             </Typography>
                         </Grid>
                     </Grid>
