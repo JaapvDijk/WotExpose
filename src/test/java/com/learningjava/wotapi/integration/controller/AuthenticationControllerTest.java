@@ -6,7 +6,7 @@ import com.learningjava.wotapi.application.dto.LoginRequest;
 import com.learningjava.wotapi.application.dto.RegisterUserRequest;
 import com.learningjava.wotapi.application.service.JwtService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,8 +35,8 @@ public class AuthenticationControllerTest {
     @Autowired
     private DbSeeder dbSeeder;
 
-    @BeforeEach
-    void setup() {
+    @BeforeAll
+    static void setup(@Autowired DbSeeder dbSeeder) {
         dbSeeder.init();
     }
 
