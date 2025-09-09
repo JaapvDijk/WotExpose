@@ -67,7 +67,7 @@ public class PlayerControllerTests {
                         .param("name", "AnyName")
                         .param("region", "SA")) // Invalid
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("Region must be either 'EU', 'NA' or 'ASIA'")));
+                .andExpect(content().string(containsString("Unknown region code")));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class PlayerControllerTests {
         mockMvc.perform(get("/player/info/{id}", playerId)
                         .param("region", "EU"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("account_id").value(playerId))
+                .andExpect(jsonPath("accountId").value(playerId))
                 .andExpect(jsonPath("nickname").value(playerName));
     }
 
