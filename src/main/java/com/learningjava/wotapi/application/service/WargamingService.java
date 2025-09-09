@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.application.service;
 
 import com.learningjava.wotapi.application.dto.PlayerInfoResponse;
-import com.learningjava.wotapi.application.factory.PlayerTankStatsFactory;
+import com.learningjava.wotapi.application.calculator.PlayerTankStatsCalculator;
 import com.learningjava.wotapi.application.mapper.PlayerMapper;
 import com.learningjava.wotapi.application.dto.PlayerSearchResponse;
 import com.learningjava.wotapi.application.dto.PlayerTankStatsResponse;
@@ -16,14 +16,14 @@ public class WargamingService {
 
     private final WargamingClient client;
     private final PlayerMapper playerMapper;
-    private final ObjectProvider<PlayerTankStatsFactory> factoryProvider;
+    private final ObjectProvider<PlayerTankStatsCalculator> statsCalculatorProvider;
 
     public WargamingService(WargamingClient client,
                             PlayerMapper mapper,
-                            ObjectProvider<PlayerTankStatsFactory> playerTankStatsFactory) {
+                            ObjectProvider<PlayerTankStatsCalculator> statsCalculatorProvider) {
         this.client = client;
         this.playerMapper = mapper;
-        this.factoryProvider = playerTankStatsFactory;
+        this.statsCalculatorProvider = statsCalculatorProvider;
     }
 
     public List<PlayerSearchResponse> getPlayers(String name) {
@@ -41,8 +41,8 @@ public class WargamingService {
     public PlayerTankStatsResponse getPlayerTankStats(int id) {
         var result = client.getPlayerTanks(id);
 
-        var playerTankStatsFactory = factoryProvider.getObject();
+        var statsCalculator = statsCalculatorProvider.getObject();
 
-        return playerTankStatsFactory.from(result);
+        return statsCalculator.calculate(result);
     }
 }

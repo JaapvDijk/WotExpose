@@ -23,12 +23,12 @@ public class TomatoService {
         this.mapper = mapper;
     }
 
-    public TomatoTankPerformancesResponse fetchTankPerformance(String region)
+    public TomatoTankPerformancesResponse fetchTankPerformance(RegionType region)
     {
         return client.getTankPerformance(region);
     }
 
-    public void saveTankPerformance(TomatoTankPerformancesResponse tankPerformanceResponse, String region)
+    public void saveTankPerformance(TomatoTankPerformancesResponse tankPerformanceResponse, RegionType region)
     {
         var localDate = LocalDate.now();
         var alreadyImportedToday = repo.existsByImportDateAndRegionEquals(localDate, region);

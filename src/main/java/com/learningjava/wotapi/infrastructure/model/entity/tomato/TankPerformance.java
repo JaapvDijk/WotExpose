@@ -1,5 +1,6 @@
 package com.learningjava.wotapi.infrastructure.model.entity.tomato;
 
+import com.learningjava.wotapi.shared.constant.RegionType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ public class TankPerformance {
     @Column(name = "import_date")
     private LocalDate importDate;
 
-    private String region;
+    private RegionType region;
     private Date updated;
 
     @Column(name = "tank_id")

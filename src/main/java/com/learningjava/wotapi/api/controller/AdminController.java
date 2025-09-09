@@ -28,7 +28,7 @@ public class AdminController {
     }
 
     @GetMapping("/import/tomato")
-    public ResponseEntity<String> doImportTomato(String region)
+    public ResponseEntity<String> doImportTomato(RegionType region)
     {
         if (Objects.isNull(region)) { ResponseEntity.ok("Missing: 'region' query parameter"); }
 

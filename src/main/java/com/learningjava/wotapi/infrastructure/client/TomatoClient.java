@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.infrastructure.model.dto.tomato.TomatoTankPerformancesResponse;
+import com.learningjava.wotapi.shared.constant.RegionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,7 +29,7 @@ public class TomatoClient {
         this.objectMapper = objectMapper;
     }
 
-    public TomatoTankPerformancesResponse getTankPerformance(String region) {
+    public TomatoTankPerformancesResponse getTankPerformance(RegionType region) {
         try {
             JsonNode root = retryTemplate.execute(
                     context -> restClient.get()
