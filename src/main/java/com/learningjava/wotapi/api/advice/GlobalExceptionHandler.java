@@ -1,4 +1,4 @@
-package com.learningjava.wotapi.api.exception;
+package com.learningjava.wotapi.api.advice;
 
 
 import com.learningjava.wotapi.shared.exception.PlayerNotFoundException;
