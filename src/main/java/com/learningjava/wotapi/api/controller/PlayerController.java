@@ -2,6 +2,8 @@ package com.learningjava.wotapi.api.controller;
 
 import com.learningjava.wotapi.application.dto.*;
 
+import com.learningjava.wotapi.application.dto.PlayerSearchRequest;
+import com.learningjava.wotapi.application.dto.PlayerTankStatsResponse;
 import com.learningjava.wotapi.application.service.WargamingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
