@@ -9,6 +9,7 @@ import com.learningjava.wotapi.shared.constant.RegionType;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class TomatoService {
@@ -46,8 +47,8 @@ public class TomatoService {
         repo.saveAll(result);
     }
 
-    public TankPerformance getLatestTankPerformance(int tank_id, RegionType region) {
-        return repo.getLatestByTankIdAndRegionEquals(tank_id, region);
+    public Optional<TankPerformance> findLatestTankPerformance(int tank_id, RegionType region) {
+        return repo.findLatestByTankIdAndRegionEquals(tank_id, region);
     }
 }
 
