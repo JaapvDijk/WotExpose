@@ -76,7 +76,7 @@ function Banner() {
         sx={{ width: 500, maxWidth: "90%", margin: "0 auto" }}
         renderOption={(props, option) => (
           <Link
-            to={{ pathname: "info/" + option.account_id }}
+            to={{ pathname: "info/" + option.accountId }}
             state={option}
             style={{
               textDecoration: "none",
@@ -84,9 +84,9 @@ function Banner() {
               fontSize: "15px"
             }}
           >
-            <ListItem {...props} key={option.account_id}>
+            <ListItem {...props} key={option.accountId}>
               <ListItemText
-                primary={`${option.nickname} (${option.account_id})`}
+                primary={`${option.nickname} (${option.accountId})`}
               />
             </ListItem>
           </Link>
