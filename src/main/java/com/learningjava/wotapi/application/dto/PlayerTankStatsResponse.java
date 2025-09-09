@@ -1,6 +1,6 @@
 package com.learningjava.wotapi.application.dto;
 
-import com.learningjava.wotapi.infrastructure.model.value.StatTotals;
+import com.learningjava.wotapi.infrastructure.client.tomato.dto.value.StatTotals;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

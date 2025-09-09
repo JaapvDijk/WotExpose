@@ -1,8 +1,8 @@
 package com.learningjava.wotapi.integration.importer;
 
 import com.learningjava.wotapi.application.importer.TomatoImporter;
-import com.learningjava.wotapi.infrastructure.model.entity.tomato.TankPerformance;
-import com.learningjava.wotapi.infrastructure.repo.TomatoTankPerformanceRepository;
+import com.learningjava.wotapi.infrastructure.persistance.entity.tomato.TankPerformance;
+import com.learningjava.wotapi.infrastructure.persistance.repo.TomatoTankPerformanceRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

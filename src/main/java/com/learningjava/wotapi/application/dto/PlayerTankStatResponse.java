@@ -1,8 +1,7 @@
 package com.learningjava.wotapi.application.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.learningjava.wotapi.infrastructure.model.shared.BaseStatistics;
-import com.learningjava.wotapi.infrastructure.model.shared.ExtraStatistics;
+import com.learningjava.wotapi.infrastructure.client.wargaming.dto.shared.BaseStatistics;
+import com.learningjava.wotapi.infrastructure.client.wargaming.dto.shared.ExtraStatistics;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

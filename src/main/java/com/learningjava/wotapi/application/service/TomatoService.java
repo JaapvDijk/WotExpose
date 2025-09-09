@@ -1,10 +1,10 @@
 package com.learningjava.wotapi.application.service;
 
-import com.learningjava.wotapi.infrastructure.model.dto.tomato.TomatoTankPerformancesResponse;
-import com.learningjava.wotapi.infrastructure.mapper.TankPerformanceMapper;
-import com.learningjava.wotapi.infrastructure.model.entity.tomato.TankPerformance;
-import com.learningjava.wotapi.infrastructure.repo.TomatoTankPerformanceRepository;
-import com.learningjava.wotapi.infrastructure.client.TomatoClient;
+import com.learningjava.wotapi.infrastructure.client.tomato.dto.TomatoTankPerformancesResponse;
+import com.learningjava.wotapi.infrastructure.persistance.mapper.TankPerformanceMapper;
+import com.learningjava.wotapi.infrastructure.persistance.entity.tomato.TankPerformance;
+import com.learningjava.wotapi.infrastructure.persistance.repo.TomatoTankPerformanceRepository;
+import com.learningjava.wotapi.infrastructure.client.tomato.TomatoClient;
 import com.learningjava.wotapi.shared.constant.RegionType;
 import org.springframework.stereotype.Service;
 

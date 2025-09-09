@@ -3,7 +3,7 @@ package com.learningjava.wotapi.application.service;
 import com.learningjava.wotapi.application.mapper.UserMapper;
 import com.learningjava.wotapi.application.dto.UserRequest;
 import com.learningjava.wotapi.application.dto.UserResponse;
-import com.learningjava.wotapi.infrastructure.repo.UserRepository;
+import com.learningjava.wotapi.infrastructure.persistance.repo.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

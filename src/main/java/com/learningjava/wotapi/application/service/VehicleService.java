@@ -1,12 +1,12 @@
 package com.learningjava.wotapi.application.service;
 
-import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.VehicleKey;
+import com.learningjava.wotapi.infrastructure.persistance.entity.worldoftanks.VehicleKey;
 import com.learningjava.wotapi.shared.constant.RegionType;
-import com.learningjava.wotapi.infrastructure.mapper.VehicleMapper;
-import com.learningjava.wotapi.infrastructure.model.dto.worldoftanks.WoTVehicleResponse;
-import com.learningjava.wotapi.infrastructure.model.entity.worldoftanks.Vehicle;
-import com.learningjava.wotapi.infrastructure.repo.VehicleRepository;
-import com.learningjava.wotapi.infrastructure.client.WargamingClient;
+import com.learningjava.wotapi.infrastructure.persistance.mapper.VehicleMapper;
+import com.learningjava.wotapi.infrastructure.client.wargaming.dto.WoTVehicleResponse;
+import com.learningjava.wotapi.infrastructure.persistance.entity.worldoftanks.Vehicle;
+import com.learningjava.wotapi.infrastructure.persistance.repo.VehicleRepository;
+import com.learningjava.wotapi.infrastructure.client.wargaming.WargamingClient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.learningjava.wotapi.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learningjava.wotapi.infrastructure.DbSeeder;
+import com.learningjava.wotapi.infrastructure.persistance.DbSeeder;
 import com.learningjava.wotapi.application.dto.LoginRequest;
 import com.learningjava.wotapi.application.dto.RegisterUserRequest;
 import com.learningjava.wotapi.application.service.JwtService;

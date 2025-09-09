@@ -1,10 +1,9 @@
 package com.learningjava.wotapi;
 
-import com.learningjava.wotapi.infrastructure.DbSeeder;
+import com.learningjava.wotapi.infrastructure.persistance.DbSeeder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication

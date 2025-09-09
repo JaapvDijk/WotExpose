@@ -2,10 +2,10 @@ package com.learningjava.wotapi.application.calculator;
 
 import com.learningjava.wotapi.application.dto.PlayerTankStatResponse;
 import com.learningjava.wotapi.application.dto.PlayerTankStatsResponse;
-import com.learningjava.wotapi.infrastructure.model.dto.worldoftanks.WoTPlayerTankStatResponse;
+import com.learningjava.wotapi.infrastructure.client.wargaming.dto.WoTPlayerTankStatResponse;
 import com.learningjava.wotapi.application.mapper.TankStatMapper;
 import com.learningjava.wotapi.infrastructure.HttpContext;
-import com.learningjava.wotapi.infrastructure.model.value.StatTotals;
+import com.learningjava.wotapi.infrastructure.client.tomato.dto.value.StatTotals;
 import com.learningjava.wotapi.application.service.TomatoService;
 import com.learningjava.wotapi.application.service.VehicleService;
 import com.learningjava.wotapi.shared.constant.RegionType;

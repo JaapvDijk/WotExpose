@@ -5,7 +5,7 @@ import com.learningjava.wotapi.application.calculator.PlayerTankStatsCalculator;
 import com.learningjava.wotapi.application.mapper.PlayerMapper;
 import com.learningjava.wotapi.application.dto.PlayerSearchResponse;
 import com.learningjava.wotapi.application.dto.PlayerTankStatsResponse;
-import com.learningjava.wotapi.infrastructure.client.WargamingClient;
+import com.learningjava.wotapi.infrastructure.client.wargaming.WargamingClient;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Service;
 
