@@ -32,7 +32,7 @@ public class VehicleImporter { //TODO: tests
     }
 
     @Profile("!test")
-    @EventListener(ApplicationReadyEvent.class)
+//    @EventListener(ApplicationReadyEvent.class)
     public boolean startupImport() {
         return start();
     }
