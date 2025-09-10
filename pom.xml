@@ -195,7 +195,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.3</version>
                 <configuration>
-                    <excludedGroups>excludedTests</excludedGroups>
+                    <excludedGroups>callsExternalApi,</excludedGroups>
                 </configuration>
             </plugin>
         </plugins>

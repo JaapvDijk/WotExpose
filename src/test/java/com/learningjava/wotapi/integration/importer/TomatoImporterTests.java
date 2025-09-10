@@ -3,6 +3,7 @@ package com.learningjava.wotapi.integration.importer;
 import com.learningjava.wotapi.application.importer.TomatoImporter;
 import com.learningjava.wotapi.infrastructure.persistance.entity.tomato.TankPerformance;
 import com.learningjava.wotapi.infrastructure.persistance.repo.TomatoTankPerformanceRepository;
+import com.learningjava.wotapi.shared.constant.RegionType;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
@@ -12,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@Tag("excludedTests") //because of the often invalid ID (in the base tomato URL) it fails often
+@Tag("failsOften") //because of the often invalid ID (in the base tomato URL, need to scrape it)
 @ActiveProfiles("test")
 @Transactional
 public class TomatoImporterTests {
@@ -33,9 +34,10 @@ public class TomatoImporterTests {
         Assertions.assertFalse(tankPerformances.isEmpty());
 
         var regions = tankPerformances.stream().map(TankPerformance::getRegion).toList();
-        Assertions.assertTrue(regions.contains("EU"));
-        Assertions.assertTrue(regions.contains("NA"));
-        Assertions.assertTrue(regions.contains("ASIA"));
+
+        for (RegionType region : RegionType.values()) {
+            Assertions.assertTrue(regions.contains(region), "Missing region: " + region);
+        }
 
         tankPerformances.forEach(p -> {
             Assertions.assertNotNull(p.getImportDate());

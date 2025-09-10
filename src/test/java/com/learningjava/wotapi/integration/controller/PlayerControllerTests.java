@@ -1,6 +1,7 @@
 package com.learningjava.wotapi.integration.controller;
 
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
+@Tag("callsExternalApi")
 @AutoConfigureMockMvc
 @Transactional
 public class PlayerControllerTests {
