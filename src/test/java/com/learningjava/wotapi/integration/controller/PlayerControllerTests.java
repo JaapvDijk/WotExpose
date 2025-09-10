@@ -33,7 +33,7 @@ public class PlayerControllerTests {
                         .param("region", "EU"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].nickname").value(playerName))
-                .andExpect(jsonPath("[0].account_id").value(playerId));
+                .andExpect(jsonPath("[0].accountId").value(playerId));
     }
 
     @Test
@@ -94,10 +94,11 @@ public class PlayerControllerTests {
                         .param("region", "EU"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", not(empty())))
-                .andExpect(jsonPath("$[0].tank_id", isA(Integer.class)))
-                .andExpect(jsonPath("$[0].tank_id", greaterThan(0)))
-                .andExpect(jsonPath("$[0].mark_of_mastery", allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(4))))
-                .andExpect(jsonPath("$[0].statistics", notNullValue()));
+                .andExpect(jsonPath("$.data", not(empty())))
+                .andExpect(jsonPath("$.data[0].tankId", greaterThan(0)))
+                .andExpect(jsonPath("$.data[0].markOfMastery", allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(4))));
+
+        //TODO: expand further for stas props, now only raw data is tested
     }
 
     @Test

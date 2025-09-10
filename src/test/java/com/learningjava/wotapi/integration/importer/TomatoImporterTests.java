@@ -5,12 +5,14 @@ import com.learningjava.wotapi.infrastructure.persistance.entity.tomato.TankPerf
 import com.learningjava.wotapi.infrastructure.persistance.repo.TomatoTankPerformanceRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
+@Tag("excludedTests") //because of the often invalid ID (in the base tomato URL) it fails often
 @ActiveProfiles("test")
 @Transactional
 public class TomatoImporterTests {
