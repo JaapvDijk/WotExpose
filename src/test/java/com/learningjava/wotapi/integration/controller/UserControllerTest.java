@@ -5,6 +5,7 @@ import com.learningjava.wotapi.infrastructure.persistance.DbSeeder;
 import com.learningjava.wotapi.application.dto.UserRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Import(DbSeeder.class)
 @WithMockUser(username = "admin", roles = {"ADMIN"})
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -36,7 +38,7 @@ public class UserControllerTest {
     private DbSeeder dbSeeder;
 
     @BeforeAll
-    static void setup(@Autowired DbSeeder dbSeeder) {
+    void setup(@Autowired DbSeeder dbSeeder) {
         dbSeeder.init();
     }
 

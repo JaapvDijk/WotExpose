@@ -8,6 +8,7 @@ import com.learningjava.wotapi.application.service.JwtService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AuthenticationControllerTest {
 
     @Autowired
@@ -36,7 +38,7 @@ public class AuthenticationControllerTest {
     private DbSeeder dbSeeder;
 
     @BeforeAll
-    static void setup(@Autowired DbSeeder dbSeeder) {
+    void setup(@Autowired DbSeeder dbSeeder) {
         dbSeeder.init();
     }
 
