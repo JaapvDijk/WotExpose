@@ -38,7 +38,7 @@ public class AuthenticationControllerTest {
     private DbSeeder dbSeeder;
 
     @BeforeAll
-    void setup(@Autowired DbSeeder dbSeeder) {
+    void setup() {
         dbSeeder.init();
     }
 
