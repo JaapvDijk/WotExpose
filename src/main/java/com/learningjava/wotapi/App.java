@@ -17,6 +17,6 @@ public class App {
         var dbSeeder = context.getBean(DbSeeder.class);
         dbSeeder.init();
 
-        //CHECK: https://blog.tericcabrel.com/handle-database-migrations-in-a-springboot-application-with-flyway/
+        //CHECK:https://blog.tericcabrel.com/handle-database-migrations-in-a-springboot-application-with-flyway/
     }
 }
