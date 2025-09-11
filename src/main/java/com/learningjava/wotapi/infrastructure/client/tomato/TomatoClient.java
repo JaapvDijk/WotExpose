@@ -43,7 +43,7 @@ public class TomatoClient {
                                     logger.error("[Tomato Import] HTTP Error {} calling {}", response.getStatusCode(), request.getURI()))
                             .body(JsonNode.class),
                     e -> {
-                        logger.error("[Tomato Import] All retry attempts failed for region '{}'", region, e);
+                        logger.error("[Tomato Import] All retry attempts failed for region '{}', error: {}", region, e);
                         return null;
                     });
 

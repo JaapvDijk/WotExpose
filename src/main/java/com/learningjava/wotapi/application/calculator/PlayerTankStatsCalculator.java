@@ -25,7 +25,6 @@ public class PlayerTankStatsCalculator {
     private final VehicleService vehicleService;
     private final TomatoService tomatoService;
     private final TankStatMapper tankStatMapper;
-    private final Logger logger = LoggerFactory.getLogger(PlayerTankStatsCalculator.class);
 
     public PlayerTankStatsCalculator(VehicleService vehicleService,
                                      TomatoService tomatoService,

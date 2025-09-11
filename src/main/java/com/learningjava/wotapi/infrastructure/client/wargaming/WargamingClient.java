@@ -21,7 +21,6 @@ public class WargamingClient {
 
     private final WargamingRestClientProxy restClient;
     private final ObjectMapper objectMapper;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //TODO: add access token for private info .queryParam("access_token", access_token)
     public WargamingClient(@Qualifier("wargamingRestClient") WargamingRestClientProxy restClient,
@@ -43,7 +42,6 @@ public class WargamingClient {
 
         var dataNode = getData(root);
 
-//        return objectMapper.convertValue(dataNode, WoTPlayersResponse.class);
         return objectMapper.convertValue(dataNode, new TypeReference<>() {});
     }
 

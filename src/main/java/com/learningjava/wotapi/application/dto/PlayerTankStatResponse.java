@@ -10,18 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PlayerTankStatResponse {
-//    private WoTPlayerTankStatResponse.StrongholdSkirmish strongholdSkirmish;
-//    @JsonProperty("regular_team")
-//    private MaxStats regularTeam;
     private int accountId;
     private int maxXp;
     private BaseStatistics company;
     private ExtraStatistics all;
-//    @JsonProperty("stronghold_defense")
-//    private StrongholdDefense strongholdDefense;
-//    @JsonProperty("max_frags")
-//    private int maxFrags;
-//    private MaxStats team;
     private ExtraStatistics globalmap;
     private Object frags;
     private int markOfMastery;

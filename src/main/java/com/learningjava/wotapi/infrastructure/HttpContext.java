@@ -4,6 +4,8 @@ import com.learningjava.wotapi.shared.constant.RegionType;
 
 public class HttpContext {
 
+    private HttpContext() {}
+
     private static final ThreadLocal<RegionType> regionHolder = new ThreadLocal<>();
 
     public static void setRegion(RegionType region) {
