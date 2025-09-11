@@ -12,19 +12,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import com.learningjava.wotapi.application.configuration.RestClientConfig.RestClientProxy;
+import com.learningjava.wotapi.application.configuration.RestClientConfig.WargamingRestClientProxy;
 
 import java.util.List;
 
 @Component
 public class WargamingClient {
 
-    private final RestClientProxy restClient;
+    private final WargamingRestClientProxy restClient;
     private final ObjectMapper objectMapper;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //TODO: add access token for private info .queryParam("access_token", access_token)
-    public WargamingClient(@Qualifier("wargamingRestClient") RestClientProxy restClient,
+    public WargamingClient(@Qualifier("wargamingRestClient") WargamingRestClientProxy restClient,
                            ObjectMapper objectMapper) {
         this.restClient = restClient;
         this.objectMapper = objectMapper;
