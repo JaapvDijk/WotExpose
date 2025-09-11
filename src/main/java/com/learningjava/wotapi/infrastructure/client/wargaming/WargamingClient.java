@@ -32,7 +32,7 @@ public class WargamingClient {
 
     //Accounts
     public List<WoTPlayerResponse> getPlayers(String name) {
-        var root = restClient.getRequest()
+        var root = restClient.get()
                 .uri(builder ->
                         builder.path("/account/list/")
                                 .queryParam("application_id", "{application_id}")
@@ -48,7 +48,7 @@ public class WargamingClient {
     }
 
     public WoTPlayerInfoResponse getPlayerInfo(int accountId) {
-        var root = restClient.getRequest()
+        var root = restClient.get()
                 .uri(builder ->
                         builder.path("/account/info/")
                                 .queryParam("application_id", "{application_id}")
@@ -63,7 +63,7 @@ public class WargamingClient {
     }
 
     public List<WoTPlayerTankStatResponse> getPlayerTanks(int accountId) {
-        var root = restClient.getRequest()
+        var root = restClient.get()
                 .uri(builder ->
                         builder.path("/tanks/stats/")
                                 .queryParam("application_id", "{application_id}")
@@ -78,7 +78,7 @@ public class WargamingClient {
     }
 
     public List<WoTVehicleResponse> getVehicles() {
-        var root = restClient.getRequest()
+        var root = restClient.get()
                 .uri(builder ->
                         builder.path("/encyclopedia/vehicles/")
                                 .queryParam("application_id", "{application_id}")
