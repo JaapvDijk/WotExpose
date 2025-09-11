@@ -12,8 +12,6 @@ import java.util.Map;
 @RequestMapping("/heartbeat")
 public class HeartbeatController {
 
-    public HeartbeatController() { }
-
     @GetMapping("")
     public ResponseEntity<Map<String, String>> get()
     {

@@ -37,7 +37,7 @@ public class DbSeeder {
     @Getter
     private User normalUser;
     @Getter
-    private static final String normalUserPassword = "user123";
+    private static final String NORMAL_USER_PASSWORD = "user123";
 
     public DbSeeder(UserRepository userRepository,
                     RoleRepository roleRepository,
@@ -55,6 +55,10 @@ public class DbSeeder {
         addUsers();
 
         addMissingVehicles();
+    }
+
+    public static String getNormalUserPassword() {
+        return NORMAL_USER_PASSWORD;
     }
 
     private void addUsers() {
@@ -81,7 +85,7 @@ public class DbSeeder {
         User admin = new User();
         admin.setFullName("admin");
         admin.setEmail("admin@wotapi.nl");
-        admin.setPassword(passwordEncoder.encode(normalUserPassword));
+        admin.setPassword(passwordEncoder.encode(NORMAL_USER_PASSWORD));
         admin.setRoles(Set.of(adminRole));
         adminUser = userRepository.save(admin);
 
