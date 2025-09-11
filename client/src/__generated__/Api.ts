@@ -44,16 +44,16 @@ export interface LoginResponse {
 }
 
 export interface PageUserResponse {
-  /** @format int32 */
-  totalPages?: number;
   /** @format int64 */
   totalElements?: number;
+  /** @format int32 */
+  totalPages?: number;
+  sort?: SortObject;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
-  sort?: SortObject;
   first?: boolean;
   last?: boolean;
   /** @format int32 */
@@ -63,13 +63,13 @@ export interface PageUserResponse {
 }
 
 export interface PageableObject {
+  sort?: SortObject;
   /** @format int64 */
   offset?: number;
-  sort?: SortObject;
-  /** @format int32 */
-  pageNumber?: number;
   /** @format int32 */
   pageSize?: number;
+  /** @format int32 */
+  pageNumber?: number;
   paged?: boolean;
   unpaged?: boolean;
 }
@@ -287,8 +287,8 @@ export interface Private {
   /** @format int32 */
   battleLifeTime?: number;
   banInfo?: any;
-  boundToPhone?: boolean;
   premium?: boolean;
+  boundToPhone?: boolean;
 }
 
 export interface Restrictions {
@@ -670,7 +670,7 @@ export class Api<
      * @request GET:/heartbeat
      */
     get: (params: RequestParams = {}) =>
-      this.request<string, any>({
+      this.request<Record<string, string>, any>({
         path: `/heartbeat`,
         method: "GET",
         ...params,
