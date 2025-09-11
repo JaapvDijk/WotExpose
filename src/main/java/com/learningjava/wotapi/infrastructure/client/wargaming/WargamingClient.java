@@ -62,21 +62,6 @@ public class WargamingClient {
         return objectMapper.convertValue(dataNode, WoTPlayerInfoResponse.class);
     }
 
-//    public WoTPlayerTanksResponse getPlayerTanks(int accountId) {
-//        var root = restClient.getRequest()
-//                .uri(builder ->
-//                        builder.path("/account/tanks/")
-//                                .queryParam("application_id", "{application_id}")
-//                                .queryParam("account_id", accountId)
-//                                .build())
-//                .retrieve()
-//                .body(JsonNode.class);
-//
-//        var dataNode = getData(accountId, root);
-//
-//        return objectMapper.convertValue(dataNode, WoTPlayerTanksResponse.class);
-//    }
-
     public List<WoTPlayerTankStatResponse> getPlayerTanks(int accountId) {
         var root = restClient.getRequest()
                 .uri(builder ->
