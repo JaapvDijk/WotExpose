@@ -16,7 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 @Tag("failsOften") //because of the often invalid ID (in the base tomato URL, need to scrape it)
 @ActiveProfiles("test")
 @Transactional
-public class TomatoImporterTests {
+class TomatoImporterTests {
 
     @Autowired
     private TomatoImporter importer;

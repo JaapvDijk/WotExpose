@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class AuthenticationControllerTest {
+class AuthenticationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

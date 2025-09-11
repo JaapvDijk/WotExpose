@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import(DbSeeder.class)
 @WithMockUser(username = "admin", roles = {"ADMIN"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class UserControllerTest {
+class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 

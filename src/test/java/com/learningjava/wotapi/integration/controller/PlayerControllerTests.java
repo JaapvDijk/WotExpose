@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.*;
 @Tag("callsExternalApi")
 @AutoConfigureMockMvc
 @Transactional
-public class PlayerControllerTests {
+class PlayerControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
@@ -29,7 +29,7 @@ public class PlayerControllerTests {
     private final String playerName = "iyouxin";
 
     @Test
-    public void testSearch_withValidInput_returnsOk() throws Exception {
+    void testSearch_withValidInput_returnsOk() throws Exception {
        mockMvc.perform(get("/player/search")
                         .param("name", playerName)
                         .param("region", "EU"))
