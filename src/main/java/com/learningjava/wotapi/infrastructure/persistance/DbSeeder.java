@@ -37,7 +37,7 @@ public class DbSeeder {
     @Getter
     private User normalUser;
     @Getter
-    private final String normalUserPassword = "user123";
+    private static final String normalUserPassword = "user123";
 
     public DbSeeder(UserRepository userRepository,
                     RoleRepository roleRepository,
