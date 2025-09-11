@@ -73,7 +73,7 @@ public class PlayerControllerTests {
     }
 
     @Test
-    public void testGetInfo_withValidId_returnsOk() throws Exception {
+    void testGetInfo_withValidId_returnsOk() throws Exception {
         mockMvc.perform(get("/player/info/{id}", playerId)
                         .param("region", "EU"))
                 .andExpect(status().isOk())
@@ -82,7 +82,7 @@ public class PlayerControllerTests {
     }
 
     @Test
-    public void testGetInfo_withUnknownId_returnsNotFound() throws Exception {
+    void testGetInfo_withUnknownId_returnsNotFound() throws Exception {
         int unknownId = 123456789;
 
         mockMvc.perform(get("/player/info/{id}", unknownId)
@@ -91,7 +91,7 @@ public class PlayerControllerTests {
     }
 
     @Test
-    public void testGetTanks_withValidId_returnsOk() throws Exception {
+    void testGetTanks_withValidId_returnsOk() throws Exception {
         mockMvc.perform(get("/player/tanks/{id}", playerId)
                         .param("region", "EU"))
                 .andExpect(status().isOk())
@@ -104,7 +104,7 @@ public class PlayerControllerTests {
     }
 
     @Test
-    public void testGetTanks_withUnknownId_returnsNotFound() throws Exception {
+    void testGetTanks_withUnknownId_returnsNotFound() throws Exception {
         int unknownId = 123456789;
 
         mockMvc.perform(get("/player/tanks/{id}", unknownId)
