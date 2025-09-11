@@ -1,10 +1,12 @@
 package com.learningjava.wotapi.infrastructure.client.tomato.dto;
 
+import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Generated("")
 @Getter
 @Setter
 @NoArgsConstructor

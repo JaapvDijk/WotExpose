@@ -4,8 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Generated;
 import java.util.ArrayList;
 
+@Generated("")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor

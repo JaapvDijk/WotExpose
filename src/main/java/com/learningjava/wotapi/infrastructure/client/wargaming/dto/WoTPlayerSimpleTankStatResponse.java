@@ -4,6 +4,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Generated;
+
+@Generated("")
 @Data
 @NoArgsConstructor
 public class WoTPlayerSimpleTankStatResponse {
