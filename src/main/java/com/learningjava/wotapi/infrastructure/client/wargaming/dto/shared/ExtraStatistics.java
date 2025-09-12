@@ -1,7 +1,13 @@
 package com.learningjava.wotapi.infrastructure.client.wargaming.dto.shared;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
+@NoArgsConstructor
 public class ExtraStatistics extends BaseStatistics {
     @JsonProperty("avg_damage_blocked")
     private double avgDamageBlocked;

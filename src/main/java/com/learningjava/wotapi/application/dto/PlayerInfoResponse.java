@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public final class PlayerInfoResponse {
     private String clientLanguage;
     private int lastBattleTime;

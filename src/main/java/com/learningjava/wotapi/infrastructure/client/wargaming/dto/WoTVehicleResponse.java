@@ -1,17 +1,15 @@
 package com.learningjava.wotapi.infrastructure.client.wargaming.dto;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.annotation.Generated;
 
 @Generated("")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WoTVehicleResponse {
     private String name;
     @JsonProperty("short_name")
@@ -24,17 +22,16 @@ public class WoTVehicleResponse {
     private int tier;
     @JsonProperty("tank_id")
     private int tankId;
+    private Images images;
 
-//    images
-//
-//    Image links
-//    images.big_icon	string
-//
-//    URL to 160 x 100 px image of vehicle
-//    images.contour_icon	string
-//
-//    URL to outline image of vehicle
-//    images.small_icon	string
-//
-//    URL to 124 x 31 px image of vehicle
+    @Data
+    @NoArgsConstructor
+    public static class Images{
+        @JsonProperty("small_icon")
+        private String smallIcon;
+        @JsonProperty("contour_icon")
+        private String contourIcon;
+        @JsonProperty("big_icon")
+        private String bigIcon;
+    }
 }

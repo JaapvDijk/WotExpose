@@ -31,13 +31,11 @@ public final class WoTPlayerInfoResponse {
     private int clanId;
     private Statistics statistics;
     private String nickname;
-
     @JsonProperty("logout_at")
     private int logoutAt;
 
     @Data
     @NoArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Private{
         private int gold;
         @JsonProperty("free_xp")
@@ -60,7 +58,6 @@ public final class WoTPlayerInfoResponse {
 
     @Data
     @NoArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Statistics {
         private BaseStatistics clan;
         private ExtraStatistics all;
@@ -79,7 +76,6 @@ public final class WoTPlayerInfoResponse {
 
     @Data
     @NoArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class BaseStatistics {
         private int spotted;
         @JsonProperty("battles_on_stunning_vehicles")
@@ -142,7 +138,6 @@ public final class WoTPlayerInfoResponse {
     @EqualsAndHashCode(callSuper = true)
     @Data
     @NoArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ExtraStatistics extends BaseStatistics {
         @JsonProperty("max_xp")
         private int maxXp;

@@ -1,18 +1,18 @@
 package com.learningjava.wotapi.infrastructure.client.wargaming.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.learningjava.wotapi.infrastructure.client.wargaming.dto.shared.BaseStatistics;
 import com.learningjava.wotapi.infrastructure.client.wargaming.dto.shared.ExtraStatistics;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.annotation.Generated;
 
 @Generated("")
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WoTPlayerTankStatResponse {
     private MaxStats clan;
     @JsonProperty("stronghold_skirmish")
@@ -39,8 +39,8 @@ public class WoTPlayerTankStatResponse {
     @JsonProperty("tank_id")
     private int tankId;
 
-    @Getter
-    @Setter
+    @Data
+    @NoArgsConstructor
     private static class MaxStats extends BaseStatistics {
         @JsonProperty("max_xp")
         private int maxXp;
@@ -50,8 +50,8 @@ public class WoTPlayerTankStatResponse {
         private int maxFrags;
     }
 
-    @Getter
-    @Setter
+    @Data
+    @NoArgsConstructor
     public static class StrongholdDefense extends BaseStatistics {
         @JsonProperty("max_xp")
         private int maxXp;
@@ -74,8 +74,8 @@ public class WoTPlayerTankStatResponse {
         private int explosionHitsReceived;
     }
 
-    @Getter
-    @Setter
+    @Data
+    @NoArgsConstructor
     public static class StrongholdSkirmish extends BaseStatistics {
         @JsonProperty("max_xp")
         private int maxXp;

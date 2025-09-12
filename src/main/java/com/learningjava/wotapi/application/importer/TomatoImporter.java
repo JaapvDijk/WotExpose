@@ -30,7 +30,6 @@ public class TomatoImporter {
     }
 
     @Profile("!test")
-//    @EventListener(ApplicationReadyEvent.class)
     public boolean startupImport() {
         return start();
     }

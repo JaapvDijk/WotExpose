@@ -9,5 +9,6 @@ import org.mapstruct.Mapping;
 public interface VehicleMapper {
 
     @Mapping(target = "id.tankId", source = "tankId")
+    @Mapping(target = "importDate", ignore = true)
     Vehicle toEntity(WoTVehicleResponse dto);
 }

@@ -79,7 +79,7 @@ public class WargamingClient {
                 .uri(builder ->
                         builder.path("/encyclopedia/vehicles/")
                                 .queryParam("application_id", "{application_id}")
-                                .queryParam("fields", "tank_id,tag,short_name,name,type,tier,nation,is_premium")
+                                .queryParam("fields", "tank_id,tag,short_name,name,type,tier,nation,is_premium,images") //because otherwise it returns a massive object with unnecessary data
                                 .build())
                 .retrieve()
                 .body(JsonNode.class);

@@ -59,7 +59,7 @@ class AuthenticationControllerTest {
 
     @Test
     void testLoginSuccess() throws Exception {
-        var user = dbSeeder.getNormalUser();
+        var user = dbSeeder.getAdminUser();
 
         LoginRequest req = new LoginRequest();
         req.setEmail(user.getEmail());

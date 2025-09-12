@@ -5,8 +5,6 @@ import com.learningjava.wotapi.infrastructure.client.wargaming.dto.shared.ExtraS
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//Commented props may be needed in the future, for now only 'All' is needed
-
 @Data
 @NoArgsConstructor
 public class PlayerTankStatResponse {

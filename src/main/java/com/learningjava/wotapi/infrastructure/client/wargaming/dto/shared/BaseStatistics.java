@@ -1,12 +1,10 @@
 package com.learningjava.wotapi.infrastructure.client.wargaming.dto.shared;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class BaseStatistics {
     private int spotted;

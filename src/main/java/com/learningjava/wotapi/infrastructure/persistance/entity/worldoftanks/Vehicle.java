@@ -1,5 +1,6 @@
 package com.learningjava.wotapi.infrastructure.persistance.entity.worldoftanks;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,5 +43,21 @@ public class Vehicle {
 
     private int tier;
 
+    @Column(name = "is_missing_from_source")
     private boolean isMissingFromSource;
+
+    @Embedded
+    private Images images;
+
+    @Embeddable
+    @Data
+    @NoArgsConstructor
+    public static class Images{
+        @Column(name = "small_icon")
+        private String smallIcon;
+        @Column(name = "contour_icon")
+        private String contourIcon;
+        @Column(name = "big_icon")
+        private String bigIcon;
+    }
 }

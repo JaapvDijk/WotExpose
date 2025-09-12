@@ -1,15 +1,16 @@
 package com.learningjava.wotapi.infrastructure.client.tomato.dto;
 
 import javax.annotation.Generated;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Generated("")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TomatoTankPerformanceResponse {
     @JsonProperty("tank_id")
     private int tankId;
