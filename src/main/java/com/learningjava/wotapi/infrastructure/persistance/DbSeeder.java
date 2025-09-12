@@ -57,10 +57,6 @@ public class DbSeeder {
         addMissingVehicles();
     }
 
-    public static String getUserPassword() {
-        return USER_PASSWORD;
-    }
-
     private void addUsers() {
         userRepository.deleteAll();
         roleRepository.deleteAll();
