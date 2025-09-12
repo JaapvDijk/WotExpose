@@ -1,14 +1,12 @@
 package com.learningjava.wotapi.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
 public final class PlayerInfoResponse {
     private String clientLanguage;
     private int lastBattleTime;
@@ -26,7 +24,6 @@ public final class PlayerInfoResponse {
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Private{
-        private Restrictions restrictions;
         private int gold;
         private int freeXp;
         private Object banTime;
@@ -37,13 +34,6 @@ public final class PlayerInfoResponse {
         private int bonds;
         private int battleLifeTime;
         private Object banInfo;
-    }
-
-    @Data
-    @NoArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Restrictions{
-        public Object chatBanTime;
     }
 
     @Data

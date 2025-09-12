@@ -39,7 +39,6 @@ public final class WoTPlayerInfoResponse {
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Private{
-        private Restrictions restrictions;
         private int gold;
         @JsonProperty("free_xp")
         private int freeXp;
@@ -57,14 +56,6 @@ public final class WoTPlayerInfoResponse {
         private int battleLifeTime;
         @JsonProperty("ban_info")
         private Object banInfo;
-    }
-
-    @Data
-    @NoArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Restrictions{
-        @JsonProperty("chat_ban_time")
-        public Object chatBanTime;
     }
 
     @Data
