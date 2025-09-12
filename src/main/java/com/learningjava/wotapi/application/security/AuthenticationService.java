@@ -45,7 +45,7 @@ public class AuthenticationService {
         user.setFullName(input.getFullName());
         user.setPassword(passwordEncoder.encode(input.getPassword()));
 
-        Role role = roleRepository.findByRole(RoleType.USER)
+        Role role = roleRepository.findByRoleType(RoleType.USER)
                 .orElseThrow(() -> new RuntimeException("User role not found"));
 
         user.setRoles(new HashSet<>(List.of(role)));
