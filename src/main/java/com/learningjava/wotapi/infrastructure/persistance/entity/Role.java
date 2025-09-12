@@ -23,9 +23,6 @@ public class Role {
     @Column(name = "type", nullable = false, unique = true, length = 20)
     private RoleType roleType;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
-
     @ManyToMany
     @JoinTable(
             name = "roles_privileges",
