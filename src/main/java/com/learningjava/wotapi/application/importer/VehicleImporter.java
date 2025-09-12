@@ -29,11 +29,6 @@ public class VehicleImporter { //TODO: tests
                 .allMatch(this::start);
     }
 
-    @Profile("!test")
-    public boolean startupImport() {
-        return start();
-    }
-
     public boolean start(RegionType region) {
         HttpContext.setRegion(region);
 

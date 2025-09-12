@@ -69,12 +69,12 @@ public class DbSeeder {
         privilegeRepository.saveAll(Arrays.asList(readPrivilege, writePrivilege));
 
         var adminRole = new Role();
-        adminRole.setRole(RoleType.ADMIN);
+        adminRole.setRoleType(RoleType.ADMIN);
         adminRole.setPrivileges(Set.of(readPrivilege, writePrivilege));
         roleRepository.save(adminRole);
 
         var userRole = new Role();
-        userRole.setRole(RoleType.USER);
+        userRole.setRoleType(RoleType.USER);
         userRole.setPrivileges(Set.of(readPrivilege));
         roleRepository.save(userRole);
 

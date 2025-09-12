@@ -29,11 +29,6 @@ public class TomatoImporter {
                 .allMatch(this::start);
     }
 
-    @Profile("!test")
-    public boolean startupImport() {
-        return start();
-    }
-
     public boolean start(RegionType region) {
         logger.info("[Tomato Import] Started for {}", region);
 

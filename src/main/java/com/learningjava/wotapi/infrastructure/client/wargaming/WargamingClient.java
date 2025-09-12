@@ -8,9 +8,6 @@ import com.learningjava.wotapi.infrastructure.client.wargaming.dto.WoTPlayerInfo
 import com.learningjava.wotapi.infrastructure.client.wargaming.dto.WoTPlayerResponse;
 import com.learningjava.wotapi.infrastructure.client.wargaming.dto.WoTPlayerTankStatResponse;
 import com.learningjava.wotapi.infrastructure.client.wargaming.dto.WoTVehicleResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import com.learningjava.wotapi.application.configuration.RestClientConfig.WargamingRestClientProxy;
 
