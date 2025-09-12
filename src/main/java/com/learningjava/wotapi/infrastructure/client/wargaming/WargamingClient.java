@@ -23,13 +23,12 @@ public class WargamingClient {
     private final ObjectMapper objectMapper;
 
     //TODO: add access token for private info .queryParam("access_token", access_token)
-    public WargamingClient(@Qualifier("wargamingRestClient") WargamingRestClientProxy restClient,
+    public WargamingClient(WargamingRestClientProxy restClient,
                            ObjectMapper objectMapper) {
         this.restClient = restClient;
         this.objectMapper = objectMapper;
     }
 
-    //Accounts
     public List<WoTPlayerResponse> getPlayers(String name) {
         var root = restClient.get()
                 .uri(builder ->

@@ -20,7 +20,6 @@ public class RestClientConfig {
     }
 
     @Bean
-    @Qualifier("tomatoRestClient")
     public RestClient tomatoRestClient() {
 
         return RestClient.builder()
@@ -29,7 +28,6 @@ public class RestClientConfig {
     }
 
     @Bean
-    @Qualifier("wargamingRestClient")
     public WargamingRestClientProxy wargamingRestClient() {
         return new WargamingRestClientProxy();
     }
