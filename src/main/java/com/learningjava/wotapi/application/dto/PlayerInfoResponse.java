@@ -20,8 +20,6 @@ public final class PlayerInfoResponse {
     private int clanId;
     private Statistics statistics;
     private String nickname;
-
-    @JsonProperty("logout_at")
     private int logoutAt;
 
     @Data
@@ -45,7 +43,7 @@ public final class PlayerInfoResponse {
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Restrictions{
-        public Object chat_ban_time;
+        public Object chatBanTime;
     }
 
     @Data

@@ -17,8 +17,6 @@ public class Privilege {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
-
-    @ManyToMany(mappedBy = "privileges")
-    private Set<Role> roles =  new HashSet<>();
 }

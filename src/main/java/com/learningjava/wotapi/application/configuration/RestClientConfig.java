@@ -1,7 +1,6 @@
 package com.learningjava.wotapi.application.configuration;
 
 import com.learningjava.wotapi.infrastructure.HttpContext;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;

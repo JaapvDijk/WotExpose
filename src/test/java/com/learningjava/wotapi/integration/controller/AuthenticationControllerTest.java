@@ -63,7 +63,7 @@ class AuthenticationControllerTest {
 
         LoginRequest req = new LoginRequest();
         req.setEmail(user.getEmail());
-        req.setPassword(dbSeeder.getNormalUserPassword());
+        req.setPassword(DbSeeder.getUserPassword());
 
         String token = objectMapper.readTree(
                 mockMvc.perform(post("/auth/login")

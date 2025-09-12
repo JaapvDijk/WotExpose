@@ -63,7 +63,8 @@ public final class WoTPlayerInfoResponse {
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Restrictions{
-        public Object chat_ban_time;
+        @JsonProperty("chat_ban_time")
+        public Object chatBanTime;
     }
 
     @Data
