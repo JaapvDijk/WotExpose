@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
-@Tag("callsExternalApi")
+@Tag("callerIpMustBeStatic")
 @AutoConfigureMockMvc
 @Transactional
 class PlayerControllerTests {
