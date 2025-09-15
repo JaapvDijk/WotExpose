@@ -48,35 +48,35 @@ export interface PageUserResponse {
   totalElements?: number;
   /** @format int32 */
   totalPages?: number;
-  sort?: SortObject;
+  pageable?: PageableObject;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
-  first?: boolean;
-  last?: boolean;
+  sort?: SortObject;
   /** @format int32 */
   numberOfElements?: number;
-  pageable?: PageableObject;
+  first?: boolean;
+  last?: boolean;
   empty?: boolean;
 }
 
 export interface PageableObject {
-  sort?: SortObject;
-  /** @format int64 */
-  offset?: number;
-  /** @format int32 */
-  pageSize?: number;
+  paged?: boolean;
   /** @format int32 */
   pageNumber?: number;
-  paged?: boolean;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int64 */
+  offset?: number;
+  sort?: SortObject;
   unpaged?: boolean;
 }
 
 export interface SortObject {
-  empty?: boolean;
   sorted?: boolean;
+  empty?: boolean;
   unsorted?: boolean;
 }
 
@@ -152,6 +152,8 @@ export interface ExtraStatistics {
   losses?: number;
   /** @format int32 */
   shots?: number;
+  /** @format int32 */
+  piercings?: number;
   /** @format int32 */
   battles_on_stunning_vehicles?: number;
   /** @format int32 */
@@ -268,11 +270,10 @@ export interface PlayerInfoResponse {
   statistics?: Statistics;
   nickname?: string;
   /** @format int32 */
-  logout_at?: number;
+  logoutAt?: number;
 }
 
 export interface Private {
-  restrictions?: Restrictions;
   /** @format int32 */
   gold?: number;
   /** @format int32 */
@@ -287,12 +288,8 @@ export interface Private {
   /** @format int32 */
   battleLifeTime?: number;
   banInfo?: any;
-  premium?: boolean;
   boundToPhone?: boolean;
-}
-
-export interface Restrictions {
-  chat_ban_time?: any;
+  premium?: boolean;
 }
 
 export interface Statistics {
