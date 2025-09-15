@@ -1,14 +1,13 @@
 package com.learningjava.wotapi.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learningjava.wotapi.infrastructure.persistance.DbSeeder;
 import com.learningjava.wotapi.application.dto.UserRequest;
+import com.learningjava.wotapi.infrastructure.persistance.TestDataSeeder;
 import com.learningjava.wotapi.integration.IntegrationTestBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@Import(DbSeeder.class)
 @WithMockUser(username = "admin", roles = {"ADMIN"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserControllerTest extends IntegrationTestBase {
@@ -30,11 +28,11 @@ class UserControllerTest extends IntegrationTestBase {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private DbSeeder dbSeeder;
+    private TestDataSeeder testDataSeeder;
 
     @BeforeAll
     void setup() {
-        dbSeeder.init();
+        testDataSeeder.init();
     }
 
     @Test
@@ -51,7 +49,7 @@ class UserControllerTest extends IntegrationTestBase {
 
     @Test
     void testGetUserById_returnsUser() throws Exception {
-        int id = dbSeeder.getAdminUser().getId();
+        int id = testDataSeeder.getAdminUser().getId();
 
         mockMvc.perform(get("/user/" + id))
                 .andExpect(status().isOk())
@@ -67,7 +65,7 @@ class UserControllerTest extends IntegrationTestBase {
 
     @Test
     void testUpdateUser_success() throws Exception {
-        int id = dbSeeder.getAdminUser().getId();
+        int id = testDataSeeder.getAdminUser().getId();
         UserRequest update = new UserRequest("Updated Name", "new@test.com");
 
         mockMvc.perform(put("/user/" + id)
@@ -80,7 +78,7 @@ class UserControllerTest extends IntegrationTestBase {
 
     @Test
     void testUpdateUser_invalidEmail_returnsBadRequest() throws Exception {
-        int id = dbSeeder.getNormalUser().getId();
+        int id = testDataSeeder.getNormalUser().getId();
         UserRequest update = new UserRequest("Name", "invalid-email");
 
         mockMvc.perform(put("/user/" + id)
@@ -91,7 +89,7 @@ class UserControllerTest extends IntegrationTestBase {
 
     @Test
     void testDeleteUser_success() throws Exception {
-        int id = dbSeeder.getNormalUser().getId();
+        int id = testDataSeeder.getNormalUser().getId();
 
         mockMvc.perform(delete("/user/" + id))
                 .andExpect(status().isNoContent());

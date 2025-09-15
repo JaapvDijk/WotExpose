@@ -1,10 +1,10 @@
 package com.learningjava.wotapi.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learningjava.wotapi.infrastructure.persistance.DbSeeder;
 import com.learningjava.wotapi.application.dto.LoginRequest;
 import com.learningjava.wotapi.application.dto.RegisterUserRequest;
 import com.learningjava.wotapi.application.service.JwtService;
+import com.learningjava.wotapi.infrastructure.persistance.TestDataSeeder;
 import com.learningjava.wotapi.integration.IntegrationTestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,11 +30,11 @@ class AuthenticationControllerTest extends IntegrationTestBase {
     private JwtService jwtService;
 
     @Autowired
-    private DbSeeder dbSeeder;
+    private TestDataSeeder testDbSeeder;
 
     @BeforeAll
     void setup() {
-        dbSeeder.init();
+        testDbSeeder.init();
     }
 
     @Test
@@ -54,11 +54,11 @@ class AuthenticationControllerTest extends IntegrationTestBase {
 
     @Test
     void testLoginSuccess() throws Exception {
-        var user = dbSeeder.getAdminUser();
+        var user = testDbSeeder.getAdminUser();
 
         LoginRequest req = new LoginRequest();
         req.setEmail(user.getEmail());
-        req.setPassword(DbSeeder.getUSER_PASSWORD());
+        req.setPassword(TestDataSeeder.getUSER_PASSWORD());
 
         String token = objectMapper.readTree(
                 mockMvc.perform(post("/auth/login")
