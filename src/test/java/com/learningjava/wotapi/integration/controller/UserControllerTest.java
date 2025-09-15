@@ -3,16 +3,14 @@ package com.learningjava.wotapi.integration.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learningjava.wotapi.infrastructure.persistance.DbSeeder;
 import com.learningjava.wotapi.application.dto.UserRequest;
+import com.learningjava.wotapi.integration.IntegrationTestBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,13 +19,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@SpringBootTest
-@ActiveProfiles("test")
-@AutoConfigureMockMvc
 @Import(DbSeeder.class)
 @WithMockUser(username = "admin", roles = {"ADMIN"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class UserControllerTest {
+class UserControllerTest extends IntegrationTestBase {
     @Autowired
     private MockMvc mockMvc;
 

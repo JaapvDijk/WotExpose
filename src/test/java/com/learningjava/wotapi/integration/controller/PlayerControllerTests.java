@@ -1,13 +1,9 @@
 package com.learningjava.wotapi.integration.controller;
 
-import jakarta.transaction.Transactional;
+import com.learningjava.wotapi.integration.IntegrationTestBase;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -17,11 +13,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.*;
 
-@SpringBootTest
 @Tag("callerIpMustBeStatic")
-@AutoConfigureMockMvc
-@Transactional
-class PlayerControllerTests {
+class PlayerControllerTests extends IntegrationTestBase {
     @Autowired
     private MockMvc mockMvc;
 
