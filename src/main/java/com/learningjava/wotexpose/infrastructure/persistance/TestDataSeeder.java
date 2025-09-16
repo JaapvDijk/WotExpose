@@ -8,6 +8,7 @@ import com.learningjava.wotexpose.infrastructure.persistance.repo.RoleRepository
 import com.learningjava.wotexpose.infrastructure.persistance.repo.UserRepository;
 import com.learningjava.wotexpose.shared.constant.RoleType;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
@@ -29,8 +30,8 @@ public class TestDataSeeder {
     private User adminUser;
     @Getter
     private User normalUser;
-    @Getter
-    private static final String USER_PASSWORD = "user123";
+    @Value("${test.user.pass}")
+    private String userPassword;
 
     public TestDataSeeder(UserRepository userRepository,
                           RoleRepository roleRepository,
@@ -72,14 +73,14 @@ public class TestDataSeeder {
         var admin = new User();
         admin.setFullName("admin");
         admin.setEmail("admin@api.nl");
-        admin.setPassword(passwordEncoder.encode(USER_PASSWORD));
+        admin.setPassword(passwordEncoder.encode(userPassword));
         admin.setRoles(Set.of(adminRole));
         adminUser = userRepository.save(admin);
 
         normalUser = new User();
         normalUser.setFullName("user");
         normalUser.setEmail("user@api.nl");
-        normalUser.setPassword(passwordEncoder.encode(USER_PASSWORD));
+        normalUser.setPassword(passwordEncoder.encode(userPassword));
         normalUser.setRoles(Set.of(userRole));
         userRepository.save(normalUser);
 
@@ -88,7 +89,7 @@ public class TestDataSeeder {
             var user = new User();
             user.setFullName("user"+i);
             user.setEmail("user"+i+"@api.nl");
-            user.setPassword(passwordEncoder.encode(USER_PASSWORD));
+            user.setPassword(passwordEncoder.encode(userPassword));
             user.setRoles(Set.of(userRole));
             userRepository.save(user);
         }

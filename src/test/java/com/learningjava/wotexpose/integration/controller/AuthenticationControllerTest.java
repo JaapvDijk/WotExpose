@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -37,6 +38,9 @@ class AuthenticationControllerTest extends IntegrationTestBase {
         testDbSeeder.init();
     }
 
+    @Value("${test.user.pass}")
+    private String userPassword;
+
     @Test
     void testSignupSuccess() throws Exception {
         var req = new RegisterUserRequest();
@@ -58,7 +62,7 @@ class AuthenticationControllerTest extends IntegrationTestBase {
 
         LoginRequest req = new LoginRequest();
         req.setEmail(user.getEmail());
-        req.setPassword(TestDataSeeder.getUSER_PASSWORD());
+        req.setPassword(userPassword);
 
         String token = objectMapper.readTree(
                 mockMvc.perform(post("/auth/login")
