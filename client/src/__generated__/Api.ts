@@ -12,6 +12,7 @@
 
 export interface UserRequest {
   fullName?: string;
+  /** @format email */
   email?: string;
 }
 
@@ -23,6 +24,7 @@ export interface UserResponse {
 }
 
 export interface RegisterUserRequest {
+  /** @format email */
   email?: string;
   /**
    * @minLength 8
@@ -33,6 +35,7 @@ export interface RegisterUserRequest {
 }
 
 export interface LoginRequest {
+  /** @format email */
   email?: string;
   password?: string;
 }
@@ -49,6 +52,8 @@ export interface PageUserResponse {
   /** @format int32 */
   totalPages?: number;
   pageable?: PageableObject;
+  first?: boolean;
+  last?: boolean;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
@@ -57,8 +62,6 @@ export interface PageUserResponse {
   sort?: SortObject;
   /** @format int32 */
   numberOfElements?: number;
-  first?: boolean;
-  last?: boolean;
   empty?: boolean;
 }
 
