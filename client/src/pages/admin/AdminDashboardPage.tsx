@@ -48,7 +48,7 @@ function AdminDashboardPage() {
           background: "linear-gradient(135deg, #1976d2, #1565c0)",
           color: "white",
         }}>
-        <CardActionArea onClick={() => navigate("/userManagement")}>
+        <CardActionArea onClick={() => navigate("/admin/userManagement")}>
           <CardContent sx={{ textAlign: "center" }}>
             <Typography variant="h6">Total Users</Typography>
             {isLoading ? (

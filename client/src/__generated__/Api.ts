@@ -52,14 +52,14 @@ export interface PageUserResponse {
   /** @format int32 */
   totalPages?: number;
   pageable?: PageableObject;
-  first?: boolean;
-  last?: boolean;
   /** @format int32 */
   size?: number;
   content?: UserResponse[];
   /** @format int32 */
   number?: number;
   sort?: SortObject;
+  first?: boolean;
+  last?: boolean;
   /** @format int32 */
   numberOfElements?: number;
   empty?: boolean;

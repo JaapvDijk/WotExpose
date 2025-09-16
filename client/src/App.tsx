@@ -33,7 +33,7 @@ function App() {
                 <AdminDashboardPage />
             } />
 
-            <Route path="/userManagement" element={
+            <Route path="admin/userManagement" element={
                 <UserManagementPage />
             } />
 
